@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mode B — HttpPlatformHandler (DISARANKAN jika ARR/URL Rewrite bermasalah).
+  Prasyarat: modul HttpPlatformHandler terinstall.
+  Physical path site IIS = ROOT folder web (tempat package.json & node_modules).
+  IIS menjalankan "next start" langsung — tidak perlu PM2 terpisah.
+-->
+<configuration>
+  <system.webServer>
+    <handlers>
+      <add
+        name="httpPlatformHandler"
+        path="*"
+        verb="*"
+        modules="httpPlatformHandler"
+        resourceType="Unspecified"
+        requireAccess="Script"
+      />
+    </handlers>
+    <httpPlatform
+      processPath="C:\Program Files\nodejs\node.exe"
+      arguments="&quot;.\node_modules\next\dist\bin\next&quot; start"
+      stdoutLogEnabled="true"
+      stdoutLogFile=".\logs\iis-node"
+      startupTimeLimit="120"
+      processesPerApplication="1"
+    >
+      <environmentVariables>
+        <environmentVariable name="PORT" value="%HTTP_PLATFORM_PORT%" />
+        <environmentVariable name="NODE_ENV" value="production" />
+      </environmentVariables>
+    </httpPlatform>
+  </system.webServer>
+</configuration>
