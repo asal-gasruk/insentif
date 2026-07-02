@@ -1,6 +1,6 @@
 # Lahans Insentif Reguler 2026 — Prototype
 
-Prototype web app berdasarkan dokumen **Skema Insentif Reguler - Plan 2026.xlsx**.
+Prototype web app
 Konfigurasi insentif sepenuhnya dinamis berbasis **Parameter Insentif** — semua 14 sheet/lampiran dokumen telah diimplementasikan.
 
 ## Tech Stack
