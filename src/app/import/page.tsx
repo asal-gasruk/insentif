@@ -8,6 +8,8 @@ import { Select2 } from "@/components/Select2";
 import {
   calculateDeliveryIncentive,
   calculateParameterIncentive,
+  calculateTeamDeliveryIncentive,
+  calculateTeamParameterIncentive,
   formatRupiah,
 } from "@/lib/calculator";
 import {
@@ -18,8 +20,14 @@ import {
 import {
   buildSchemeImportTemplate,
   getImportTemplateMeta,
+  isTeamScheme,
 } from "@/lib/import-templates";
 import { generateId } from "@/lib/storage";
+import {
+  defaultSegmentForTeam,
+  resolveSubjectMode,
+  schemeForTeam,
+} from "@/lib/team-utils";
 import { useAppData } from "@/hooks/useAppData";
 import type {
   AchievementRecord,
@@ -28,6 +36,7 @@ import type {
   DeliveryResult,
   Employee,
   IncentiveResult,
+  Team,
 } from "@/types";
 
 // ---------------------------------------------------------------------------
@@ -77,21 +86,27 @@ type ParsedRow =
       line: number;
       kind: "achievement";
       status: "ok";
-      employee: Employee;
+      subjectLabel: string;
+      employee?: Employee;
+      team?: Team;
       info: string;
       payload: AchievementRecord;
       isUpdate: boolean;
       result: IncentiveResult;
+      results?: IncentiveResult[];
     }
   | {
       line: number;
       kind: "delivery";
       status: "ok";
-      employee: Employee;
+      subjectLabel: string;
+      employee?: Employee;
+      team?: Team;
       info: string;
       payload: DeliveryRecord;
       isUpdate: boolean;
       result: DeliveryResult;
+      results?: DeliveryResult[];
     }
   | {
       line: number;
@@ -100,11 +115,139 @@ type ParsedRow =
       info: string;
     };
 
+function aggregateTeamResult(results: IncentiveResult[]): IncentiveResult {
+  const first = results[0];
+  return {
+    ...first,
+    employeeName: first.teamName
+      ? `Tim ${first.teamName}`
+      : first.employeeName,
+    finalAmount: results.reduce((s, r) => s + r.finalAmount, 0),
+    splitRatio: 1,
+  };
+}
+
+function validateTeamAchievementRow(
+  data: AppData,
+  row: Record<string, string>,
+  line: number,
+): ParsedRow {
+  const teamId = row.teamId?.trim();
+  const period = row.periode?.trim();
+  if (!teamId || !period) {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: "Kolom teamId / periode kosong",
+    };
+  }
+
+  const team = data.teams.find((t) => t.id === teamId);
+  if (!team) {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: `teamId "${teamId}" tidak ditemukan di Master Tim`,
+    };
+  }
+  if (!team.active) {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: `Tim "${team.name}" tidak aktif`,
+    };
+  }
+
+  const scheme = schemeForTeam(data, team);
+  if (!scheme || scheme.type !== "parameter") {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: `Role "${team.roleId}" tidak punya skema parameter (Delivery pakai template pengiriman)`,
+    };
+  }
+
+  const segment = defaultSegmentForTeam(data, team);
+  const active = activeParams(data, scheme.id, segment);
+
+  const achievements: Record<string, number> = {};
+  for (const paramId of active) {
+    const v = parseNum(row[paramId]);
+    if (v !== undefined) achievements[paramId] = v;
+  }
+  if (Object.keys(achievements).length === 0) {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: "Tidak ada nilai pencapaian yang terisi",
+    };
+  }
+
+  const existing = data.achievementRecords.find(
+    (r) => r.teamId === team.id && r.period === period,
+  );
+
+  const payload: AchievementRecord = {
+    id: existing?.id ?? generateId("ach"),
+    teamId: team.id,
+    period,
+    schemeId: scheme.id,
+    segmentId: existing?.segmentId ?? segment,
+    achievements,
+    overduePct: parseNum(row.overduePct) ?? 0,
+    badDebtDays: parseNum(row.badDebtDays) ?? 0,
+    notes: row.catatan?.trim() ?? "Import bulk",
+  };
+
+  const results = calculateTeamParameterIncentive(data, payload, team);
+  const result = results.length > 0 ? aggregateTeamResult(results) : {
+    recordId: payload.id,
+    employeeId: "",
+    employeeName: team.name,
+    position: "salesman",
+    period,
+    schemeName: scheme.name,
+    segmentName: segment,
+    tierLabel: "-",
+    parameterBreakdown: {},
+    grossAmount: 0,
+    splitRatio: 1,
+    penaltyPct: 0,
+    suspended: false,
+    voided: false,
+    finalAmount: 0,
+    teamId: team.id,
+    teamName: team.name,
+  };
+
+  return {
+    line,
+    kind: "achievement",
+    status: "ok",
+    subjectLabel: `Tim ${team.name}`,
+    team,
+    info: `${team.name} · ${scheme.name} · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota`,
+    payload,
+    isUpdate: Boolean(existing),
+    result,
+    results,
+  };
+}
+
 function validateAchievementRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
 ): ParsedRow {
+  if (row.teamId?.trim()) {
+    return validateTeamAchievementRow(data, row, line);
+  }
+
   const nik = row.nik?.trim();
   const period = row.periode?.trim();
   if (!nik || !period) {
@@ -112,7 +255,7 @@ function validateAchievementRow(
       line,
       kind: "achievement",
       status: "error",
-      info: "Kolom nik / periode kosong",
+      info: "Kolom nik / periode kosong (skema tim pakai teamId)",
     };
   }
 
@@ -123,6 +266,15 @@ function validateAchievementRow(
       kind: "achievement",
       status: "error",
       info: `NIK "${nik}" tidak ditemukan di master Karyawan`,
+    };
+  }
+
+  if (resolveSubjectMode(data, employee) === "team") {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: `${employee.name} mode Tim — unduh template dengan kolom teamId`,
     };
   }
 
@@ -173,6 +325,7 @@ function validateAchievementRow(
     line,
     kind: "achievement",
     status: "ok",
+    subjectLabel: employee.name,
     employee,
     info: `${employee.name} · ${scheme.name} · ${period}${existing ? " (update)" : ""}`,
     payload,
@@ -183,11 +336,132 @@ function validateAchievementRow(
 
 const VEHICLE_TYPES = ["PICKUP", "ENGKEL", "DOUBLE"];
 
+function aggregateTeamDeliveryResult(results: DeliveryResult[]): DeliveryResult {
+  const first = results[0];
+  return {
+    ...first,
+    employeeName: first.teamName ? `Tim ${first.teamName}` : first.employeeName,
+    finalAmount: results.reduce((s, r) => s + r.finalAmount, 0),
+    splitRatio: 1,
+  };
+}
+
+function validateTeamDeliveryRow(
+  data: AppData,
+  row: Record<string, string>,
+  line: number,
+): ParsedRow {
+  const teamId = row.teamId?.trim();
+  const period = row.periode?.trim();
+  if (!teamId || !period) {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: "Kolom teamId / periode kosong",
+    };
+  }
+
+  const team = data.teams.find((t) => t.id === teamId);
+  if (!team) {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: `teamId "${teamId}" tidak ditemukan di Master Tim`,
+    };
+  }
+  if (!team.active) {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: `Tim "${team.name}" tidak aktif`,
+    };
+  }
+
+  const deliveryScheme = data.schemes.find(
+    (s) => s.type === "volumeTier" && s.roleId === team.roleId,
+  );
+  if (!deliveryScheme) {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: `Tim "${team.name}" bukan Delivery — gunakan template pencapaian`,
+    };
+  }
+
+  const vehicleType = (row.armada ?? "").trim().toUpperCase();
+  if (!VEHICLE_TYPES.includes(vehicleType)) {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: `Armada "${row.armada}" tidak dikenal (gunakan PICKUP / ENGKEL / DOUBLE)`,
+    };
+  }
+
+  const existing = data.deliveryRecords.find(
+    (r) => r.teamId === team.id && r.period === period,
+  );
+
+  const payload: DeliveryRecord = {
+    id: existing?.id ?? generateId("del"),
+    teamId: team.id,
+    period,
+    vehicleType,
+    cartons: parseNum(row.karton) ?? 0,
+    invoices: parseNum(row.faktur) ?? 0,
+    otdPct: parseNum(row.otdPct) ?? 100,
+    accuracyPct: parseNum(row.akurasiPct) ?? 100,
+    notes: row.catatan?.trim() ?? "Import bulk",
+  };
+
+  const results = calculateTeamDeliveryIncentive(data, payload, team);
+  const result =
+    results.length > 0
+      ? aggregateTeamDeliveryResult(results)
+      : {
+          recordId: payload.id,
+          employeeId: "",
+          employeeName: team.name,
+          position: "driver",
+          period,
+          vehicleType,
+          cartonNominal: 0,
+          dropPointNominal: 0,
+          grossAmount: 0,
+          splitRatio: 1,
+          qualityPassed: false,
+          finalAmount: 0,
+          teamId: team.id,
+          teamName: team.name,
+        };
+
+  return {
+    line,
+    kind: "delivery",
+    status: "ok",
+    subjectLabel: `Tim ${team.name}`,
+    team,
+    info: `${team.name} · ${vehicleType} · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota`,
+    payload,
+    isUpdate: Boolean(existing),
+    result,
+    results,
+  };
+}
+
 function validateDeliveryRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
 ): ParsedRow {
+  if (row.teamId?.trim()) {
+    return validateTeamDeliveryRow(data, row, line);
+  }
+
   const nik = row.nik?.trim();
   const period = row.periode?.trim();
   if (!nik || !period) {
@@ -195,7 +469,7 @@ function validateDeliveryRow(
       line,
       kind: "delivery",
       status: "error",
-      info: "Kolom nik / periode kosong",
+      info: "Kolom nik / periode kosong (mode Tim pakai teamId)",
     };
   }
 
@@ -209,6 +483,15 @@ function validateDeliveryRow(
     };
   }
 
+  if (resolveSubjectMode(data, employee) === "team") {
+    return {
+      line,
+      kind: "delivery",
+      status: "error",
+      info: `${employee.name} mode Tim — unduh template pengiriman dengan kolom teamId`,
+    };
+  }
+
   const deliveryScheme = data.schemes.find(
     (s) => s.type === "volumeTier" && s.roleId === employee.roleId,
   );
@@ -217,7 +500,7 @@ function validateDeliveryRow(
       line,
       kind: "delivery",
       status: "error",
-      info: `${employee.name} (${nik}) bukan tim Delivery — gunakan template pencapaian`,
+      info: `${employee.name} (${nik}) bukan Delivery — gunakan template pencapaian`,
     };
   }
 
@@ -251,6 +534,7 @@ function validateDeliveryRow(
     line,
     kind: "delivery",
     status: "ok",
+    subjectLabel: employee.name,
     employee,
     info: `${employee.name} · ${vehicleType} · ${period}${existing ? " (update)" : ""}`,
     payload,
@@ -329,7 +613,7 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
               ) : (
                 <>
                   <td className="px-3 py-2 font-medium">
-                    {row.employee.name}
+                    {row.subjectLabel}
                   </td>
                   <td className="px-3 py-2">{row.payload.period}</td>
                   <td className="px-3 py-2 text-xs">
@@ -358,21 +642,43 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
   );
 }
 
+type ImportSubjectMode = "individu" | "team";
+
 export default function ImportPage() {
   const { data, ready, create, update } = useAppData();
   const [rows, setRows] = useState<ParsedRow[]>([]);
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState<string | null>(null);
   const [imported, setImported] = useState<ParsedRow[]>([]);
+  const [subjectMode, setSubjectMode] = useState<ImportSubjectMode>("team");
   const [selectedSchemeId, setSelectedSchemeId] = useState("");
 
   if (!ready || !data) return <LoadingState />;
 
-  const schemeId = selectedSchemeId || data.schemes[0]?.id || "";
-  const templateMeta = getImportTemplateMeta(data, schemeId);
+  const schemesForMode = data.schemes.filter((s) =>
+    subjectMode === "team" ? isTeamScheme(data, s) : true,
+  );
+
+  const schemeId =
+    (schemesForMode.some((s) => s.id === selectedSchemeId)
+      ? selectedSchemeId
+      : schemesForMode[0]?.id) || "";
+  const templateMeta = schemeId
+    ? getImportTemplateMeta(data, schemeId, subjectMode)
+    : null;
+
+  const setMode = (mode: ImportSubjectMode) => {
+    setSubjectMode(mode);
+    setSelectedSchemeId("");
+    setRows([]);
+    setImported([]);
+    setResult(null);
+    setFileName("");
+  };
 
   const downloadSchemeTemplate = () => {
-    const built = buildSchemeImportTemplate(data, schemeId);
+    if (!schemeId) return;
+    const built = buildSchemeImportTemplate(data, schemeId, subjectMode);
     if (!built) return;
     downloadCsv(built.filename, built.content);
   };
@@ -395,6 +701,23 @@ export default function ImportPage() {
     }
 
     const isDelivery = "armada" in parsed[0];
+    const hasTeamId = "teamId" in parsed[0];
+
+    if (subjectMode === "team" && !hasTeamId) {
+      setRows([]);
+      setResult(
+        "Mode Tim membutuhkan kolom teamId. Unduh ulang template di mode Tim.",
+      );
+      return;
+    }
+    if (subjectMode === "individu" && hasTeamId) {
+      setRows([]);
+      setResult(
+        "File berisi teamId — itu template Tim. Ganti mode ke Tim, atau unduh template Individu.",
+      );
+      return;
+    }
+
     const validated = parsed.map((row, i) =>
       isDelivery
         ? validateDeliveryRow(data, row, i + 2)
@@ -440,32 +763,74 @@ export default function ImportPage() {
     <>
       <PageHeader
         title="Import Bulk Data Transaksi"
-        description="Upload hasil penjualan (pencapaian) atau data pengiriman dalam jumlah banyak via CSV — hasil insentif langsung terhitung di halaman Perhitungan."
+        description="Satu alur import — pilih Individu atau Tim, unduh template sesuai skema, lalu upload CSV."
       />
 
       <div className="mb-6 grid gap-4 lg:grid-cols-2">
         <section className="card p-5">
           <h3 className="mb-1 font-bold">1 · Unduh Template</h3>
           <p className="mb-4 text-sm text-[var(--text-muted)]">
-            Pilih skema insentif — kolom CSV menyesuaikan parameter/bobot skema
-            tersebut. Baris contoh memakai karyawan dengan role yang sama (jika
-            ada di master).
+            Pilih subjek dulu, lalu skema. Template Tim memakai{" "}
+            <b>teamId</b>; Individu memakai <b>NIK</b> (termasuk Delivery).
           </p>
+
+          <div className="mb-4">
+            <label className="label">Subjek Import</label>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className={
+                  subjectMode === "team"
+                    ? "btn-primary flex-1"
+                    : "btn-secondary flex-1"
+                }
+                onClick={() => setMode("team")}
+              >
+                Tim
+              </button>
+              <button
+                type="button"
+                className={
+                  subjectMode === "individu"
+                    ? "btn-primary flex-1"
+                    : "btn-secondary flex-1"
+                }
+                onClick={() => setMode("individu")}
+              >
+                Individu
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-[var(--text-muted)]">
+              {subjectMode === "team"
+                ? "Role capable Tim (Canvass, Sales, Delivery, …) — 1 baris = 1 tim"
+                : "Semua role mode Individu — 1 baris = 1 karyawan (NIK)"}
+            </p>
+          </div>
 
           <div className="mb-4">
             <label className="label">Skema Insentif</label>
             <Select2
               value={schemeId}
               onChange={setSelectedSchemeId}
-              options={data.schemes.map((s) => ({
+              options={schemesForMode.map((s) => ({
                 value: s.id,
                 label: `${s.name} (${s.type === "volumeTier" ? "Pengiriman" : "Pencapaian"})`,
               }))}
+              placeholder={
+                schemesForMode.length === 0
+                  ? "Tidak ada skema untuk mode ini"
+                  : "Pilih skema"
+              }
+              isDisabled={schemesForMode.length === 0}
             />
           </div>
 
           {templateMeta && (
             <div className="mb-4 rounded-lg border border-[var(--border)] bg-[var(--surface-muted)]/50 p-3 text-xs">
+              <p>
+                <span className="font-semibold">Mode:</span>{" "}
+                {subjectMode === "team" ? "Tim (teamId)" : "Individu (NIK)"}
+              </p>
               <p>
                 <span className="font-semibold">Tipe:</span>{" "}
                 {templateMeta.kind === "delivery"
@@ -498,9 +863,13 @@ export default function ImportPage() {
                 </p>
               )}
               <p className="mt-1 text-[var(--text-muted)]">
-                {templateMeta.employeeCount > 0
-                  ? `${templateMeta.employeeCount} karyawan cocok di master`
-                  : "Belum ada karyawan role ini — template berisi baris placeholder"}
+                {templateMeta.subjectKind === "team"
+                  ? templateMeta.teamCount > 0
+                    ? `${templateMeta.teamCount} tim cocok di Master Tim`
+                    : "Belum ada tim role ini — template berisi baris placeholder"
+                  : templateMeta.employeeCount > 0
+                    ? `${templateMeta.employeeCount} karyawan cocok di master`
+                    : "Belum ada karyawan role ini — template berisi baris placeholder"}
               </p>
             </div>
           )}
@@ -516,15 +885,39 @@ export default function ImportPage() {
             onClick={downloadSchemeTemplate}
           >
             ⇩ Unduh Template{" "}
-            {templateMeta?.kind === "delivery" ? "Pengiriman" : "Pencapaian"}
+            {subjectMode === "team"
+              ? "Tim"
+              : templateMeta?.kind === "delivery"
+                ? "Pengiriman"
+                : "Individu"}
           </button>
 
           <ul className="mt-4 space-y-1 text-xs text-[var(--text-muted)]">
-            <li>• Identitas karyawan memakai <b>NIK</b> (lihat menu Karyawan)</li>
-            <li>• Periode sesuai skema: <b>{templateMeta?.periodLabel ?? "YYYY-MM"}</b></li>
-            <li>• Hanya kolom parameter dengan bobot &gt; 0 di skema terpilih</li>
-            <li>• Skema &amp; segment ditentukan otomatis dari role dan cabang karyawan</li>
-            <li>• Jika NIK + periode sudah ada, data akan <b>diperbarui</b> (bukan duplikat)</li>
+            {subjectMode === "team" ? (
+              <>
+                <li>
+                  • Kolom identitas: <b>teamId</b> (lihat Master Tim)
+                </li>
+                <li>
+                  • Satu baris pencapaian dibagi ke semua anggota saat perhitungan
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  • Kolom identitas: <b>NIK</b> (lihat Karyawan)
+                </li>
+                <li>
+                  • Delivery: tambah kolom armada / karton / faktur / OTD /
+                  akurasi
+                </li>
+              </>
+            )}
+            <li>
+              • Periode sesuai skema:{" "}
+              <b>{templateMeta?.periodLabel ?? "YYYY-MM"}</b>
+            </li>
+            <li>• Jika subjek + periode sudah ada, data akan <b>diperbarui</b></li>
             <li>• Mendukung pemisah koma maupun titik-koma (CSV dari Excel)</li>
           </ul>
         </section>
@@ -532,8 +925,9 @@ export default function ImportPage() {
         <section className="card p-5">
           <h3 className="mb-1 font-bold">2 · Upload File CSV</h3>
           <p className="mb-4 text-sm text-[var(--text-muted)]">
-            Jenis template terdeteksi otomatis. Data divalidasi dulu — tidak
-            langsung tersimpan.
+            Pastikan file sesuai mode{" "}
+            <b>{subjectMode === "team" ? "Tim" : "Individu"}</b> di sebelah kiri.
+            Data divalidasi dulu — tidak langsung tersimpan.
           </p>
           <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-[var(--border)] px-4 py-8 text-center hover:border-[var(--primary)] hover:bg-[var(--surface-muted)]">
             <span className="text-2xl">⇪</span>
@@ -561,7 +955,8 @@ export default function ImportPage() {
             <div>
               <h3 className="font-bold">
                 3 · Preview, Validasi &amp; Estimasi Hasil —{" "}
-                {rows[0].kind === "delivery" ? "Pengiriman" : "Pencapaian"}
+                {rows[0].kind === "delivery" ? "Pengiriman" : "Pencapaian"}{" "}
+                ({subjectMode === "team" ? "Tim" : "Individu"})
               </h3>
               <p className="text-xs text-[var(--text-muted)]">
                 {validRows.length} baris valid · {errorRows.length} baris error

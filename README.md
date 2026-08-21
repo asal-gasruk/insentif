@@ -19,12 +19,22 @@ Konfigurasi insentif sepenuhnya dinamis berbasis **Parameter Insentif** — semu
 | Master Parameter | CRUD parameter insentif (All Product, EC, NOO, AO, Contract, dll) |
 | Master Tier | CRUD tier pencapaian (rentang %, bisa ditambah) |
 | Master Cabang | CRUD cabang (MB, SB, NB, dll) |
-| Karyawan | CRUD karyawan (role, posisi, tim, armada untuk Delivery) |
+| Karyawan | CRUD karyawan + **Manpower** (Individu / Tim) sesuai kebijakan role |
+| Master Tim | Tim untuk role capable (Canvass, Sales, Delivery, …); anggota fleksibel |
 | Bobot Parameter | Bobot per skema × segment, kolom dinamis sesuai parameter |
 | Nominal Insentif | Nominal per tier; breakdown otomatis = bobot × total |
-| Pencapaian | Input % pencapaian, field dinamis sesuai bobot skema |
-| Pengiriman (DT) | Data kartonase & drop point untuk Delivery Team |
+| Pencapaian | Input per Tim atau per Individu (NIK) sesuai Manpower |
+| Pengiriman (DT) | Kartonase & drop point — per Tim atau Individu |
 | Perhitungan | Kalkulasi gabungan skema parameter + volume tier |
+
+## Tim vs Individu
+
+| Level | Field | Arti |
+|-------|--------|------|
+| Role | `subjectPolicy` | `individu` · `team` (wajib) · `optional` |
+| Karyawan | `workforceMode` | Mode aktual Manpower: Individu (NIK) atau Tim |
+
+Resolusi: policy `individu`/`team` mengunci mode; `optional` mengikuti Manpower. Tanpa Master Tim → hitung sebagai Individu (jika diizinkan). Delivery mode Tim: 1 record pengiriman per tim → split ke anggota.
 
 ## Skema yang Di-seed (dari dokumen)
 
@@ -72,7 +82,8 @@ Tombol **Sync dari Bobot** mengisi parameter dari halaman Bobot & Nominal.
 - **Penalty multi-aturan** per skema: kondisi (overdue % / bad debt hari) + aksi (potongan %, penangguhan, penghapusan) — bisa ditambah lebih dari satu aturan
 - Seed default: overdue >0,5% → potong 10% (manager 20%); bad debt >60 hari penangguhan; >90 hari penghapusan
 - Pembagian tim (mis. Canvasser 3 org: 55% / 22,5% / 22,5%) dikonfigurasi per skema
-- Delivery: tier kartonase + drop point per armada, quality gate OTD ≥ 95% & akurasi ≥ 97%
+- Delivery: tier kartonase + drop point per armada; quality gate OTD ≥ 95% & akurasi ≥ 97%; mode Tim = 1 record → split by `teamSplits` armada
+- Role seed: Canvass / Sales MT / Horeca / Delivery = `subjectPolicy: optional`; role lain = `individu`
 
 ## Menjalankan
 

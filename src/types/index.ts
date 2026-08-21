@@ -6,10 +6,21 @@ export interface BranchType {
   nameEn: string;
 }
 
+/** Kebijakan subjek input/hitung per role */
+export type SubjectPolicy = "individu" | "team" | "optional";
+
+/** Mode kerja aktual di manpower (karyawan) */
+export type WorkforceMode = "individu" | "team";
+
 export interface Role {
   id: string;
   name: string;
   sheet: string;
+  /**
+   * individu = selalu NIK · team = wajib Master Tim ·
+   * optional = ikut Employee.workforceMode
+   */
+  subjectPolicy: SubjectPolicy;
 }
 
 export interface Parameter {
@@ -196,12 +207,36 @@ export interface Employee {
   position: EmployeePosition;
   teamSize: number;
   vehicleType?: string;
+  /** Mode aktual: individu (NIK) atau tim (Master Tim) */
+  workforceMode: WorkforceMode;
+  active: boolean;
+}
+
+/** Label tipe tim (GT/MT/Horeca/Delivery/dll) — bebas string */
+export type TeamTypeId = string;
+
+export interface TeamMember {
+  employeeId: string;
+  position: EmployeePosition;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  teamType: TeamTypeId;
+  /** Role skema yang dipakai tim */
+  roleId: string;
+  branchId: string;
+  members: TeamMember[];
   active: boolean;
 }
 
 export interface AchievementRecord {
   id: string;
-  employeeId: string;
+  /** Mode individu */
+  employeeId?: string;
+  /** Mode Master Tim */
+  teamId?: string;
   period: string;
   schemeId: string;
   segmentId: string;
@@ -214,7 +249,10 @@ export interface AchievementRecord {
 
 export interface DeliveryRecord {
   id: string;
-  employeeId: string;
+  /** Mode individu */
+  employeeId?: string;
+  /** Mode Master Tim — 1 record per tim, lalu split */
+  teamId?: string;
   period: string;
   vehicleType: string;
   cartons: number;
@@ -244,6 +282,9 @@ export interface IncentiveResult {
   suspended: boolean;
   voided: boolean;
   finalAmount: number;
+  /** Diisi jika hasil berasal dari pencapaian Master Tim */
+  teamId?: string;
+  teamName?: string;
 }
 
 export interface DeliveryResult {
@@ -259,6 +300,8 @@ export interface DeliveryResult {
   splitRatio: number;
   qualityPassed: boolean;
   finalAmount: number;
+  teamId?: string;
+  teamName?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -276,6 +319,7 @@ export interface AppData {
   schemeNominals: SchemeNominal[];
   volumeTiers: VolumeTier[];
   employees: Employee[];
+  teams: Team[];
   achievementRecords: AchievementRecord[];
   deliveryRecords: DeliveryRecord[];
 }
@@ -290,6 +334,7 @@ export type CollectionKey = keyof Pick<
   | "schemeNominals"
   | "volumeTiers"
   | "employees"
+  | "teams"
   | "achievementRecords"
   | "deliveryRecords"
 >;

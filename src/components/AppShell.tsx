@@ -16,6 +16,7 @@ const navGroups = [
       { href: "/tier", label: "Master Tier", icon: "▤" },
       { href: "/cabang", label: "Master Cabang", icon: "⌂" },
       { href: "/karyawan", label: "Karyawan", icon: "☺" },
+      { href: "/tim", label: "Master Tim", icon: "☷" },
     ],
   },
   {

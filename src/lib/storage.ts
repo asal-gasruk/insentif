@@ -1,12 +1,24 @@
 import { seedData, STORAGE_KEY } from "@/data/seed";
+import {
+  SALES_TEAM_SPLITS,
+  defaultSubjectPolicy,
+  defaultWorkforceMode,
+  employeeAssignedTeamId,
+} from "@/lib/team-utils";
 import type {
   AppData,
   CollectionKey,
+  Employee,
   IncentiveScheme,
   PenaltyRule,
+  Role,
+  SubjectPolicy,
+  WorkforceMode,
 } from "@/types";
 
 const LEGACY_STORAGE_KEYS = [
+  "lahans-insentif-v8",
+  "lahans-insentif-v7",
   "lahans-insentif-v6",
   "lahans-insentif-v5",
   "lahans-insentif-v4",
@@ -95,7 +107,51 @@ function migrateScheme(scheme: IncentiveScheme & { penalty?: LegacyPenalty }): I
     };
   }
 
+  // Upgrade split Sales/Canvass team ke pola multi-anggota jika masih solo
+  if (
+    ["canvasser", "sales-mt", "sales-horeca"].includes(migrated.roleId) &&
+    migrated.type === "parameter"
+  ) {
+    const onlySolo =
+      migrated.teamSplits.length <= 1 &&
+      migrated.teamSplits.every(
+        (s) => s.key === "1" && Object.keys(s.split).length === 1,
+      );
+    if (onlySolo) {
+      migrated = { ...migrated, teamSplits: SALES_TEAM_SPLITS };
+    }
+  }
+
   return migrated;
+}
+
+function migrateRole(role: Role & { subjectPolicy?: SubjectPolicy }): Role {
+  return {
+    ...role,
+    subjectPolicy: role.subjectPolicy ?? defaultSubjectPolicy(role.id),
+  };
+}
+
+function migrateEmployee(
+  emp: Employee & { workforceMode?: WorkforceMode },
+  data: Pick<AppData, "teams" | "roles">,
+): Employee {
+  const assigned = employeeAssignedTeamId(
+    { teams: data.teams ?? [] } as AppData,
+    emp.id,
+  );
+  const fallback: WorkforceMode =
+    assigned != null
+      ? "team"
+      : defaultWorkforceMode(
+          { roles: data.roles ?? [] } as AppData,
+          emp.roleId,
+        );
+
+  return {
+    ...emp,
+    workforceMode: emp.workforceMode ?? fallback,
+  };
 }
 
 /**
@@ -128,6 +184,20 @@ function enrichNotes(data: AppData): AppData {
     seed.schemes,
   );
 
+  const teams = mergeMissingById(data.teams ?? [], seed.teams);
+
+  const roles = mergeMissingById(
+    (data.roles ?? []).map(migrateRole),
+    seed.roles,
+  ).map(migrateRole);
+
+  const employees = mergeMissingById(
+    (data.employees ?? []).map((e) =>
+      migrateEmployee(e, { teams, roles }),
+    ),
+    seed.employees,
+  ).map((e) => migrateEmployee(e, { teams, roles }));
+
   return {
     ...data,
     parameters,
@@ -136,14 +206,15 @@ function enrichNotes(data: AppData): AppData {
       data.achievementTiers ?? [],
       seed.achievementTiers,
     ),
-    roles: mergeMissingById(data.roles ?? [], seed.roles),
+    roles,
     schemeWeights: mergeMissingById(data.schemeWeights ?? [], seed.schemeWeights),
     schemeNominals: mergeMissingById(
       data.schemeNominals ?? [],
       seed.schemeNominals,
     ),
     volumeTiers: mergeMissingById(data.volumeTiers ?? [], seed.volumeTiers),
-    employees: mergeMissingById(data.employees ?? [], seed.employees),
+    employees,
+    teams,
     achievementRecords: (data.achievementRecords ?? []).filter(
       (r) => !SEED_DEMO_RECORD_IDS.has(r.id),
     ),

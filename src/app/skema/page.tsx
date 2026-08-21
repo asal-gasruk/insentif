@@ -8,6 +8,10 @@ import { PageHeader } from "@/components/PageHeader";
 import { FORMULA_TEMPLATES, getFormulaTemplateMeta } from "@/data/formula-templates";
 import { formatFormulaRuleSummary } from "@/data/formula-rules";
 import { FormulaRuleEditor } from "@/components/FormulaRuleEditor";
+import {
+  TeamSplitEditor,
+  formatTeamSplitsSummary,
+} from "@/components/TeamSplitEditor";
 import { SchemeSetupGuide } from "@/components/SchemeSetupGuide";
 import { Select2 } from "@/components/Select2";
 import { useAppData } from "@/hooks/useAppData";
@@ -118,7 +122,8 @@ function defaultTeamSplits(
       { key: "DOUBLE", split: { driver: 0.4, helper1: 0.3, helper2: 0.3 } },
     ];
   }
-  if (dimension === "branchType") {
+  // Parameter schemes (incl. MT/Horeca/none) default to sales team splits
+  if (dimension === "branchType" || dimension === "none") {
     return [
       { key: "3", split: { salesman: 0.55, driver: 0.225, helper1: 0.225 } },
       { key: "2", split: { salesman: 0.7, driver: 0.3 } },
@@ -213,6 +218,17 @@ export default function SkemaPage() {
     e.preventDefault();
     if (!form || !form.name.trim()) return;
 
+    const badSplit = (form.teamSplits ?? []).find((row) => {
+      const total = Object.values(row.split).reduce((s, v) => s + (v || 0), 0);
+      return Math.abs(total - 1) >= 0.001;
+    });
+    if (badSplit) {
+      alert(
+        `Pembagian tim untuk key "${badSplit.key}" belum 100%. Sesuaikan persentase posisi.`,
+      );
+      return;
+    }
+
     if (isCreate) {
       const id = customId.trim() || `sch-${slugify(form.name)}`;
       if (!id) return;
@@ -235,7 +251,7 @@ export default function SkemaPage() {
     <>
       <PageHeader
         title="Skema Insentif"
-        description="Konfigurasi per role: segment, template rumus, dan aturan penalty (multi-aturan). Bobot & nominal di halaman Bobot & Nominal."
+        description="Konfigurasi per role: segment, template rumus, pembagian tim, dan aturan penalty. Bobot & nominal di halaman Bobot & Nominal."
         action={
           <button type="button" className="btn-primary" onClick={openCreate}>
             + Tambah Skema
@@ -314,6 +330,13 @@ export default function SkemaPage() {
 
               <p className="mt-2 text-[10px] text-[var(--text-muted)]">
                 {formatPenaltySummary(scheme.penalties ?? [])}
+              </p>
+
+              <p
+                className="mt-2 line-clamp-2 text-[10px] text-[var(--text-muted)]"
+                title={formatTeamSplitsSummary(scheme.teamSplits ?? [])}
+              >
+                Bagi: {formatTeamSplitsSummary(scheme.teamSplits ?? [])}
               </p>
 
               <NotesPanel
@@ -484,6 +507,8 @@ export default function SkemaPage() {
                 </p>
               )}
             </div>
+
+            <TeamSplitEditor form={form} setForm={setForm} />
 
             <fieldset className="rounded-lg border border-[var(--border)] p-4">
               <div className="mb-3 flex items-center justify-between">

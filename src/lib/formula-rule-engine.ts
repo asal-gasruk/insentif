@@ -27,11 +27,12 @@ function findNominalRow(
   tierId: string,
 ): SchemeNominal | undefined {
   const { data, scheme, record, employee } = ctx;
+  const teamSize = ctx.teamSize ?? employee.teamSize;
   return data.schemeNominals.find(
     (n) =>
       n.schemeId === scheme.id &&
       n.segmentId === record.segmentId &&
-      n.teamSize === employee.teamSize &&
+      n.teamSize === teamSize &&
       n.achievementTierId === tierId,
   );
 }

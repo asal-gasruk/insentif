@@ -12,28 +12,107 @@ import {
   schemeForEmployee,
 } from "@/lib/scheme-utils";
 import { formatPenaltySummary } from "@/lib/penalty-engine";
+import {
+  defaultSegmentForTeam,
+  resolveSubjectMode,
+  schemeForTeam,
+} from "@/lib/team-utils";
+import { generateId } from "@/lib/storage";
 import { useAppData } from "@/hooks/useAppData";
 import type { AchievementRecord } from "@/types";
 
+type SubjectMode = "team" | "employee";
+
 export default function PencapaianPage() {
-  const { data, ready, update, remove } = useAppData();
+  const { data, ready, create, update, remove } = useAppData();
   const [editing, setEditing] = useState<AchievementRecord | null>(null);
   const [form, setForm] = useState<AchievementRecord | null>(null);
+  const [mode, setMode] = useState<SubjectMode>("team");
+  const [creating, setCreating] = useState(false);
 
   if (!ready || !data) return <LoadingState />;
 
-  const eligibleEmployees = data.employees.filter((e) =>
-    schemeForEmployee(data, e),
-  );
+  const eligibleTeams = data.teams.filter((t) => {
+    if (!t.active) return false;
+    const scheme = schemeForTeam(data, t);
+    return scheme?.type === "parameter";
+  });
+  const eligibleEmployees = data.employees.filter((e) => {
+    if (!schemeForEmployee(data, e)) return false;
+    return resolveSubjectMode(data, e) === "individu";
+  });
+
+  const openCreate = (nextMode: SubjectMode) => {
+    setCreating(true);
+    setEditing(null);
+    setMode(nextMode);
+
+    if (nextMode === "team") {
+      const team = eligibleTeams[0];
+      const scheme = schemeForTeam(data, team);
+      if (!team || !scheme) {
+        setForm(null);
+        return;
+      }
+      setForm({
+        id: generateId("ach"),
+        teamId: team.id,
+        period: scheme.period === "quarterly" ? "2026-Q1" : "2026-02",
+        schemeId: scheme.id,
+        segmentId: defaultSegmentForTeam(data, team),
+        achievements: {},
+        overduePct: 0,
+        badDebtDays: 0,
+        notes: "",
+      });
+      return;
+    }
+
+    const emp = eligibleEmployees[0];
+    const scheme = schemeForEmployee(data, emp);
+    if (!emp || !scheme) {
+      setForm(null);
+      return;
+    }
+    setForm({
+      id: generateId("ach"),
+      employeeId: emp.id,
+      period: scheme.period === "quarterly" ? "2026-Q1" : "2026-02",
+      schemeId: scheme.id,
+      segmentId: defaultSegment(data, emp),
+      achievements: {},
+      overduePct: 0,
+      badDebtDays: 0,
+      notes: "",
+    });
+  };
 
   const openEdit = (row: AchievementRecord) => {
+    setCreating(false);
     setEditing(row);
+    setMode(row.teamId ? "team" : "employee");
     setForm(JSON.parse(JSON.stringify(row)) as AchievementRecord);
   };
 
   const close = () => {
     setEditing(null);
     setForm(null);
+    setCreating(false);
+  };
+
+  const onTeamChange = (teamId: string) => {
+    if (!form) return;
+    const team = data.teams.find((t) => t.id === teamId);
+    const scheme = schemeForTeam(data, team);
+    if (!scheme || !team) return;
+    setForm({
+      ...form,
+      teamId,
+      employeeId: undefined,
+      schemeId: scheme.id,
+      segmentId: defaultSegmentForTeam(data, team),
+      achievements: {},
+    });
   };
 
   const onEmployeeChange = (employeeId: string) => {
@@ -44,6 +123,7 @@ export default function PencapaianPage() {
     setForm({
       ...form,
       employeeId,
+      teamId: undefined,
       schemeId: scheme.id,
       segmentId: defaultSegment(data, emp),
       achievements: {},
@@ -52,8 +132,12 @@ export default function PencapaianPage() {
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (!form || !editing) return;
-    update("achievementRecords", form);
+    if (!form) return;
+    if (editing) {
+      update("achievementRecords", form);
+    } else {
+      create("achievementRecords", form);
+    }
     close();
   };
 
@@ -64,18 +148,48 @@ export default function PencapaianPage() {
     ? activeParams(data, form.schemeId, form.segmentId)
     : [];
 
+  const subjectLabel = (row: AchievementRecord) => {
+    if (row.teamId) {
+      const team = data.teams.find((t) => t.id === row.teamId);
+      if (!team) return row.teamId;
+      return `Tim: ${team.name} (${team.teamType})`;
+    }
+    const emp = data.employees.find((e) => e.id === row.employeeId);
+    return emp?.name ?? row.employeeId ?? "—";
+  };
+
   return (
     <>
       <PageHeader
         title="Data Pencapaian"
-        description="Data pencapaian dari import bulk. Field parameter mengikuti bobot skema karyawan."
+        description="Mode Tim: input per Master Tim. Mode Individu: input per NIK (termasuk role optional yang Manpower-nya Individu)."
+        action={
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="btn-primary"
+              onClick={() => openCreate("team")}
+              disabled={eligibleTeams.length === 0}
+            >
+              + Pencapaian Tim
+            </button>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => openCreate("employee")}
+              disabled={eligibleEmployees.length === 0}
+            >
+              + Pencapaian Individu
+            </button>
+          </div>
+        }
       />
 
       <div className="card overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-[var(--surface-muted)]">
             <tr>
-              <th className="px-3 py-3 text-left">Karyawan</th>
+              <th className="px-3 py-3 text-left">Subjek</th>
               <th className="px-3 py-3 text-left">Periode</th>
               <th className="px-3 py-3 text-left">Skema</th>
               <th className="px-3 py-3 text-left">Segment</th>
@@ -86,14 +200,13 @@ export default function PencapaianPage() {
           </thead>
           <tbody>
             {data.achievementRecords.map((row) => {
-              const emp = data.employees.find((e) => e.id === row.employeeId);
               const scheme = data.schemes.find((s) => s.id === row.schemeId);
               const segment = scheme?.segments.find(
                 (s) => s.id === row.segmentId,
               );
               return (
                 <tr key={row.id} className="border-t border-[var(--border)]">
-                  <td className="px-3 py-2 font-medium">{emp?.name}</td>
+                  <td className="px-3 py-2 font-medium">{subjectLabel(row)}</td>
                   <td className="px-3 py-2">{row.period}</td>
                   <td className="px-3 py-2">{scheme?.name}</td>
                   <td className="px-3 py-2">{segment?.name ?? row.segmentId}</td>
@@ -137,8 +250,11 @@ export default function PencapaianPage() {
             })}
             {data.achievementRecords.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-[var(--text-muted)]">
-                  Belum ada data pencapaian. Tambahkan via menu Import.
+                <td
+                  colSpan={7}
+                  className="px-4 py-8 text-center text-[var(--text-muted)]"
+                >
+                  Belum ada data pencapaian. Tambah manual atau via Import.
                 </td>
               </tr>
             )}
@@ -148,26 +264,41 @@ export default function PencapaianPage() {
 
       <Modal
         open={form !== null}
-        title="Edit Pencapaian"
+        title={creating ? "Tambah Pencapaian" : "Edit Pencapaian"}
         onClose={close}
       >
         {form && formScheme && (
           <form onSubmit={submit} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="label">Karyawan</label>
-                <Select2
-                  value={form.employeeId}
-                  onChange={onEmployeeChange}
-                  options={eligibleEmployees.map((e) => ({
-                    value: e.id,
-                    label: `${e.name} (${e.nik})`,
-                  }))}
-                />
-              </div>
+              {mode === "team" ? (
+                <div>
+                  <label className="label">Tim</label>
+                  <Select2
+                    value={form.teamId ?? ""}
+                    onChange={onTeamChange}
+                    options={eligibleTeams.map((t) => ({
+                      value: t.id,
+                      label: `${t.name} (${t.teamType} · ${t.members.length} org)`,
+                    }))}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <label className="label">Karyawan</label>
+                  <Select2
+                    value={form.employeeId ?? ""}
+                    onChange={onEmployeeChange}
+                    options={eligibleEmployees.map((e) => ({
+                      value: e.id,
+                      label: `${e.name} (${e.nik})`,
+                    }))}
+                  />
+                </div>
+              )}
               <div>
                 <label className="label">
-                  Periode ({formScheme.period === "monthly" ? "YYYY-MM" : "YYYY-Qn"})
+                  Periode (
+                  {formScheme.period === "monthly" ? "YYYY-MM" : "YYYY-Qn"})
                 </label>
                 <input
                   className="input"

@@ -6,8 +6,13 @@ import { Modal } from "@/components/Modal";
 import { PageHeader } from "@/components/PageHeader";
 import { Select2 } from "@/components/Select2";
 import { generateId } from "@/lib/storage";
+import {
+  defaultWorkforceMode,
+  employeeAssignedTeamId,
+  subjectPolicyOf,
+} from "@/lib/team-utils";
 import { useAppData } from "@/hooks/useAppData";
-import type { Employee, EmployeePosition } from "@/types";
+import type { Employee, EmployeePosition, WorkforceMode } from "@/types";
 
 const positions: { value: EmployeePosition; label: string }[] = [
   { value: "salesman", label: "Salesman" },
@@ -29,6 +34,7 @@ const empty: Omit<Employee, "id"> = {
   position: "salesman",
   teamSize: 3,
   vehicleType: undefined,
+  workforceMode: "individu",
   active: true,
 };
 
@@ -37,17 +43,35 @@ export default function KaryawanPage() {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Employee | null>(null);
   const [form, setForm] = useState(empty);
+  const [error, setError] = useState<string | null>(null);
 
   if (!ready || !data) return <LoadingState />;
 
+  const policy = subjectPolicyOf(data, form.roleId);
+  const modeLocked = policy === "individu" || policy === "team";
+  const effectiveMode: WorkforceMode =
+    policy === "individu"
+      ? "individu"
+      : policy === "team"
+        ? "team"
+        : form.workforceMode;
+
   const openCreate = () => {
     setEditing(null);
-    setForm({ ...empty, branchId: data.branches[0]?.id ?? "" });
+    setError(null);
+    const roleId = data.roles[0]?.id ?? "canvasser";
+    setForm({
+      ...empty,
+      branchId: data.branches[0]?.id ?? "",
+      roleId,
+      workforceMode: defaultWorkforceMode(data, roleId),
+    });
     setOpen(true);
   };
 
   const openEdit = (emp: Employee) => {
     setEditing(emp);
+    setError(null);
     setForm({
       name: emp.name,
       nik: emp.nik,
@@ -56,17 +80,46 @@ export default function KaryawanPage() {
       position: emp.position,
       teamSize: emp.teamSize,
       vehicleType: emp.vehicleType,
+      workforceMode: emp.workforceMode ?? defaultWorkforceMode(data, emp.roleId),
       active: emp.active,
     });
     setOpen(true);
   };
 
+  const onRoleChange = (roleId: string) => {
+    const nextPolicy = subjectPolicyOf(data, roleId);
+    const workforceMode: WorkforceMode =
+      nextPolicy === "individu"
+        ? "individu"
+        : nextPolicy === "team"
+          ? "team"
+          : form.workforceMode;
+    setForm({
+      ...form,
+      roleId,
+      workforceMode,
+      vehicleType: roleId === "delivery" ? form.vehicleType ?? "PICKUP" : undefined,
+    });
+  };
+
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    const workforceMode = effectiveMode;
+    const payload = { ...form, workforceMode };
+    setError(null);
     if (editing) {
-      update("employees", { ...editing, ...form });
+      if (workforceMode === "team") {
+        const assigned = employeeAssignedTeamId(data, editing.id);
+        if (!assigned) {
+          setError(
+            "Mode Tim membutuhkan keanggotaan di Master Tim. Tambahkan karyawan ke tim dulu, atau set mode Individu.",
+          );
+          return;
+        }
+      }
+      update("employees", { ...editing, ...payload });
     } else {
-      create("employees", { id: generateId("emp"), ...form });
+      create("employees", { id: generateId("emp"), ...payload });
     }
     setOpen(false);
   };
@@ -74,8 +127,8 @@ export default function KaryawanPage() {
   return (
     <>
       <PageHeader
-        title="Karyawan / Tim Sales"
-        description="Kelola data karyawan yang dihitung insentifnya berdasarkan role dan ukuran tim."
+        title="Karyawan / Manpower"
+        description="Kelola karyawan dan mode kerja (Individu / Tim). Role menentukan kebijakan; Manpower menentukan mode aktual."
         action={
           <button type="button" className="btn-primary" onClick={openCreate}>
             + Tambah Karyawan
@@ -92,7 +145,8 @@ export default function KaryawanPage() {
               <th className="px-4 py-3 text-left">Role</th>
               <th className="px-4 py-3 text-left">Cabang</th>
               <th className="px-4 py-3 text-left">Posisi</th>
-              <th className="px-4 py-3 text-left">Tim</th>
+              <th className="px-4 py-3 text-left">Mode</th>
+              <th className="px-4 py-3 text-left">Ukuran</th>
               <th className="px-4 py-3 text-right">Aksi</th>
             </tr>
           </thead>
@@ -100,6 +154,7 @@ export default function KaryawanPage() {
             {data.employees.map((emp) => {
               const role = data.roles.find((r) => r.id === emp.roleId);
               const branch = data.branches.find((b) => b.id === emp.branchId);
+              const mode = emp.workforceMode ?? "individu";
               return (
                 <tr key={emp.id} className="border-t border-[var(--border)]">
                   <td className="px-4 py-3 font-[family-name:var(--font-mono)] text-xs">
@@ -109,6 +164,17 @@ export default function KaryawanPage() {
                   <td className="px-4 py-3">{role?.name}</td>
                   <td className="px-4 py-3">{branch?.name}</td>
                   <td className="px-4 py-3 capitalize">{emp.position}</td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`badge ${
+                        mode === "team"
+                          ? "bg-[var(--primary)]/10 text-[var(--primary)]"
+                          : "bg-[var(--surface-muted)]"
+                      }`}
+                    >
+                      {mode === "team" ? "Tim" : "Individu"}
+                    </span>
+                  </td>
                   <td className="px-4 py-3">{emp.teamSize} org</td>
                   <td className="px-4 py-3 text-right">
                     <button
@@ -122,7 +188,8 @@ export default function KaryawanPage() {
                       type="button"
                       className="btn-danger px-3 py-1"
                       onClick={() => {
-                        if (confirm(`Hapus ${emp.name}?`)) remove("employees", emp.id);
+                        if (confirm(`Hapus ${emp.name}?`))
+                          remove("employees", emp.id);
                       }}
                     >
                       Hapus
@@ -141,6 +208,11 @@ export default function KaryawanPage() {
         onClose={() => setOpen(false)}
       >
         <form onSubmit={submit} className="grid gap-4 sm:grid-cols-2">
+          {error && (
+            <p className="sm:col-span-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+              {error}
+            </p>
+          )}
           <div>
             <label className="label">NIK</label>
             <input
@@ -163,12 +235,32 @@ export default function KaryawanPage() {
             <label className="label">Role</label>
             <Select2
               value={form.roleId}
-              onChange={(v) => setForm({ ...form, roleId: v })}
+              onChange={onRoleChange}
               options={data.roles.map((r) => ({
                 value: r.id,
-                label: r.name,
+                label: `${r.name} (${r.subjectPolicy})`,
               }))}
             />
+          </div>
+          <div>
+            <label className="label">Manpower / Mode kerja</label>
+            <Select2
+              value={effectiveMode}
+              onChange={(v) =>
+                setForm({ ...form, workforceMode: v as WorkforceMode })
+              }
+              options={[
+                { value: "individu", label: "Individu (NIK)" },
+                { value: "team", label: "Tim (Master Tim)" },
+              ]}
+              isDisabled={modeLocked}
+            />
+            <p className="mt-1 text-xs text-[var(--text-muted)]">
+              {policy === "individu" && "Role ini hanya Individu."}
+              {policy === "team" && "Role ini wajib Tim."}
+              {policy === "optional" &&
+                "Role opsional — pilih Individu atau Tim."}
+            </p>
           </div>
           <div>
             <label className="label">Cabang</label>
@@ -195,7 +287,7 @@ export default function KaryawanPage() {
             />
           </div>
           <div>
-            <label className="label">Ukuran Tim</label>
+            <label className="label">Ukuran Tim (nominal)</label>
             <input
               type="number"
               min={1}
@@ -229,7 +321,11 @@ export default function KaryawanPage() {
             </label>
           </div>
           <div className="sm:col-span-2 flex justify-end gap-2">
-            <button type="button" className="btn-secondary" onClick={() => setOpen(false)}>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => setOpen(false)}
+            >
               Batal
             </button>
             <button type="submit" className="btn-primary">

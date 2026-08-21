@@ -53,11 +53,15 @@ export default function PerhitunganPage() {
       ) : (
         <div className="mb-8 space-y-4">
           {paramResults.map((r) => (
-            <article key={r.recordId} className="card p-5">
+            <article
+              key={`${r.recordId}-${r.employeeId}`}
+              className="card p-5"
+            >
               <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <h4 className="font-bold">{r.employeeName}</h4>
                   <p className="text-sm text-[var(--text-muted)]">
+                    {r.teamName ? `Tim ${r.teamName} · ` : ""}
                     {r.schemeName} · {r.segmentName} · {r.period} · Tier{" "}
                     {r.tierLabel}
                   </p>
@@ -133,8 +137,18 @@ export default function PerhitunganPage() {
             </thead>
             <tbody>
               {deliveryResults.map((r) => (
-                <tr key={r.recordId} className="border-t border-[var(--border)]">
-                  <td className="px-3 py-2 font-medium">{r.employeeName}</td>
+                <tr
+                  key={`${r.recordId}-${r.employeeId}`}
+                  className="border-t border-[var(--border)]"
+                >
+                  <td className="px-3 py-2 font-medium">
+                    {r.employeeName}
+                    {r.teamName ? (
+                      <span className="ml-1 text-xs text-[var(--text-muted)]">
+                        · {r.teamName}
+                      </span>
+                    ) : null}
+                  </td>
                   <td className="px-3 py-2">{r.period}</td>
                   <td className="px-3 py-2">{r.vehicleType}</td>
                   <td className="px-3 py-2 text-right">
@@ -173,6 +187,7 @@ export default function PerhitunganPage() {
           <li>• Breakdown nominal per parameter = bobot × total nominal tier</li>
           <li>• Penalty overdue & bad debt mengikuti konfigurasi per skema (10% GT, 20% ASM/RSM/NSM)</li>
           <li>• Pembagian tim sesuai konfigurasi skema (mis. Canvasser 3 org: 55/22.5/22.5)</li>
+          <li>• Role.subjectPolicy + Manpower: Individu (NIK) atau Tim (Master Tim); Delivery juga bisa 1 record per tim → split</li>
           <li>• Delivery: tier kartonase + drop point per armada; quality gate OTD ≥ 95%, akurasi ≥ 97%</li>
         </ul>
       </section>

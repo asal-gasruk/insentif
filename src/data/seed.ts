@@ -1,5 +1,6 @@
 import { PARAMETER_NOTES } from "@/data/parameter-notes";
 import { SCHEME_NOTES } from "@/data/scheme-notes";
+import { SALES_TEAM_SPLITS } from "@/lib/team-utils";
 import type {
   AppData,
   IncentiveScheme,
@@ -10,7 +11,7 @@ import type {
   VolumeTier,
 } from "@/types";
 
-export const STORAGE_KEY = "lahans-insentif-v7";
+export const STORAGE_KEY = "lahans-insentif-v9";
 
 function param(
   id: string,
@@ -133,10 +134,7 @@ const schemes: IncentiveScheme[] = [
     penalties: DEFAULT_PENALTIES,
     formulaMode: "template",
     formulaTemplate: "paramIndependent",
-    teamSplits: [
-      { key: "3", split: { salesman: 0.55, driver: 0.225, helper1: 0.225 } },
-      { key: "2", split: { salesman: 0.7, driver: 0.3 } },
-    ],
+    teamSplits: SALES_TEAM_SPLITS,
     notes: SCHEME_NOTES["sch-canvasser"],
   },
   {
@@ -244,7 +242,7 @@ const schemes: IncentiveScheme[] = [
     penalties: DEFAULT_PENALTIES,
     formulaMode: "template",
     formulaTemplate: "paramIndependent",
-    teamSplits: [{ key: "1", split: { salesman: 1 } }],
+    teamSplits: SALES_TEAM_SPLITS,
     notes: SCHEME_NOTES["sch-sales-mt"],
   },
   {
@@ -286,7 +284,7 @@ const schemes: IncentiveScheme[] = [
     penalties: DEFAULT_PENALTIES,
     formulaMode: "template",
     formulaTemplate: "paramIndependent",
-    teamSplits: [{ key: "1", split: { salesman: 1 } }],
+    teamSplits: SALES_TEAM_SPLITS,
     notes: SCHEME_NOTES["sch-sales-horeca"],
   },
   {
@@ -463,19 +461,19 @@ export const seedData: AppData = {
     { id: "NB", name: "Cabang Baru", nameEn: "New Branch" },
   ],
   roles: [
-    { id: "canvasser", name: "Canvass Team", sheet: "Canvasser" },
-    { id: "to", name: "Taking Order (TO)", sheet: "TO" },
-    { id: "mix", name: "SLD Mix", sheet: "Mix" },
-    { id: "ass", name: "Area Sales Supervisor (ASS)", sheet: "ASS" },
-    { id: "asm", name: "Area Sales Manager (ASM)", sheet: "ASM" },
-    { id: "rsm", name: "Regional Sales Manager (RSM)", sheet: "RSM" },
-    { id: "nsm", name: "National Sales Manager (NSM)", sheet: "NSM" },
-    { id: "spv-mt", name: "Sales SPV (MT)", sheet: "Sales SPV (MT)" },
-    { id: "ass-mt", name: "ASS MT (Area Sales Supervisor MT)", sheet: "Sales SPV (MT)" },
-    { id: "sales-mt", name: "Sales Team (MT)", sheet: "Sales Team (MT)" },
-    { id: "sales-horeca", name: "Sales Team (Horeca)", sheet: "Sales Team (Horeca)" },
-    { id: "spv-horeca", name: "Sales SPV (Horeca)", sheet: "Sales SPV (Horeca)" },
-    { id: "delivery", name: "Delivery Team", sheet: "Delivery Team" },
+    { id: "canvasser", name: "Canvass Team", sheet: "Canvasser", subjectPolicy: "optional" },
+    { id: "to", name: "Taking Order (TO)", sheet: "TO", subjectPolicy: "individu" },
+    { id: "mix", name: "SLD Mix", sheet: "Mix", subjectPolicy: "individu" },
+    { id: "ass", name: "Area Sales Supervisor (ASS)", sheet: "ASS", subjectPolicy: "individu" },
+    { id: "asm", name: "Area Sales Manager (ASM)", sheet: "ASM", subjectPolicy: "individu" },
+    { id: "rsm", name: "Regional Sales Manager (RSM)", sheet: "RSM", subjectPolicy: "individu" },
+    { id: "nsm", name: "National Sales Manager (NSM)", sheet: "NSM", subjectPolicy: "individu" },
+    { id: "spv-mt", name: "Sales SPV (MT)", sheet: "Sales SPV (MT)", subjectPolicy: "individu" },
+    { id: "ass-mt", name: "ASS MT (Area Sales Supervisor MT)", sheet: "Sales SPV (MT)", subjectPolicy: "individu" },
+    { id: "sales-mt", name: "Sales Team (MT)", sheet: "Sales Team (MT)", subjectPolicy: "optional" },
+    { id: "sales-horeca", name: "Sales Team (Horeca)", sheet: "Sales Team (Horeca)", subjectPolicy: "optional" },
+    { id: "spv-horeca", name: "Sales SPV (Horeca)", sheet: "Sales SPV (Horeca)", subjectPolicy: "individu" },
+    { id: "delivery", name: "Delivery Team", sheet: "Delivery Team", subjectPolicy: "optional" },
   ],
   parameters: [
     param("allProduct", "Sales Value - All Product", "Rp", "All Prod"),
@@ -543,6 +541,7 @@ export const seedData: AppData = {
       branchId: "br-mb-1",
       position: "salesman",
       teamSize: 3,
+      workforceMode: "team",
       active: true,
     },
     {
@@ -553,6 +552,51 @@ export const seedData: AppData = {
       branchId: "br-mb-1",
       position: "driver",
       teamSize: 3,
+      workforceMode: "team",
+      active: true,
+    },
+    {
+      id: "emp-10",
+      name: "Siti Aminah",
+      nik: "LMN-010",
+      roleId: "canvasser",
+      branchId: "br-mb-1",
+      position: "helper1",
+      teamSize: 3,
+      workforceMode: "team",
+      active: true,
+    },
+    {
+      id: "emp-11",
+      name: "Andi Pratama",
+      nik: "MT-001",
+      roleId: "sales-mt",
+      branchId: "br-mb-1",
+      position: "salesman",
+      teamSize: 2,
+      workforceMode: "team",
+      active: true,
+    },
+    {
+      id: "emp-12",
+      name: "Bambang Sutrisno",
+      nik: "MT-002",
+      roleId: "sales-mt",
+      branchId: "br-mb-1",
+      position: "driver",
+      teamSize: 2,
+      workforceMode: "team",
+      active: true,
+    },
+    {
+      id: "emp-13",
+      name: "Maya Sari",
+      nik: "HR-001",
+      roleId: "sales-horeca",
+      branchId: "br-mb-2",
+      position: "salesman",
+      teamSize: 1,
+      workforceMode: "team",
       active: true,
     },
     {
@@ -563,6 +607,7 @@ export const seedData: AppData = {
       branchId: "br-sb-1",
       position: "salesman",
       teamSize: 1,
+      workforceMode: "individu",
       active: true,
     },
     {
@@ -573,6 +618,7 @@ export const seedData: AppData = {
       branchId: "br-mb-1",
       position: "supervisor",
       teamSize: 1,
+      workforceMode: "individu",
       active: true,
     },
     {
@@ -583,6 +629,7 @@ export const seedData: AppData = {
       branchId: "br-mb-1",
       position: "manager",
       teamSize: 1,
+      workforceMode: "individu",
       active: true,
     },
     {
@@ -594,6 +641,7 @@ export const seedData: AppData = {
       position: "driver",
       teamSize: 2,
       vehicleType: "ENGKEL",
+      workforceMode: "team",
       active: true,
     },
     {
@@ -605,6 +653,7 @@ export const seedData: AppData = {
       position: "driver",
       teamSize: 1,
       vehicleType: "PICKUP",
+      workforceMode: "individu",
       active: true,
     },
     {
@@ -616,6 +665,7 @@ export const seedData: AppData = {
       position: "driver",
       teamSize: 3,
       vehicleType: "DOUBLE",
+      workforceMode: "individu",
       active: true,
     },
     {
@@ -623,10 +673,59 @@ export const seedData: AppData = {
       name: "Slamet Riyadi",
       nik: "DT-003",
       roleId: "delivery",
-      branchId: "br-sb-1",
-      position: "driver",
+      branchId: "br-mb-1",
+      position: "helper1",
       teamSize: 2,
       vehicleType: "ENGKEL",
+      workforceMode: "team",
+      active: true,
+    },
+  ],
+  teams: [
+    {
+      id: "team-gt-1",
+      name: "Canvass Bandung A",
+      teamType: "GT",
+      roleId: "canvasser",
+      branchId: "br-mb-1",
+      members: [
+        { employeeId: "emp-1", position: "salesman" },
+        { employeeId: "emp-2", position: "driver" },
+        { employeeId: "emp-10", position: "helper1" },
+      ],
+      active: true,
+    },
+    {
+      id: "team-mt-1",
+      name: "Sales MT Bandung",
+      teamType: "MT",
+      roleId: "sales-mt",
+      branchId: "br-mb-1",
+      members: [
+        { employeeId: "emp-11", position: "salesman" },
+        { employeeId: "emp-12", position: "driver" },
+      ],
+      active: true,
+    },
+    {
+      id: "team-horeca-1",
+      name: "Horeca Garut",
+      teamType: "Horeca",
+      roleId: "sales-horeca",
+      branchId: "br-mb-2",
+      members: [{ employeeId: "emp-13", position: "salesman" }],
+      active: true,
+    },
+    {
+      id: "team-dt-1",
+      name: "Delivery Bandung Engkel",
+      teamType: "Delivery",
+      roleId: "delivery",
+      branchId: "br-mb-1",
+      members: [
+        { employeeId: "emp-6", position: "driver" },
+        { employeeId: "emp-9", position: "helper1" },
+      ],
       active: true,
     },
   ],

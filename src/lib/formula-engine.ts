@@ -14,6 +14,8 @@ export interface FormulaContext {
   scheme: IncentiveScheme;
   record: AchievementRecord;
   employee: Employee;
+  /** Override ukuran tim (Master Tim); default employee.teamSize */
+  teamSize?: number;
   weightRow: SchemeWeight;
   activeParams: string[];
   tiers: AchievementTier[];
@@ -34,6 +36,10 @@ function resolveTier(
     if (t.maxPct === null) return pct >= t.minPct;
     return pct >= t.minPct && pct < t.maxPct;
   });
+}
+
+function contextTeamSize(ctx: FormulaContext): number {
+  return ctx.teamSize ?? ctx.employee.teamSize;
 }
 
 function findNominalRow(
@@ -107,8 +113,8 @@ function tierLabel(
 
 /** Skema parameter mandiri — setiap param punya tier & slice sendiri */
 export function computeParamIndependent(ctx: FormulaContext): FormulaResult {
-  const { data, scheme, record, employee, weightRow, activeParams, tiers } =
-    ctx;
+  const { data, scheme, record, weightRow, activeParams, tiers } = ctx;
+  const teamSize = contextTeamSize(ctx);
 
   const parameterBreakdown: Record<string, number> = {};
   let gross = 0;
@@ -122,7 +128,7 @@ export function computeParamIndependent(ctx: FormulaContext): FormulaResult {
       data,
       scheme.id,
       record.segmentId,
-      employee.teamSize,
+      teamSize,
       tier.id,
     );
     if (!nominalRow) continue;
@@ -157,7 +163,8 @@ export function computeAggregateTier(
   ctx: FormulaContext,
   template: Exclude<FormulaTemplate, "paramIndependent">,
 ): FormulaResult {
-  const { data, scheme, record, employee, weightRow, tiers } = ctx;
+  const { data, scheme, record, weightRow, tiers } = ctx;
+  const teamSize = contextTeamSize(ctx);
 
   const pct = aggregatePct(template, ctx);
   const tier = resolveTier(tiers, pct);
@@ -175,7 +182,7 @@ export function computeAggregateTier(
     data,
     scheme.id,
     record.segmentId,
-    employee.teamSize,
+    teamSize,
     tier.id,
   );
 

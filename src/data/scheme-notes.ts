@@ -8,6 +8,7 @@ export const SCHEME_NOTES: Record<string, string> = {
   "sch-canvasser": [
     "Lampiran 02 — Canvass Team (GT)",
     INDEPENDENT_PARAMS,
+    "Pencapaian diinput per Master Tim (bukan per individu).",
     "Pembagian tim: 3 orang (55% / 22,5% / 22,5%) atau 2 orang (70% / 30%).",
     NB_FOCUS_NOTE,
   ].join("\n\n"),
@@ -56,6 +57,8 @@ export const SCHEME_NOTES: Record<string, string> = {
     "Lampiran 10 — Sales Team (MT)",
     INDEPENDENT_PARAMS,
     "Tanpa segment cabang — berlaku untuk seluruh wilayah MT.",
+    "Pencapaian diinput per Master Tim (bukan per individu).",
+    "Pembagian tim: 3 orang (55% / 22,5% / 22,5%), 2 orang (70% / 30%), atau 1 orang (100%).",
   ].join("\n\n"),
 
   "sch-spv-mt": [
@@ -76,6 +79,8 @@ export const SCHEME_NOTES: Record<string, string> = {
     "Lampiran 11 — Sales Team (Horeca)",
     INDEPENDENT_PARAMS,
     "Parameter khusus: Sales Contract, Co-Branding, NOO, AO.",
+    "Pencapaian diinput per Master Tim (bukan per individu).",
+    "Pembagian tim: 3 orang (55% / 22,5% / 22,5%), 2 orang (70% / 30%), atau 1 orang (100%).",
   ].join("\n\n"),
 
   "sch-spv-horeca": [
