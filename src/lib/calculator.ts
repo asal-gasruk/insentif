@@ -11,7 +11,10 @@ import type {
 import { computeFormula } from "@/lib/formula-engine";
 import { computeFormulaRules } from "@/lib/formula-rule-engine";
 import { evaluatePenalties } from "@/lib/penalty-engine";
-import { teamSizeOf } from "@/lib/team-utils";
+import {
+  resolveParameterTeamSplitRatio,
+  teamSizeOf,
+} from "@/lib/team-utils";
 
 function getSplitRatio(
   scheme: IncentiveScheme,
@@ -80,6 +83,7 @@ function buildMemberResult(args: {
   parameterBreakdown: Record<string, number>;
   tierLabel: string;
   team?: Team;
+  memberPositions?: string[];
 }): IncentiveResult {
   const {
     record,
@@ -91,13 +95,18 @@ function buildMemberResult(args: {
     parameterBreakdown,
     tierLabel,
     team,
+    memberPositions,
   } = args;
 
-  const splitRatio = getSplitRatio(
-    scheme,
-    String(teamSize),
-    employee.position,
-  );
+  const splitRatio =
+    memberPositions && memberPositions.length > 0
+      ? resolveParameterTeamSplitRatio(
+          scheme,
+          teamSize,
+          employee.position,
+          memberPositions,
+        )
+      : getSplitRatio(scheme, String(teamSize), employee.position);
   const penaltyResult = evaluatePenalties(scheme.penalties ?? [], record);
 
   let finalAmount = Math.round(
@@ -256,6 +265,8 @@ export function calculateTeamParameterIncentive(
     });
   }
 
+  const memberPositions = team.members.map((m) => m.position);
+
   return team.members.flatMap((m) => {
     const emp = data.employees.find((e) => e.id === m.employeeId);
     if (!emp) return [];
@@ -275,6 +286,7 @@ export function calculateTeamParameterIncentive(
         parameterBreakdown: gross.parameterBreakdown,
         tierLabel: gross.tierLabel,
         team,
+        memberPositions,
       }),
     ];
   });

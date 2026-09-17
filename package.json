@@ -12,7 +12,9 @@
     "build": "next build",
     "build:clean": "rm -rf .next && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:sfa": "python3 scripts/generate-sfa-excel-json.py",
+    "verify:sfa": "node scripts/verify-sfa-mapping.mjs"
   },
   "dependencies": {
     "next": "^15.5.21",

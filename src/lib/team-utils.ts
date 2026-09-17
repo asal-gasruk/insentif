@@ -49,12 +49,62 @@ export const TEAM_MEMBER_POSITIONS: {
   { value: "helper2", label: "Helper 2" },
 ];
 
-/** Split default Canvass / Sales team by teamSize */
+/**
+ * Pool rule dari sheet Pembagian Insentif:
+ * Salesman fixed %; DRIVER/HELPER = sisa pool dibagi rata antar non-salesman.
+ */
+export const SALES_POOL_BY_TEAM_SIZE: Record<
+  string,
+  { salesman: number; poolNonSalesman: number }
+> = {
+  "3": { salesman: 0.55, poolNonSalesman: 0.45 },
+  "2": { salesman: 0.7, poolNonSalesman: 0.3 },
+  "1": { salesman: 1, poolNonSalesman: 0 },
+};
+
+/**
+ * Split default Canvass / Sales team by teamSize.
+ * Size 3: 55/22.5/22.5 = Excel SALES 55% + DRIVER/HELPER 45% (dibagi rata).
+ */
 export const SALES_TEAM_SPLITS: TeamSplit[] = [
   { key: "3", split: { salesman: 0.55, driver: 0.225, helper1: 0.225 } },
   { key: "2", split: { salesman: 0.7, driver: 0.3 } },
   { key: "1", split: { salesman: 1 } },
 ];
+
+/**
+ * Resolve rasio split parameter-tim.
+ * Jika semua posisi anggota ada di `teamSplits`, pakai lookup.
+ * Jika tidak (mis. Helper+Helper tanpa Driver), jatuh ke pool Excel:
+ * salesman fixed, sisa dibagi rata ke non-salesman.
+ */
+export function resolveParameterTeamSplitRatio(
+  scheme: IncentiveScheme,
+  teamSize: number,
+  position: string,
+  memberPositions: string[],
+): number {
+  const key = String(teamSize);
+  const configured = scheme.teamSplits.find((s) => s.key === key)?.split;
+  const pool = SALES_POOL_BY_TEAM_SIZE[key] ?? SALES_POOL_BY_TEAM_SIZE["1"];
+
+  if (!memberPositions.includes(position)) return 0;
+
+  if (configured) {
+    const allMapped = memberPositions.every((p) => configured[p] !== undefined);
+    if (allMapped) return configured[position] ?? 0;
+  }
+
+  const salesmanRatio = configured?.salesman ?? pool.salesman;
+  if (position === "salesman") return salesmanRatio;
+
+  const nonSales = memberPositions.filter((p) => p !== "salesman");
+  if (nonSales.length === 0) return 0;
+
+  const remaining =
+    configured?.salesman !== undefined ? 1 - salesmanRatio : pool.poolNonSalesman;
+  return remaining / nonSales.length;
+}
 
 export function defaultSubjectPolicy(roleId: string): SubjectPolicy {
   return (DEFAULT_TEAM_CAPABLE_ROLE_IDS as readonly string[]).includes(roleId)

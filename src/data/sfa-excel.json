@@ -1,0 +1,2308 @@
+{
+  "source": "docs/Insentif Team - Data Karyawan SFA.xlsx",
+  "sheets": {
+    "splits": "Pembagian Insentif",
+    "teams": "Sales Team SFA"
+  },
+  "poolRule": "non-salesman share remaining pool equally",
+  "splits": {
+    "3": {
+      "salesman": 0.55,
+      "poolNonSalesman": 0.45
+    },
+    "2": {
+      "salesman": 0.7,
+      "poolNonSalesman": 0.3
+    },
+    "1": {
+      "salesman": 1.0,
+      "poolNonSalesman": 0.0
+    }
+  },
+  "examples": [
+    {
+      "kode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "typeSales": "3 Orang",
+      "incentiveGross": 600000,
+      "salesShare": 330000,
+      "driverHelperShare": 270000
+    },
+    {
+      "kode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "typeSales": "3 Orang",
+      "incentiveGross": 600000,
+      "salesShare": 330000,
+      "driverHelperShare": 270000
+    },
+    {
+      "kode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "typeSales": "3 Orang",
+      "incentiveGross": 300000,
+      "salesShare": 165000,
+      "driverHelperShare": 135000
+    },
+    {
+      "kode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "typeSales": "3 Orang",
+      "incentiveGross": 300000,
+      "salesShare": 165000,
+      "driverHelperShare": 135000
+    },
+    {
+      "kode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "typeSales": "2 Orang",
+      "incentiveGross": 225000,
+      "salesShare": 157500,
+      "driverHelperShare": 67500
+    },
+    {
+      "kode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "typeSales": "2 Orang",
+      "incentiveGross": 225000,
+      "salesShare": 157500,
+      "driverHelperShare": 67500
+    }
+  ],
+  "cabangs": [
+    {
+      "area": "JAWA BARAT-1",
+      "cabang": "BANDUNG"
+    },
+    {
+      "area": "JAWA BARAT-1",
+      "cabang": "PURWAKARTA"
+    },
+    {
+      "area": "JAWA BARAT-1",
+      "cabang": "SUBANG"
+    },
+    {
+      "area": "JAWA BARAT-2",
+      "cabang": "CIREBON"
+    },
+    {
+      "area": "JAWA BARAT-2",
+      "cabang": "GARUT"
+    },
+    {
+      "area": "JAWA BARAT-2",
+      "cabang": "TASIK"
+    },
+    {
+      "area": "JAWA BARAT-3",
+      "cabang": "BOGOR"
+    },
+    {
+      "area": "JAWA BARAT-3",
+      "cabang": "SUKABUMI"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "KEBUMEN"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "SEMARANG"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "SOLO"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "TEGAL"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "WANGON"
+    },
+    {
+      "area": "JAWA TENGAH",
+      "cabang": "WONOSOBO"
+    }
+  ],
+  "employees": [
+    {
+      "nik": "20100202",
+      "name": "Wawan Kurniawan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20230617",
+      "name": "Ujang Muhidin",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20130211",
+      "name": "Nurdin",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "19980198",
+      "name": "Cucu Yudi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20230600",
+      "name": "Dendi Permana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250121",
+      "name": "Miman",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20180214",
+      "name": "Iwa Setiawan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-003",
+      "mobil": null
+    },
+    {
+      "nik": "20240658",
+      "name": "Anung Kurniawan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20180224",
+      "name": "Aso Warso",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20130204",
+      "name": "Dodhie Setiawan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-004",
+      "mobil": null
+    },
+    {
+      "nik": "20220357",
+      "name": "Andri Supriadi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20160213",
+      "name": "Muhamad Yogi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20190219",
+      "name": "Sopian Kusmayana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-005",
+      "mobil": null
+    },
+    {
+      "nik": "20250151",
+      "name": "Dadan Nugraha",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20230514",
+      "name": "Tri Aris Rusdiaman",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-006",
+      "mobil": null
+    },
+    {
+      "nik": "20250125",
+      "name": "Pitra Marwan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250096",
+      "name": "Deni Romansyah",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Canvas Motoris",
+      "kode": "BDG-SLS-GT-017",
+      "mobil": null
+    },
+    {
+      "nik": "20250095",
+      "name": "Agus Saeful",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Canvas Motoris",
+      "kode": "BDG-SLS-GT-014",
+      "mobil": null
+    },
+    {
+      "nik": "20170218",
+      "name": "Candra Irawan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-007",
+      "mobil": null
+    },
+    {
+      "nik": "20210228",
+      "name": "Sukarno",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20140210",
+      "name": "Krisna Saputra",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20100208",
+      "name": "Diki Andriana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-008",
+      "mobil": null
+    },
+    {
+      "nik": "20000200",
+      "name": "Mahyadin",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20170216",
+      "name": "Dadang Rusmana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20020199",
+      "name": "Kusada",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-009",
+      "mobil": null
+    },
+    {
+      "nik": "20150206",
+      "name": "Akin",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20200225",
+      "name": "Supriadi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20130207",
+      "name": "Peri Perdiansyah",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-010",
+      "mobil": null
+    },
+    {
+      "nik": "20230522",
+      "name": "Holis Nurholis",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20180223",
+      "name": "Ahmad Sobandi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250012",
+      "name": "Ricat Batubara",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-011",
+      "mobil": null
+    },
+    {
+      "nik": "20250048",
+      "name": "Ruddy Heryadi",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20220356",
+      "name": "Suhendar",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250013",
+      "name": "Jajang Faryana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-012",
+      "mobil": null
+    },
+    {
+      "nik": "20230556",
+      "name": "Tatang Gumelar",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "19980181",
+      "name": "Ende Taryana",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "BDG-SLS-GT-019",
+      "mobil": null
+    },
+    {
+      "nik": "20260015",
+      "name": "Wawan Ridwan",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20100183",
+      "name": "Nurul Hasihin",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20260086",
+      "name": "Dina Apriani",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Horeca Executive",
+      "kode": "BDG-SLS-HRC-002",
+      "mobil": null
+    },
+    {
+      "nik": "20250122",
+      "name": "Dian Fitriani",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Key Account Executive",
+      "kode": "BDG-SLS-MT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20260059",
+      "name": "Dinda Dewi Maharani",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Key Account Executive",
+      "kode": "BDG-SLS-MT-002",
+      "mobil": null
+    },
+    {
+      "nik": "19990196",
+      "name": "Mansyur",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "SBG-SLS-GT-001",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20110209",
+      "name": "Tohanudin",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": "Helper"
+    },
+    {
+      "nik": "20250133",
+      "name": "Atan Sukmandar",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": "Helper"
+    },
+    {
+      "nik": "20240645",
+      "name": "Sujiarto",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "SBG-SLS-GT-002",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20210271",
+      "name": "Asep Kusnadi",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": "Driver"
+    },
+    {
+      "nik": "20250132",
+      "name": "Agus Geri Gustiana",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "SBG-SLS-GT-003",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20250040",
+      "name": "Asep Awaludin M Nur",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": "Driver"
+    },
+    {
+      "nik": "20220346",
+      "name": "Dede Supriadi",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "PWK-SLS-GT-001",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20220345",
+      "name": "Uce Ade Wira",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": "Driver"
+    },
+    {
+      "nik": "20160150",
+      "name": "Mumuh",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": "Helper"
+    },
+    {
+      "nik": "20110185",
+      "name": "Yayan Nurjaman",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "PWK-SLS-GT-002",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20160148",
+      "name": "Rudiana",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": "Driver"
+    },
+    {
+      "nik": "20260007",
+      "name": "Acep Hendra",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Salesman",
+      "kode": "PWK-SLS-GT-003",
+      "mobil": "Salesman"
+    },
+    {
+      "nik": "20260092",
+      "name": "Hahan Septiawan",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": "Driver"
+    },
+    {
+      "nik": "20170178",
+      "name": "Sukmadin",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20190177",
+      "name": "Ridwan Arif",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20200163",
+      "name": "Hendrik",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-004",
+      "mobil": null
+    },
+    {
+      "nik": "20050174",
+      "name": "Engkan Rusmana",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250002",
+      "name": "Sona Sukmayasa",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20250205",
+      "name": "Isep Rohmadi",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240682",
+      "name": "Adie Wirahadie",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-005",
+      "mobil": null
+    },
+    {
+      "nik": "20250192",
+      "name": "Deri Kurnia Nugraha",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "19970175",
+      "name": "Saryanto",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-007",
+      "mobil": null
+    },
+    {
+      "nik": "20160152",
+      "name": "Sansan Herdiansyah",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20050180",
+      "name": "Nandang",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-003",
+      "mobil": null
+    },
+    {
+      "nik": "20200179",
+      "name": "Dede Deri",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20210170",
+      "name": "Moch. Ganjar Ilmani",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-008",
+      "mobil": null
+    },
+    {
+      "nik": "20230586",
+      "name": "Irman Hidayat",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20210302",
+      "name": "Ridwan Nugraha",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240661",
+      "name": "Asep Rizal",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20200168",
+      "name": "Solahudin",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-009",
+      "mobil": null
+    },
+    {
+      "nik": "20200167",
+      "name": "Rian Ernawan",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20210284",
+      "name": "Hilmi Firmansyah",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20200164",
+      "name": "Ahmad Hambali",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Helper",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250203",
+      "name": "Yopi Dana Wirya",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Sales Executive",
+      "kode": "GRT-SLS-HRC-001",
+      "mobil": null
+    },
+    {
+      "nik": "20000173",
+      "name": "Ade Nurjaman",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "GRT-SLS-GT-010",
+      "mobil": null
+    },
+    {
+      "nik": "20250119",
+      "name": "Dede Hudaya",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Sales TO",
+      "kode": "TSK-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20240742",
+      "name": "Sansan Wirasandi",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "TSK-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20250080",
+      "name": "Dendy Zuendy",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20260019",
+      "name": "Eris Rismana",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "TSK-SLS-GT-003",
+      "mobil": null
+    },
+    {
+      "nik": "20240743",
+      "name": "Rizki Aditya Firmansyah",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20180251",
+      "name": "Wawan Darmawan",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Canvas Motoris",
+      "kode": "TSK-SLS-GT-004",
+      "mobil": null
+    },
+    {
+      "nik": "20260045",
+      "name": "Hari Prayoga",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Sales Executive",
+      "kode": "TSK-SLS-HRC-001",
+      "mobil": null
+    },
+    {
+      "nik": "20240736",
+      "name": "Dede Kurniasih",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250191",
+      "name": "Kriswanto",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20260078",
+      "name": "Tia Ambarwati",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "CRB-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20240759",
+      "name": "Yoggi Isfarulloh",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20260074",
+      "name": "Deny Koesmawan",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Salesman",
+      "kode": "CRB-SLS-GT-003",
+      "mobil": null
+    },
+    {
+      "nik": "20250105",
+      "name": "Ali Tarmidi",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240659",
+      "name": "Mira Kusumawati",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Salesman",
+      "kode": "SKB-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20230499",
+      "name": "Adnan Subur",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20230498",
+      "name": "Dede Suhendar",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Salesman",
+      "kode": "SKB-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20240693",
+      "name": "Hanhan Suhendi",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20250039",
+      "name": "Candy Miranda",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Salesman",
+      "kode": "TGR-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20250057",
+      "name": "Imam Taopik",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240701",
+      "name": "Diki Wahyudin",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Salesman",
+      "kode": "TGR-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20260046",
+      "name": "Haris Budiman",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    }
+  ],
+  "individu": [
+    {
+      "nik": "20240708",
+      "name": "ARIFIN SUFJAN",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20220403",
+      "name": "ENDY AFRIANA NUGRAHA",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20240669",
+      "name": "USDEK RIYANTO",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "HORECA SPV",
+      "kode": null
+    },
+    {
+      "nik": "20220376",
+      "name": "CATUR ATOT RISTADIN",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "KEY ACCOUNT SUPERVISOR",
+      "kode": null
+    },
+    {
+      "nik": "20260034",
+      "name": "Riska Nopa Nopianti",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260041",
+      "name": "Cristi Yulia",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260085",
+      "name": "Lina Karnia",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260084",
+      "name": "Yuli Herlina",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20240700",
+      "name": "ERITOGA FEBRIAWAN RIADY",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "ASPR",
+      "kode": null
+    },
+    {
+      "nik": "20240766",
+      "name": "Ai Rokayah",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250005",
+      "name": "Dini Setiani",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260013",
+      "name": "Mira Yasa Natapradja",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20240685",
+      "name": "Putri Hartati Wijaksani",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20140197",
+      "name": "IWAN SETIAWAN",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "WAREHOUSE CABANG SUPERVISOR",
+      "kode": null
+    },
+    {
+      "nik": "20240678",
+      "name": "Siti Komariah Nurizky",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "Key Account Supervisor",
+      "kode": null
+    },
+    {
+      "nik": "20180254",
+      "name": "ANWAR SIDIK",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20250170",
+      "name": "ENDANG KUSBINI",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260082",
+      "name": "Eneng Santi Saripah",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250117",
+      "name": "JENI LESMANA",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20240721",
+      "name": "Budi Dermawan",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Task Force",
+      "kode": null
+    },
+    {
+      "nik": "20250164",
+      "name": "Mochammad Diki Mutaqin",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "FSR",
+      "kode": null
+    },
+    {
+      "nik": "20250147",
+      "name": "DANI MAINAKY",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "ASPS",
+      "kode": null
+    },
+    {
+      "nik": "20250084",
+      "name": "MOCH REZA ZUCHRAN FAUZI",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "ASPR",
+      "kode": null
+    },
+    {
+      "nik": "20260070",
+      "name": "Neng Tik Tik Nurlatifah",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250109",
+      "name": "Nur Afifah Fauziah",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260064",
+      "name": "Resna Sulistiawaty",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260033",
+      "name": "Salam Pajar Mantira P",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260069",
+      "name": "Nurul Utami",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20250046",
+      "name": "Moch Deni Muldani",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "Task Force",
+      "kode": null
+    },
+    {
+      "nik": "20250140",
+      "name": "IRFAN MALIK RAHMAN",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "ASPR",
+      "kode": null
+    },
+    {
+      "nik": "20250098",
+      "name": "Raisya Arifah Dwi Wahyuni",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260051",
+      "name": "Raudya Tuzahra Ramandani",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260094",
+      "name": "Desi Ratna Wulan",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20250054",
+      "name": "Yunita Setiana Wijaya",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260049",
+      "name": "IRFAN ACHMAD",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260105",
+      "name": "Iah Qoriah",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250056",
+      "name": "OMAN SUMANTRI",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20240763",
+      "name": "DENI HERDIAN",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260006",
+      "name": "Oktaviany Tanjung",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260088",
+      "name": "Gianti Firmansyah",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "jabatan": "SP-GT",
+      "kode": null
+    }
+  ],
+  "teams": [
+    {
+      "code": "BDG-SLS-GT-001",
+      "name": "BDG-SLS-GT-001 · Wawan Kurniawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20100202",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20230617",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20130211",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-002",
+      "name": "BDG-SLS-GT-002 · Cucu Yudi",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "19980198",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20230600",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20250121",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-003",
+      "name": "BDG-SLS-GT-003 · Iwa Setiawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20180214",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240658",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20180224",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-004",
+      "name": "BDG-SLS-GT-004 · Dodhie Setiawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20130204",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20220357",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20160213",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-005",
+      "name": "BDG-SLS-GT-005 · Sopian Kusmayana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20190219",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250151",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-006",
+      "name": "BDG-SLS-GT-006 · Tri Aris Rusdiaman",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20230514",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250125",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-017",
+      "name": "BDG-SLS-GT-017 · Deni Romansyah",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250096",
+          "position": "salesman",
+          "jabatan": "Canvas Motoris"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-014",
+      "name": "BDG-SLS-GT-014 · Agus Saeful",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250095",
+          "position": "salesman",
+          "jabatan": "Canvas Motoris"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-007",
+      "name": "BDG-SLS-GT-007 · Candra Irawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20170218",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20210228",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20140210",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-008",
+      "name": "BDG-SLS-GT-008 · Diki Andriana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20100208",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20000200",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20170216",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-009",
+      "name": "BDG-SLS-GT-009 · Kusada",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20020199",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20150206",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20200225",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-010",
+      "name": "BDG-SLS-GT-010 · Peri Perdiansyah",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20130207",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20230522",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20180223",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-011",
+      "name": "BDG-SLS-GT-011 · Ricat Batubara",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250012",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250048",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20220356",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-012",
+      "name": "BDG-SLS-GT-012 · Jajang Faryana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250013",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20230556",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-GT-019",
+      "name": "BDG-SLS-GT-019 · Ende Taryana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "19980181",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20260015",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20100183",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-HRC-002",
+      "name": "BDG-SLS-HRC-002 · Dina Apriani",
+      "teamType": "Horeca",
+      "roleId": "sales-horeca",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20260086",
+          "position": "salesman",
+          "jabatan": "Horeca Executive"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-MT-001",
+      "name": "BDG-SLS-MT-001 · Dian Fitriani",
+      "teamType": "MT",
+      "roleId": "sales-mt",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250122",
+          "position": "salesman",
+          "jabatan": "Key Account Executive"
+        }
+      ]
+    },
+    {
+      "code": "BDG-SLS-MT-002",
+      "name": "BDG-SLS-MT-002 · Dinda Dewi Maharani",
+      "teamType": "MT",
+      "roleId": "sales-mt",
+      "cabang": "BANDUNG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20260059",
+          "position": "salesman",
+          "jabatan": "Key Account Executive"
+        }
+      ]
+    },
+    {
+      "code": "SBG-SLS-GT-001",
+      "name": "SBG-SLS-GT-001 · Mansyur",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "19990196",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20110209",
+          "position": "helper1",
+          "jabatan": "Helper"
+        },
+        {
+          "nik": "20250133",
+          "position": "helper2",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "SBG-SLS-GT-002",
+      "name": "SBG-SLS-GT-002 · Sujiarto",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20240645",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20210271",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SBG-SLS-GT-003",
+      "name": "SBG-SLS-GT-003 · Agus Geri Gustiana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SUBANG",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20250132",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250040",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "PWK-SLS-GT-001",
+      "name": "PWK-SLS-GT-001 · Dede Supriadi",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20220346",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20220345",
+          "position": "driver",
+          "jabatan": "Driver"
+        },
+        {
+          "nik": "20160150",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "PWK-SLS-GT-002",
+      "name": "PWK-SLS-GT-002 · Yayan Nurjaman",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20110185",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20160148",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "PWK-SLS-GT-003",
+      "name": "PWK-SLS-GT-003 · Acep Hendra",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "PURWAKARTA",
+      "area": "JAWA BARAT-1",
+      "members": [
+        {
+          "nik": "20260007",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20260092",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-002",
+      "name": "GRT-SLS-GT-002 · Sukmadin",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20170178",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20190177",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-004",
+      "name": "GRT-SLS-GT-004 · Hendrik",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20200163",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20050174",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-001",
+      "name": "GRT-SLS-GT-001 · Sona Sukmayasa",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20250002",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250205",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-005",
+      "name": "GRT-SLS-GT-005 · Adie Wirahadie",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20240682",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250192",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-007",
+      "name": "GRT-SLS-GT-007 · Saryanto",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "19970175",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20160152",
+          "position": "helper1",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-003",
+      "name": "GRT-SLS-GT-003 · Nandang",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20050180",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20200179",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-008",
+      "name": "GRT-SLS-GT-008 · Moch. Ganjar Ilmani",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20210170",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        }
+      ]
+    },
+    {
+      "code": "TEAM-20230586",
+      "name": "TEAM-20230586 · Irman Hidayat",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20230586",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20210302",
+          "position": "helper1",
+          "jabatan": "Helper"
+        },
+        {
+          "nik": "20240661",
+          "position": "helper2",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-009",
+      "name": "GRT-SLS-GT-009 · Solahudin",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20200168",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        }
+      ]
+    },
+    {
+      "code": "TEAM-20200167",
+      "name": "TEAM-20200167 · Rian Ernawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20200167",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20210284",
+          "position": "helper1",
+          "jabatan": "Helper"
+        },
+        {
+          "nik": "20200164",
+          "position": "helper2",
+          "jabatan": "Helper"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-HRC-001",
+      "name": "GRT-SLS-HRC-001 · Yopi Dana Wirya",
+      "teamType": "Horeca",
+      "roleId": "sales-horeca",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20250203",
+          "position": "salesman",
+          "jabatan": "Sales Executive"
+        }
+      ]
+    },
+    {
+      "code": "GRT-SLS-GT-010",
+      "name": "GRT-SLS-GT-010 · Ade Nurjaman",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "GARUT",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20000173",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        }
+      ]
+    },
+    {
+      "code": "TSK-SLS-GT-001",
+      "name": "TSK-SLS-GT-001 · Dede Hudaya",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20250119",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "TSK-SLS-GT-002",
+      "name": "TSK-SLS-GT-002 · Sansan Wirasandi",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20240742",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250080",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "TSK-SLS-GT-003",
+      "name": "TSK-SLS-GT-003 · Eris Rismana",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20260019",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240743",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "TSK-SLS-GT-004",
+      "name": "TSK-SLS-GT-004 · Wawan Darmawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20180251",
+          "position": "salesman",
+          "jabatan": "Canvas Motoris"
+        }
+      ]
+    },
+    {
+      "code": "TSK-SLS-HRC-001",
+      "name": "TSK-SLS-HRC-001 · Hari Prayoga",
+      "teamType": "Horeca",
+      "roleId": "sales-horeca",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20260045",
+          "position": "salesman",
+          "jabatan": "Sales Executive"
+        }
+      ]
+    },
+    {
+      "code": "TEAM-20240736",
+      "name": "TEAM-20240736 · Dede Kurniasih",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20240736",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250191",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "CRB-SLS-GT-002",
+      "name": "CRB-SLS-GT-002 · Tia Ambarwati",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20260078",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240759",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "CRB-SLS-GT-003",
+      "name": "CRB-SLS-GT-003 · Deny Koesmawan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "CIREBON",
+      "area": "JAWA BARAT-2",
+      "members": [
+        {
+          "nik": "20260074",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250105",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SKB-SLS-GT-001",
+      "name": "SKB-SLS-GT-001 · Mira Kusumawati",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "members": [
+        {
+          "nik": "20240659",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20230499",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SKB-SLS-GT-002",
+      "name": "SKB-SLS-GT-002 · Dede Suhendar",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SUKABUMI",
+      "area": "JAWA BARAT-3",
+      "members": [
+        {
+          "nik": "20230498",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240693",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "TGR-SLS-GT-001",
+      "name": "TGR-SLS-GT-001 · Candy Miranda",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "members": [
+        {
+          "nik": "20250039",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250057",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "TGR-SLS-GT-002",
+      "name": "TGR-SLS-GT-002 · Diki Wahyudin",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "BOGOR",
+      "area": "JAWA BARAT-3",
+      "members": [
+        {
+          "nik": "20240701",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20260046",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    }
+  ]
+}

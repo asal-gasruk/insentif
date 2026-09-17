@@ -1,5 +1,12 @@
 import { PARAMETER_NOTES } from "@/data/parameter-notes";
 import { SCHEME_NOTES } from "@/data/scheme-notes";
+import {
+  buildSfaBranches,
+  buildSfaEmployees,
+  buildSfaTeams,
+  DELIVERY_DEMO_EMPLOYEES,
+  DELIVERY_DEMO_TEAMS,
+} from "@/lib/sfa-import";
 import { SALES_TEAM_SPLITS } from "@/lib/team-utils";
 import type {
   AppData,
@@ -11,7 +18,7 @@ import type {
   VolumeTier,
 } from "@/types";
 
-export const STORAGE_KEY = "lahans-insentif-v9";
+export const STORAGE_KEY = "lahans-insentif-v11";
 
 function param(
   id: string,
@@ -532,205 +539,20 @@ export const seedData: AppData = {
   schemeWeights,
   schemeNominals,
   volumeTiers,
-  employees: [
-    {
-      id: "emp-1",
-      name: "Budi Santoso",
-      nik: "LMN-001",
-      roleId: "canvasser",
-      branchId: "br-mb-1",
-      position: "salesman",
-      teamSize: 3,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-2",
-      name: "Agus Wijaya",
-      nik: "LMN-002",
-      roleId: "canvasser",
-      branchId: "br-mb-1",
-      position: "driver",
-      teamSize: 3,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-10",
-      name: "Siti Aminah",
-      nik: "LMN-010",
-      roleId: "canvasser",
-      branchId: "br-mb-1",
-      position: "helper1",
-      teamSize: 3,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-11",
-      name: "Andi Pratama",
-      nik: "MT-001",
-      roleId: "sales-mt",
-      branchId: "br-mb-1",
-      position: "salesman",
-      teamSize: 2,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-12",
-      name: "Bambang Sutrisno",
-      nik: "MT-002",
-      roleId: "sales-mt",
-      branchId: "br-mb-1",
-      position: "driver",
-      teamSize: 2,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-13",
-      name: "Maya Sari",
-      nik: "HR-001",
-      roleId: "sales-horeca",
-      branchId: "br-mb-2",
-      position: "salesman",
-      teamSize: 1,
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-3",
-      name: "Dewi Lestari",
-      nik: "LMN-003",
-      roleId: "to",
-      branchId: "br-sb-1",
-      position: "salesman",
-      teamSize: 1,
-      workforceMode: "individu",
-      active: true,
-    },
-    {
-      id: "emp-4",
-      name: "Rina Marlina",
-      nik: "LMN-004",
-      roleId: "spv-mt",
-      branchId: "br-mb-1",
-      position: "supervisor",
-      teamSize: 1,
-      workforceMode: "individu",
-      active: true,
-    },
-    {
-      id: "emp-5",
-      name: "Hendra Gunawan",
-      nik: "LMN-005",
-      roleId: "asm",
-      branchId: "br-mb-1",
-      position: "manager",
-      teamSize: 1,
-      workforceMode: "individu",
-      active: true,
-    },
-    {
-      id: "emp-6",
-      name: "Roni Saputra",
-      nik: "DT-001",
-      roleId: "delivery",
-      branchId: "br-mb-1",
-      position: "driver",
-      teamSize: 2,
-      vehicleType: "ENGKEL",
-      workforceMode: "team",
-      active: true,
-    },
-    {
-      id: "emp-7",
-      name: "Rahman Hakim",
-      nik: "DT-004",
-      roleId: "delivery",
-      branchId: "br-mb-1",
-      position: "driver",
-      teamSize: 1,
-      vehicleType: "PICKUP",
-      workforceMode: "individu",
-      active: true,
-    },
-    {
-      id: "emp-8",
-      name: "Joko Prasetyo",
-      nik: "DT-002",
-      roleId: "delivery",
-      branchId: "br-mb-2",
-      position: "driver",
-      teamSize: 3,
-      vehicleType: "DOUBLE",
-      workforceMode: "individu",
-      active: true,
-    },
-    {
-      id: "emp-9",
-      name: "Slamet Riyadi",
-      nik: "DT-003",
-      roleId: "delivery",
-      branchId: "br-mb-1",
-      position: "helper1",
-      teamSize: 2,
-      vehicleType: "ENGKEL",
-      workforceMode: "team",
-      active: true,
-    },
-  ],
-  teams: [
-    {
-      id: "team-gt-1",
-      name: "Canvass Bandung A",
-      teamType: "GT",
-      roleId: "canvasser",
-      branchId: "br-mb-1",
-      members: [
-        { employeeId: "emp-1", position: "salesman" },
-        { employeeId: "emp-2", position: "driver" },
-        { employeeId: "emp-10", position: "helper1" },
-      ],
-      active: true,
-    },
-    {
-      id: "team-mt-1",
-      name: "Sales MT Bandung",
-      teamType: "MT",
-      roleId: "sales-mt",
-      branchId: "br-mb-1",
-      members: [
-        { employeeId: "emp-11", position: "salesman" },
-        { employeeId: "emp-12", position: "driver" },
-      ],
-      active: true,
-    },
-    {
-      id: "team-horeca-1",
-      name: "Horeca Garut",
-      teamType: "Horeca",
-      roleId: "sales-horeca",
-      branchId: "br-mb-2",
-      members: [{ employeeId: "emp-13", position: "salesman" }],
-      active: true,
-    },
-    {
-      id: "team-dt-1",
-      name: "Delivery Bandung Engkel",
-      teamType: "Delivery",
-      roleId: "delivery",
-      branchId: "br-mb-1",
-      members: [
-        { employeeId: "emp-6", position: "driver" },
-        { employeeId: "emp-9", position: "helper1" },
-      ],
-      active: true,
-    },
-  ],
+  // Placeholder — diganti di bawah dengan SFA + delivery demo
+  employees: [],
+  teams: [],
   // Data transaksi sengaja kosong — isi via halaman Pencapaian/Pengiriman
   // atau Import Bulk agar hasil perhitungan mudah ditelusuri.
   achievementRecords: [],
   deliveryRecords: [],
 };
+
+const sfaEmployees = buildSfaEmployees();
+const sfaTeams = buildSfaTeams();
+
+seedData.branches = buildSfaBranches(seedData.branches);
+seedData.employees = [...sfaEmployees, ...DELIVERY_DEMO_EMPLOYEES];
+seedData.teams = [...sfaTeams, ...DELIVERY_DEMO_TEAMS];
+
+export const SEED_DATA: AppData = seedData;
