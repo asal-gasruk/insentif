@@ -231,6 +231,24 @@ export interface Team {
   active: boolean;
 }
 
+/**
+ * Target absolut per subjek × parameter × periode.
+ * % pencapaian nanti = actual / target (Actual diisi di AchievementRecord).
+ */
+export interface ParameterTarget {
+  id: string;
+  /** Mode Master Tim (utama) */
+  teamId?: string;
+  /** Mode individu */
+  employeeId?: string;
+  paramId: string;
+  /** YYYY-MM atau YYYY-Qn */
+  period: string;
+  /** Nilai target absolut — unit mengikuti Parameter.unit */
+  target: number;
+  notes?: string;
+}
+
 export interface AchievementRecord {
   id: string;
   /** Mode individu */
@@ -320,6 +338,7 @@ export interface AppData {
   volumeTiers: VolumeTier[];
   employees: Employee[];
   teams: Team[];
+  parameterTargets: ParameterTarget[];
   achievementRecords: AchievementRecord[];
   deliveryRecords: DeliveryRecord[];
 }
@@ -335,6 +354,7 @@ export type CollectionKey = keyof Pick<
   | "volumeTiers"
   | "employees"
   | "teams"
+  | "parameterTargets"
   | "achievementRecords"
   | "deliveryRecords"
 >;

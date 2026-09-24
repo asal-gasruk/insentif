@@ -17,10 +17,17 @@ import {
   defaultSegment,
   schemeForEmployee,
 } from "@/lib/scheme-utils";
+import { downloadXlsx, parseImportFile } from "@/lib/import-file";
+import {
+  normalizeImportPeriod,
+  normalizeOverduePct,
+  resolveImportedAchievementPct,
+} from "@/lib/import-achievement";
 import {
   buildSchemeImportTemplate,
   getImportTemplateMeta,
   isTeamScheme,
+  type ImportSubjectMode,
 } from "@/lib/import-templates";
 import { generateId } from "@/lib/storage";
 import {
@@ -38,37 +45,6 @@ import type {
   IncentiveResult,
   Team,
 } from "@/types";
-
-// ---------------------------------------------------------------------------
-// CSV helpers
-// ---------------------------------------------------------------------------
-
-function downloadCsv(filename: string, content: string) {
-  const blob = new Blob([`\uFEFF${content}`], {
-    type: "text/csv;charset=utf-8;",
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-/** Parse CSV sederhana — dukung pemisah koma atau titik-koma (format Excel ID) */
-function parseCsv(text: string): Record<string, string>[] {
-  const clean = text.replace(/^\uFEFF/, "").trim();
-  const lines = clean.split(/\r?\n/).filter((l) => l.trim() !== "");
-  if (lines.length < 2) return [];
-
-  const delimiter = lines[0].includes(";") ? ";" : ",";
-  const headers = lines[0].split(delimiter).map((h) => h.trim());
-
-  return lines.slice(1).map((line) => {
-    const cells = line.split(delimiter).map((c) => c.trim());
-    return Object.fromEntries(headers.map((h, i) => [h, cells[i] ?? ""]));
-  });
-}
 
 /** Angka dengan dukungan desimal koma ("0,5") */
 function parseNum(raw: string | undefined): number | undefined {
@@ -133,7 +109,7 @@ function validateTeamAchievementRow(
   line: number,
 ): ParsedRow {
   const teamId = row.teamId?.trim();
-  const period = row.periode?.trim();
+  const period = normalizeImportPeriod(row.periode ?? "");
   if (!teamId || !period) {
     return {
       line,
@@ -175,9 +151,23 @@ function validateTeamAchievementRow(
   const active = activeParams(data, scheme.id, segment);
 
   const achievements: Record<string, number> = {};
+  const missingTargets: string[] = [];
   for (const paramId of active) {
     const v = parseNum(row[paramId]);
-    if (v !== undefined) achievements[paramId] = v;
+    if (v === undefined) continue;
+    const hasTarget = data.parameterTargets.some(
+      (t) =>
+        t.teamId === team.id && t.paramId === paramId && t.period === period,
+    );
+    if (!hasTarget && v > 200) {
+      missingTargets.push(paramId);
+    }
+    achievements[paramId] = resolveImportedAchievementPct(data, {
+      teamId: team.id,
+      paramId,
+      period,
+      raw: v,
+    });
   }
   if (Object.keys(achievements).length === 0) {
     return {
@@ -185,6 +175,14 @@ function validateTeamAchievementRow(
       kind: "achievement",
       status: "error",
       info: "Tidak ada nilai pencapaian yang terisi",
+    };
+  }
+  if (missingTargets.length > 0) {
+    return {
+      line,
+      kind: "achievement",
+      status: "error",
+      info: `Nilai besar terdeteksi sebagai ACTUAL tapi Target belum ada untuk: ${missingTargets.join(", ")} (periode ${period}). Isi Target Parameter dulu, atau isi % pencapaian (mis. 100.9).`,
     };
   }
 
@@ -199,7 +197,7 @@ function validateTeamAchievementRow(
     schemeId: scheme.id,
     segmentId: existing?.segmentId ?? segment,
     achievements,
-    overduePct: parseNum(row.overduePct) ?? 0,
+    overduePct: normalizeOverduePct(parseNum(row.overduePct) ?? 0),
     badDebtDays: parseNum(row.badDebtDays) ?? 0,
     notes: row.catatan?.trim() ?? "Import bulk",
   };
@@ -231,7 +229,7 @@ function validateTeamAchievementRow(
     status: "ok",
     subjectLabel: `Tim ${team.name}`,
     team,
-    info: `${team.name} · ${scheme.name} · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota`,
+    info: `${team.name} · ${scheme.name} · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota · gross ${Math.round(result.grossAmount).toLocaleString("id-ID")}`,
     payload,
     isUpdate: Boolean(existing),
     result,
@@ -249,7 +247,7 @@ function validateAchievementRow(
   }
 
   const nik = row.nik?.trim();
-  const period = row.periode?.trim();
+  const period = normalizeImportPeriod(row.periode ?? "");
   if (!nik || !period) {
     return {
       line,
@@ -294,7 +292,13 @@ function validateAchievementRow(
   const achievements: Record<string, number> = {};
   for (const paramId of active) {
     const v = parseNum(row[paramId]);
-    if (v !== undefined) achievements[paramId] = v;
+    if (v === undefined) continue;
+    achievements[paramId] = resolveImportedAchievementPct(data, {
+      employeeId: employee.id,
+      paramId,
+      period,
+      raw: v,
+    });
   }
   if (Object.keys(achievements).length === 0) {
     return {
@@ -316,7 +320,7 @@ function validateAchievementRow(
     schemeId: scheme.id,
     segmentId: existing?.segmentId ?? defaultSegment(data, employee),
     achievements,
-    overduePct: parseNum(row.overduePct) ?? 0,
+    overduePct: normalizeOverduePct(parseNum(row.overduePct) ?? 0),
     badDebtDays: parseNum(row.badDebtDays) ?? 0,
     notes: row.catatan?.trim() ?? "Import bulk",
   };
@@ -336,6 +340,23 @@ function validateAchievementRow(
 
 const VEHICLE_TYPES = ["PICKUP", "ENGKEL", "DOUBLE"];
 
+/** Armada delivery tim dari Karyawan anggota (driver dulu), bukan kolom upload */
+function resolveTeamVehicleType(
+  data: AppData,
+  team: Team,
+): string | undefined {
+  const ordered = [
+    ...team.members.filter((m) => m.position === "driver"),
+    ...team.members,
+  ];
+  for (const m of ordered) {
+    const emp = data.employees.find((e) => e.id === m.employeeId);
+    const v = emp?.vehicleType?.trim().toUpperCase();
+    if (v && VEHICLE_TYPES.includes(v)) return v;
+  }
+  return undefined;
+}
+
 function aggregateTeamDeliveryResult(results: DeliveryResult[]): DeliveryResult {
   const first = results[0];
   return {
@@ -352,7 +373,7 @@ function validateTeamDeliveryRow(
   line: number,
 ): ParsedRow {
   const teamId = row.teamId?.trim();
-  const period = row.periode?.trim();
+  const period = normalizeImportPeriod(row.periode ?? "");
   if (!teamId || !period) {
     return {
       line,
@@ -392,13 +413,17 @@ function validateTeamDeliveryRow(
     };
   }
 
-  const vehicleType = (row.armada ?? "").trim().toUpperCase();
-  if (!VEHICLE_TYPES.includes(vehicleType)) {
+  const fromRow = (row.armada ?? "").trim().toUpperCase();
+  const vehicleType =
+    (fromRow && VEHICLE_TYPES.includes(fromRow) ? fromRow : undefined) ??
+    resolveTeamVehicleType(data, team);
+
+  if (!vehicleType) {
     return {
       line,
       kind: "delivery",
       status: "error",
-      info: `Armada "${row.armada}" tidak dikenal (gunakan PICKUP / ENGKEL / DOUBLE)`,
+      info: `Tim "${team.name}" belum punya jenis armada di Karyawan anggota (PICKUP / ENGKEL / DOUBLE)`,
     };
   }
 
@@ -445,7 +470,7 @@ function validateTeamDeliveryRow(
     status: "ok",
     subjectLabel: `Tim ${team.name}`,
     team,
-    info: `${team.name} · ${vehicleType} · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota`,
+    info: `${team.name} · ${vehicleType} (dari tim) · ${period}${existing ? " (update)" : ""} · ${team.members.length} anggota`,
     payload,
     isUpdate: Boolean(existing),
     result,
@@ -463,7 +488,7 @@ function validateDeliveryRow(
   }
 
   const nik = row.nik?.trim();
-  const period = row.periode?.trim();
+  const period = normalizeImportPeriod(row.periode ?? "");
   if (!nik || !period) {
     return {
       line,
@@ -576,6 +601,94 @@ function ResultStatusBadge({ row }: { row: OkRow }) {
 
 /** Tabel hasil perhitungan — dipakai untuk preview & ringkasan after-import */
 function ResultTable({ rows }: { rows: ParsedRow[] }) {
+  const hasTeamRows = rows.some((r) => r.status === "ok" && Boolean(r.team));
+
+  type PreviewLine = {
+    key: string;
+    lineLabel: string;
+    statusLabel: "valid" | "update" | "member" | "error";
+    teamName: string;
+    teamId: string;
+    subject: string;
+    period: string;
+    schemeOrArmada: string;
+    tierOrVolume: string;
+    badgeRow: OkRow | null;
+    errorInfo?: string;
+    finalAmount: number;
+    emphasize: boolean;
+  };
+
+  const lines: PreviewLine[] = [];
+
+  for (const row of rows) {
+    if (row.status === "error") {
+      lines.push({
+        key: `e-${row.line}`,
+        lineLabel: String(row.line),
+        statusLabel: "error",
+        teamName: "—",
+        teamId: "",
+        subject: "—",
+        period: "—",
+        schemeOrArmada: "—",
+        tierOrVolume: "—",
+        badgeRow: null,
+        errorInfo: row.info,
+        finalAmount: 0,
+        emphasize: false,
+      });
+      continue;
+    }
+
+    const schemeOrArmada =
+      row.kind === "achievement"
+        ? `${row.result.schemeName} · ${row.result.segmentName}`
+        : `Delivery · ${row.result.vehicleType}`;
+    const tierOrVolume =
+      row.kind === "achievement"
+        ? row.result.tierLabel || "—"
+        : `${row.payload.cartons.toLocaleString("id-ID")} karton · ${row.payload.invoices.toLocaleString("id-ID")} faktur`;
+
+    lines.push({
+      key: `t-${row.line}`,
+      lineLabel: String(row.line),
+      statusLabel: row.isUpdate ? "update" : "valid",
+      teamName: row.team?.name ?? "—",
+      teamId: row.team?.id ?? "",
+      subject: row.team
+        ? `Σ Total tim (${row.results?.length ?? row.team.members.length} anggota)`
+        : row.subjectLabel,
+      period: row.payload.period,
+      schemeOrArmada,
+      tierOrVolume,
+      badgeRow: row,
+      finalAmount: row.result.finalAmount,
+      emphasize: true,
+    });
+
+    if (row.team && row.results && row.results.length > 0) {
+      for (const m of row.results) {
+        lines.push({
+          key: `m-${row.line}-${m.employeeId}`,
+          lineLabel: "",
+          statusLabel: "member",
+          teamName: row.team.name,
+          teamId: row.team.id,
+          subject: `${m.employeeName} · ${m.position}`,
+          period: row.payload.period,
+          schemeOrArmada,
+          tierOrVolume: `bagian ${(m.splitRatio * 100).toFixed(1)}%`,
+          badgeRow: null,
+          finalAmount: m.finalAmount,
+          emphasize: false,
+        });
+      }
+    }
+  }
+
+  const errorColSpan = hasTeamRows ? 7 : 6;
+
   return (
     <div className="card overflow-x-auto">
       <table className="w-full text-sm">
@@ -583,7 +696,10 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
           <tr>
             <th className="px-3 py-3 text-left">Baris</th>
             <th className="px-3 py-3 text-center">Status</th>
-            <th className="px-3 py-3 text-left">Karyawan</th>
+            {hasTeamRows && <th className="px-3 py-3 text-left">Tim</th>}
+            <th className="px-3 py-3 text-left">
+              {hasTeamRows ? "Subjek / Anggota" : "Karyawan"}
+            </th>
             <th className="px-3 py-3 text-left">Periode</th>
             <th className="px-3 py-3 text-left">Skema / Armada</th>
             <th className="px-3 py-3 text-left">Tier / Volume</th>
@@ -592,45 +708,84 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr key={row.line} className="border-t border-[var(--border)]">
+          {lines.map((line) => (
+            <tr
+              key={line.key}
+              className={`border-t border-[var(--border)] ${
+                line.statusLabel === "member"
+                  ? "bg-[var(--surface-muted)]/35"
+                  : ""
+              }`}
+            >
               <td className="px-3 py-2 font-[family-name:var(--font-mono)] text-xs">
-                {row.line}
+                {line.lineLabel}
               </td>
               <td className="px-3 py-2 text-center">
-                {row.status === "ok" ? (
-                  <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
-                    Valid{row.isUpdate ? " · update" : ""}
-                  </span>
-                ) : (
+                {line.statusLabel === "error" && (
                   <span className="badge bg-red-100 text-red-700">Error</span>
                 )}
+                {line.statusLabel === "valid" && (
+                  <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+                    Valid
+                  </span>
+                )}
+                {line.statusLabel === "update" && (
+                  <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+                    Valid · update
+                  </span>
+                )}
+                {line.statusLabel === "member" && (
+                  <span className="text-xs text-[var(--text-muted)]">anggota</span>
+                )}
               </td>
-              {row.status === "error" ? (
-                <td colSpan={6} className="px-3 py-2 text-xs text-red-700">
-                  {row.info}
+              {line.statusLabel === "error" ? (
+                <td
+                  colSpan={errorColSpan}
+                  className="px-3 py-2 text-xs text-red-700"
+                >
+                  {line.errorInfo}
                 </td>
               ) : (
                 <>
-                  <td className="px-3 py-2 font-medium">
-                    {row.subjectLabel}
+                  {hasTeamRows && (
+                    <td className="px-3 py-2">
+                      <div className={line.emphasize ? "font-medium" : ""}>
+                        {line.teamName}
+                      </div>
+                      {line.teamId && line.emphasize && (
+                        <div className="mt-0.5 font-[family-name:var(--font-mono)] text-[10px] text-[var(--text-muted)]">
+                          {line.teamId}
+                        </div>
+                      )}
+                    </td>
+                  )}
+                  <td
+                    className={`px-3 py-2 ${
+                      line.statusLabel === "member"
+                        ? "pl-5 text-[var(--text-muted)]"
+                        : "font-medium"
+                    }`}
+                  >
+                    {line.subject}
                   </td>
-                  <td className="px-3 py-2">{row.payload.period}</td>
-                  <td className="px-3 py-2 text-xs">
-                    {row.kind === "achievement"
-                      ? `${row.result.schemeName} · ${row.result.segmentName}`
-                      : `Delivery · ${row.result.vehicleType}`}
-                  </td>
-                  <td className="px-3 py-2 text-xs">
-                    {row.kind === "achievement"
-                      ? row.result.tierLabel || "—"
-                      : `${row.payload.cartons.toLocaleString("id-ID")} karton · ${row.payload.invoices.toLocaleString("id-ID")} faktur`}
-                  </td>
+                  <td className="px-3 py-2">{line.period}</td>
+                  <td className="px-3 py-2 text-xs">{line.schemeOrArmada}</td>
+                  <td className="px-3 py-2 text-xs">{line.tierOrVolume}</td>
                   <td className="px-3 py-2 text-center">
-                    <ResultStatusBadge row={row} />
+                    {line.badgeRow ? (
+                      <ResultStatusBadge row={line.badgeRow} />
+                    ) : (
+                      <span className="text-[var(--text-muted)]">—</span>
+                    )}
                   </td>
-                  <td className="px-3 py-2 text-right font-semibold text-[var(--success)]">
-                    {formatRupiah(row.result.finalAmount)}
+                  <td
+                    className={`px-3 py-2 text-right font-semibold ${
+                      line.emphasize
+                        ? "text-[var(--success)]"
+                        : "text-[var(--text)]"
+                    }`}
+                  >
+                    {formatRupiah(line.finalAmount)}
                   </td>
                 </>
               )}
@@ -641,8 +796,6 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
     </div>
   );
 }
-
-type ImportSubjectMode = "individu" | "team";
 
 export default function ImportPage() {
   const { data, ready, create, update } = useAppData();
@@ -680,7 +833,7 @@ export default function ImportPage() {
     if (!schemeId) return;
     const built = buildSchemeImportTemplate(data, schemeId, subjectMode);
     if (!built) return;
-    downloadCsv(built.filename, built.content);
+    downloadXlsx(built.filename, built.headers, built.rows, built.sheetName);
   };
 
   const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -692,15 +845,25 @@ export default function ImportPage() {
     setResult(null);
     setImported([]);
 
-    const text = await file.text();
-    const parsed = parseCsv(text);
+    let parsed: Record<string, string>[];
+    try {
+      parsed = await parseImportFile(file);
+    } catch {
+      setRows([]);
+      setResult("Gagal membaca file. Pastikan format .xlsx atau .csv valid.");
+      return;
+    }
+
     if (parsed.length === 0) {
       setRows([]);
       setResult("File kosong atau format tidak dikenali.");
       return;
     }
 
-    const isDelivery = "armada" in parsed[0];
+    const isDelivery =
+      "karton" in parsed[0] ||
+      "faktur" in parsed[0] ||
+      "armada" in parsed[0];
     const hasTeamId = "teamId" in parsed[0];
 
     if (subjectMode === "team" && !hasTeamId) {
@@ -763,7 +926,7 @@ export default function ImportPage() {
     <>
       <PageHeader
         title="Import Bulk Data Transaksi"
-        description="Satu alur import — pilih Individu atau Tim, unduh template sesuai skema, lalu upload CSV."
+        description="Satu alur import — pilih Individu atau Tim, unduh template Excel (.xlsx). Untuk pencapaian: isi ACTUAL (sistem konversi ke % via Target Parameter)."
       />
 
       <div className="mb-6 grid gap-4 lg:grid-cols-2">
@@ -884,7 +1047,7 @@ export default function ImportPage() {
             }
             onClick={downloadSchemeTemplate}
           >
-            ⇩ Unduh Template{" "}
+            ⇩ Unduh Template Excel (.xlsx){" "}
             {subjectMode === "team"
               ? "Tim"
               : templateMeta?.kind === "delivery"
@@ -901,6 +1064,10 @@ export default function ImportPage() {
                 <li>
                   • Satu baris pencapaian dibagi ke semua anggota saat perhitungan
                 </li>
+                <li>
+                  • Delivery Tim: tanpa kolom armada — diambil dari Karyawan
+                  anggota Tim
+                </li>
               </>
             ) : (
               <>
@@ -908,7 +1075,11 @@ export default function ImportPage() {
                   • Kolom identitas: <b>NIK</b> (lihat Karyawan)
                 </li>
                 <li>
-                  • Delivery: tambah kolom armada / karton / faktur / OTD /
+                  • Delivery Tim: tanpa kolom armada — jenis armada dari Karyawan
+                  anggota Master Tim
+                </li>
+                <li>
+                  • Delivery Individu: kolom armada / karton / faktur / OTD /
                   akurasi
                 </li>
               </>
@@ -918,12 +1089,19 @@ export default function ImportPage() {
               <b>{templateMeta?.periodLabel ?? "YYYY-MM"}</b>
             </li>
             <li>• Jika subjek + periode sudah ada, data akan <b>diperbarui</b></li>
-            <li>• Mendukung pemisah koma maupun titik-koma (CSV dari Excel)</li>
+            <li>
+              • Template unduhan: <b>.xlsx</b> · upload juga menerima .csv lama
+            </li>
+            <li>
+              • Pencapaian: isi <b>ACTUAL</b> per parameter (bukan %). % = ACTUAL ÷
+              Target (menu Target Parameter). Overdue isi seperti Excel (0.059)
+              atau persen (5.9).
+            </li>
           </ul>
         </section>
 
         <section className="card p-5">
-          <h3 className="mb-1 font-bold">2 · Upload File CSV</h3>
+          <h3 className="mb-1 font-bold">2 · Upload File Excel</h3>
           <p className="mb-4 text-sm text-[var(--text-muted)]">
             Pastikan file sesuai mode{" "}
             <b>{subjectMode === "team" ? "Tim" : "Individu"}</b> di sebelah kiri.
@@ -932,7 +1110,7 @@ export default function ImportPage() {
           <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-[var(--border)] px-4 py-8 text-center hover:border-[var(--primary)] hover:bg-[var(--surface-muted)]">
             <span className="text-2xl">⇪</span>
             <span className="mt-2 text-sm font-medium">
-              Klik untuk pilih file .csv
+              Klik untuk pilih file .xlsx
             </span>
             {fileName && (
               <span className="mt-1 text-xs text-[var(--text-muted)]">
@@ -941,7 +1119,7 @@ export default function ImportPage() {
             )}
             <input
               type="file"
-              accept=".csv,text/csv"
+              accept=".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv"
               className="hidden"
               onChange={handleFile}
             />

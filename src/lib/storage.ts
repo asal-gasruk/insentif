@@ -17,6 +17,10 @@ import type {
 } from "@/types";
 
 const LEGACY_STORAGE_KEYS = [
+  "lahans-insentif-v12",
+  "lahans-insentif-v11",
+  "lahans-insentif-v10",
+  "lahans-insentif-v9",
   "lahans-insentif-v8",
   "lahans-insentif-v7",
   "lahans-insentif-v6",
@@ -215,6 +219,10 @@ function enrichNotes(data: AppData): AppData {
     volumeTiers: mergeMissingById(data.volumeTiers ?? [], seed.volumeTiers),
     employees,
     teams,
+    parameterTargets: mergeMissingById(
+      data.parameterTargets ?? [],
+      seed.parameterTargets ?? [],
+    ),
     achievementRecords: (data.achievementRecords ?? []).filter(
       (r) => !SEED_DEMO_RECORD_IDS.has(r.id),
     ),

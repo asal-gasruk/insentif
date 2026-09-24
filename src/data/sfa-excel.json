@@ -1009,6 +1009,168 @@
       "jabatan": "Driver",
       "kode": null,
       "mobil": null
+    },
+    {
+      "nik": "20260025",
+      "name": "Sigih Wahyani",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "SMG-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20250094",
+      "name": "Dian Slamet Setyawan",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240706",
+      "name": "Putro Prihadi",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "SMG-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20240713",
+      "name": "Nasikin",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20260072",
+      "name": "Dwi Setyaningsih",
+      "cabang": "SOLO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales Exclusive",
+      "kode": "SLO-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20260052",
+      "name": "Yonatan",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "TGL-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20250181",
+      "name": "Edi Mulyono",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20240702",
+      "name": "Danu Mujiarto",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "TGL-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20240698",
+      "name": "Dwiqi Rezaldy Cahya Santoso",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20220372",
+      "name": "Novri Alvarizi",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WGN-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20260044",
+      "name": "Faria Ummi Kulsum",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WGN-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20000233",
+      "name": "Soimin",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WGN-SLS-GT-004",
+      "mobil": null
+    },
+    {
+      "nik": "20250066",
+      "name": "Ilham Bachtiar",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WGN-SLS-GT-003",
+      "mobil": null
+    },
+    {
+      "nik": "20230516",
+      "name": "Nur Sahid",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WNS-SLS-GT-001",
+      "mobil": null
+    },
+    {
+      "nik": "20260038",
+      "name": "Titin Chuzaemah",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Sales TO",
+      "kode": "WNS-SLS-GT-004",
+      "mobil": null
+    },
+    {
+      "nik": "20180240",
+      "name": "Suryatin",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "WNS-SLS-GT-002",
+      "mobil": null
+    },
+    {
+      "nik": "20260030",
+      "name": "Eko Prasetyo Lesmito",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Driver",
+      "kode": null,
+      "mobil": null
+    },
+    {
+      "nik": "20070239",
+      "name": "Watini",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "Salesman",
+      "kode": "WNS-SLS-GT-003",
+      "mobil": null
     }
   ],
   "individu": [
@@ -1329,6 +1491,94 @@
       "name": "Gianti Firmansyah",
       "cabang": "BOGOR",
       "area": "JAWA BARAT-3",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250187",
+      "name": "AGUSTINA",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260043",
+      "name": "Catur Saputri",
+      "cabang": "SOLO",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260073",
+      "name": "Dewi Suryanti",
+      "cabang": "SOLO",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260101",
+      "name": "RITA IRANINGSIH",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20240730",
+      "name": "R BUDI SATIYA NUGROHO",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260087",
+      "name": "Anisa Hayi Majid",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250172",
+      "name": "Mustika Sari",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20250196",
+      "name": "Rafika Pusporini",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260008",
+      "name": "DANI MUSTIAWAN",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "SPV",
+      "kode": null
+    },
+    {
+      "nik": "20260026",
+      "name": "Resmi Aryanti",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "jabatan": "SP-GT",
+      "kode": null
+    },
+    {
+      "nik": "20260024",
+      "name": "Wijayanti",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
       "jabatan": "SP-GT",
       "kode": null
     }
@@ -2301,6 +2551,226 @@
           "nik": "20260046",
           "position": "driver",
           "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SMG-SLS-GT-001",
+      "name": "SMG-SLS-GT-001 · Sigih Wahyani",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20260025",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250094",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SMG-SLS-GT-002",
+      "name": "SMG-SLS-GT-002 · Putro Prihadi",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SEMARANG",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20240706",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240713",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "SLO-SLS-GT-001",
+      "name": "SLO-SLS-GT-001 · Dwi Setyaningsih",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "SOLO",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20260072",
+          "position": "salesman",
+          "jabatan": "Sales Exclusive"
+        }
+      ]
+    },
+    {
+      "code": "TGL-SLS-GT-001",
+      "name": "TGL-SLS-GT-001 · Yonatan",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20260052",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20250181",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "TGL-SLS-GT-002",
+      "name": "TGL-SLS-GT-002 · Danu Mujiarto",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "TEGAL",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20240702",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20240698",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "WGN-SLS-GT-001",
+      "name": "WGN-SLS-GT-001 · Novri Alvarizi",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20220372",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WGN-SLS-GT-002",
+      "name": "WGN-SLS-GT-002 · Faria Ummi Kulsum",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20260044",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WGN-SLS-GT-004",
+      "name": "WGN-SLS-GT-004 · Soimin",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20000233",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WGN-SLS-GT-003",
+      "name": "WGN-SLS-GT-003 · Ilham Bachtiar",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WANGON",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20250066",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WNS-SLS-GT-001",
+      "name": "WNS-SLS-GT-001 · Nur Sahid",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20230516",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WNS-SLS-GT-004",
+      "name": "WNS-SLS-GT-004 · Titin Chuzaemah",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20260038",
+          "position": "salesman",
+          "jabatan": "Sales TO"
+        }
+      ]
+    },
+    {
+      "code": "WNS-SLS-GT-002",
+      "name": "WNS-SLS-GT-002 · Suryatin",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20180240",
+          "position": "salesman",
+          "jabatan": "Salesman"
+        },
+        {
+          "nik": "20260030",
+          "position": "driver",
+          "jabatan": "Driver"
+        }
+      ]
+    },
+    {
+      "code": "WNS-SLS-GT-003",
+      "name": "WNS-SLS-GT-003 · Watini",
+      "teamType": "GT",
+      "roleId": "canvasser",
+      "cabang": "WONOSOBO",
+      "area": "JAWA TENGAH",
+      "members": [
+        {
+          "nik": "20070239",
+          "position": "salesman",
+          "jabatan": "Salesman"
         }
       ]
     }

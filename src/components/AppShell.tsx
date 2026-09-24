@@ -13,6 +13,7 @@ const navGroups = [
     label: "1 · Master Data",
     items: [
       { href: "/parameter", label: "Master Parameter", icon: "◈" },
+      { href: "/target", label: "Target Parameter", icon: "◎" },
       { href: "/tier", label: "Master Tier", icon: "▤" },
       { href: "/cabang", label: "Master Cabang", icon: "⌂" },
       { href: "/karyawan", label: "Karyawan", icon: "☺" },

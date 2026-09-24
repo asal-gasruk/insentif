@@ -28,7 +28,7 @@ Default skema UI tetap `SALES_TEAM_SPLITS` (55 / 22.5 / 22.5 untuk size 3).
 | NIK Karyawan | `Employee.nik` | Wajib; skip jika kosong / Vacant |
 | NAMA | `Employee.name` | Skip `(Vacant)` |
 | CABANG | `Branch` via normalisasi nama | Lihat tabel cabang di `sfa-import.ts` |
-| JABATAN Salesman / Canvas Motoris / Horeca Executive / … | `position: salesman` | Lead tim |
+| JABATAN Salesman / Canvas Motoris / Horeca Executive / Sales TO / Sales Exclusive / … | `position: salesman` | Lead tim |
 | JABATAN Driver | `position: driver` | |
 | JABATAN Helper | `helper1` lalu `helper2` | Urutan dalam blok Excel |
 | Kode (mis. `BDG-SLS-GT-001`) | `Team.id` / `Team.name` | Kode di lead; anggota ikut grup |
@@ -37,6 +37,8 @@ Default skema UI tetap `SALES_TEAM_SPLITS` (55 / 22.5 / 22.5 untuk size 3).
 | Prefix `*-MT-*` / Sales Executive | `sales-mt`, `MT` | |
 | — | `workforceMode: "team"` | Anggota Master Tim aktif |
 | SPV / SP-* / ASM / FSR / … | Karyawan individu | Tidak masuk `Team.members` |
+
+**Layout sheet:** tabel vertikal; header bisa berulang mid-sheet. Jawa Tengah (≈row 178+) urutan kolom berbeda: `NAMA | Kode | JABATAN | Jenis Mobil | NIK Karyawan`. Generator harus re-map kolom tiap kali menemukan baris header.
 
 Sheet **Sales Team** (tanpa NIK) diabaikan; SFA adalah sumber of truth.
 

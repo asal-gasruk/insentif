@@ -92,7 +92,22 @@ for (const ex of sfa.examples) {
   assert(missing === 0, `semua anggota tim ada di employees (missing=${missing})`);
 }
 
-assert(sfa.teams.length >= 40, `jumlah tim SFA fase-1 (${sfa.teams.length})`);
+assert(sfa.teams.length >= 60, `jumlah tim SFA fase-1 (${sfa.teams.length})`);
+
+{
+  const jt = sfa.teams.filter((t) => t.area === "JAWA TENGAH");
+  assert(jt.length >= 12, `tim Jawa Tengah ter-import (${jt.length})`);
+  const jtCodes = new Set(jt.map((t) => t.code));
+  for (const code of [
+    "SMG-SLS-GT-001",
+    "TGL-SLS-GT-001",
+    "WGN-SLS-GT-001",
+    "WNS-SLS-GT-002",
+    "SLO-SLS-GT-001",
+  ]) {
+    assert(jtCodes.has(code), `tim Jawa Tengah ${code} ada`);
+  }
+}
 
 {
   const indNiks = sfa.individu.map((i) => i.nik);

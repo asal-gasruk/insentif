@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Regenerate src/data/sfa-excel.json from docs Excel (Sales Team SFA + Pembagian Insentif)."""
+"""Regenerate src/data/sfa-excel.json from docs Excel (Sales Team SFA + Pembagian Insentif).
+
+Sales Team SFA is a vertical table; header row may repeat mid-sheet and column
+order can change (Jawa Tengah puts NIK Karyawan in column G).
+"""
 
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -27,6 +32,18 @@ SKIP_JABATAN_TEAM = {
     "KEY ACCOUNT SUPERVISOR",
     "Key Account Supervisor",
     "WAREHOUSE CABANG SUPERVISOR",
+    "ASS INDIRECT",
+    "ASPR INDIRECT",
+    "ASS INDIRECT KEBUMEN",
+    "SPV DIST",
+}
+# Fase berikutnya — bukan Master Tim sales
+OUT_OF_SCOPE_JABATAN = {
+    "Helper Gudang",
+    "Delivery Man",
+    "Helper Delivery",
+    "Driver Distributor",
+    "MIX",
 }
 LEAD_JABATAN = {
     "Salesman",
@@ -35,8 +52,11 @@ LEAD_JABATAN = {
     "Horeca Executive",
     "Key Account Executive",
     "Sales TO",
+    "Sales Exclusive",
 }
 MEMBER_JABATAN = {"Driver", "Helper"}
+
+DEFAULT_COLMAP = {"nama": 3, "nik": 4, "kode": 5, "jabatan": 6, "mobil": 7}
 
 
 def is_vacant(p: dict) -> bool:
@@ -44,46 +64,96 @@ def is_vacant(p: dict) -> bool:
     return "vacant" in n or not p.get("nama")
 
 
+def norm_nik(nik) -> str | None:
+    if nik is None:
+        return None
+    s = str(nik).strip()
+    if s in ("", "0"):
+        return None
+    # NIK harus numerik; hindari kode tim yang terselip di kolom salah
+    if not re.fullmatch(r"\d+", s):
+        return None
+    return s
+
+
+def is_header_row(vals: list) -> bool:
+    labels = {str(v).strip() for v in vals if v is not None and str(v).strip()}
+    return "AREA" in labels and "CABANG" in labels and "NAMA" in labels
+
+
+def colmap_from_header(ws, row: int) -> dict[str, int]:
+    headers = {
+        str(ws.cell(row, c).value).strip(): c
+        for c in range(1, 8)
+        if ws.cell(row, c).value is not None
+    }
+    return {
+        "nama": headers.get("NAMA", DEFAULT_COLMAP["nama"]),
+        "nik": headers.get("NIK Karyawan", DEFAULT_COLMAP["nik"]),
+        "kode": headers.get("Kode", DEFAULT_COLMAP["kode"]),
+        "jabatan": headers.get("JABATAN", DEFAULT_COLMAP["jabatan"]),
+        "mobil": headers.get("Jenis Mobil", DEFAULT_COLMAP["mobil"]),
+    }
+
+
+def should_skip_jabatan_as_team_break(j: str) -> bool:
+    if not j:
+        return False
+    if j in SKIP_JABATAN_TEAM or j in OUT_OF_SCOPE_JABATAN:
+        return True
+    if j.startswith("SP-"):
+        return True
+    if "INDIRECT" in j.upper() or j.endswith("DIST"):
+        return True
+    return False
+
+
 def parse_sfa(ws) -> list[dict]:
-    starts = [
-        c
-        for c in range(1, min(ws.max_column, 200) + 1)
-        if ws.cell(2, c).value == "AREA"
-    ]
+    """Parse vertical Sales Team SFA with mid-sheet header / column-order changes."""
     people: list[dict] = []
-    for start_col in starts:
-        area = cabang = None
-        for r in range(3, ws.max_row + 1):
-            nama = ws.cell(r, start_col + 2).value
-            nik = ws.cell(r, start_col + 3).value
-            kode = ws.cell(r, start_col + 4).value
-            jabatan = ws.cell(r, start_col + 5).value
-            mobil = ws.cell(r, start_col + 6).value
-            a = ws.cell(r, start_col).value
-            cab = ws.cell(r, start_col + 1).value
-            if a:
-                area = str(a).strip()
-            if cab:
-                cabang = str(cab).strip()
-            if not nama and not jabatan and not kode:
+    area = cabang = None
+    colmap = dict(DEFAULT_COLMAP)
+
+    for r in range(1, ws.max_row + 1):
+        vals = [ws.cell(r, c).value for c in range(1, 8)]
+        if is_header_row(vals):
+            colmap = colmap_from_header(ws, r)
+            continue
+
+        a, cab = vals[0], vals[1]
+        if a is not None and str(a).strip() and str(a).strip().upper() != "AREA":
+            area = str(a).strip()
+        if cab is not None and str(cab).strip():
+            cab_s = str(cab).strip()
+            if cab_s.startswith("*"):
                 continue
-            if cabang and cabang.startswith("*"):
-                continue
-            people.append(
-                {
-                    "area": area,
-                    "cabang": cabang,
-                    "nama": str(nama).strip() if nama else None,
-                    "nik": None
-                    if nik is None or str(nik).strip() == ""
-                    else str(nik).strip(),
-                    "kode": None
-                    if kode is None or str(kode).strip() in ("", "0")
-                    else str(kode).strip(),
-                    "jabatan": str(jabatan).strip() if jabatan else None,
-                    "mobil": str(mobil).strip() if mobil else None,
-                }
-            )
+            if cab_s.upper() != "CABANG":
+                cabang = cab_s
+
+        nama = ws.cell(r, colmap["nama"]).value
+        nik = ws.cell(r, colmap["nik"]).value
+        kode = ws.cell(r, colmap["kode"]).value
+        jabatan = ws.cell(r, colmap["jabatan"]).value
+        mobil = ws.cell(r, colmap["mobil"]).value
+
+        if not nama and not jabatan and not kode and not nik:
+            continue
+        if isinstance(nama, str) and nama.strip().upper() == "NAMA":
+            continue
+
+        people.append(
+            {
+                "area": area,
+                "cabang": cabang,
+                "nama": str(nama).strip() if nama else None,
+                "nik": norm_nik(nik),
+                "kode": None
+                if kode is None or str(kode).strip() in ("", "0")
+                else str(kode).strip(),
+                "jabatan": str(jabatan).strip() if jabatan else None,
+                "mobil": str(mobil).strip() if mobil else None,
+            }
+        )
     return people
 
 
@@ -94,7 +164,7 @@ def extract_teams(people_list: list[dict]) -> list[dict]:
         j = (p.get("jabatan") or "").strip()
         if not j:
             continue
-        if j in SKIP_JABATAN_TEAM or j.startswith("SP-"):
+        if should_skip_jabatan_as_team_break(j):
             if current:
                 teams.append(current)
                 current = None
@@ -119,6 +189,26 @@ def extract_teams(people_list: list[dict]) -> list[dict]:
     if current:
         teams.append(current)
     return teams
+
+
+def resolve_team_role(kode: str | None, lead_j: str) -> tuple[str, str]:
+    kode_u = (kode or "").upper()
+    if "HRC" in kode_u or lead_j == "Horeca Executive":
+        return "Horeca", "sales-horeca"
+    if "MT" in kode_u or lead_j in ("Sales Executive", "Key Account Executive"):
+        return "MT", "sales-mt"
+    # Sales TO / Sales Exclusive / Canvas Motoris → GT canvasser (kode *-GT-*)
+    return "GT", "canvasser"
+
+
+def is_individu_jabatan(j: str) -> bool:
+    if not j:
+        return False
+    if j in SKIP_JABATAN_TEAM or j.startswith("SP-"):
+        return True
+    if "INDIRECT" in j.upper() or j.endswith("DIST"):
+        return True
+    return False
 
 
 def main() -> None:
@@ -185,16 +275,7 @@ def main() -> None:
         if not members_out or not any(x["position"] == "salesman" for x in members_out):
             continue
         kode = t.get("kode") or f"TEAM-{t['lead']['nik']}"
-        lead_j = t["lead"]["jabatan"]
-        if "HRC" in (t.get("kode") or "") or lead_j == "Horeca Executive":
-            team_type, role = "Horeca", "sales-horeca"
-        elif "MT" in (t.get("kode") or "") or lead_j in (
-            "Sales Executive",
-            "Key Account Executive",
-        ):
-            team_type, role = "MT", "sales-mt"
-        else:
-            team_type, role = "GT", "canvasser"
+        team_type, role = resolve_team_role(kode, t["lead"]["jabatan"])
         out_teams.append(
             {
                 "code": kode,
@@ -213,7 +294,7 @@ def main() -> None:
         j = (p.get("jabatan") or "").strip()
         if is_vacant(p) or not p.get("nik"):
             continue
-        if j in SKIP_JABATAN_TEAM or j.startswith("SP-"):
+        if is_individu_jabatan(j):
             if p["nik"] in seen_ind:
                 continue
             seen_ind.add(p["nik"])
@@ -254,8 +335,13 @@ def main() -> None:
 
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     sizes = Counter(len(t["members"]) for t in out_teams)
+    by_area = Counter(t["area"] for t in out_teams)
     print(f"Wrote {OUT.relative_to(ROOT)}")
-    print(f"teams={len(out_teams)} employees={len(emp_map)} individu={len(individu)} sizes={dict(sizes)}")
+    print(
+        f"teams={len(out_teams)} employees={len(emp_map)} "
+        f"individu={len(individu)} sizes={dict(sizes)}"
+    )
+    print(f"by_area={dict(by_area)}")
 
 
 if __name__ == "__main__":

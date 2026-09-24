@@ -14,13 +14,17 @@
     "start": "next start",
     "lint": "next lint",
     "generate:sfa": "python3 scripts/generate-sfa-excel-json.py",
-    "verify:sfa": "node scripts/verify-sfa-mapping.mjs"
+    "generate:targets": "python3 scripts/generate-parameter-targets.py",
+    "verify:sfa": "node scripts/verify-sfa-mapping.mjs",
+    "verify:targets": "node scripts/verify-parameter-targets.mjs"
   },
   "dependencies": {
     "next": "^15.5.21",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-select": "^5.10.2"
+    "react-select": "^5.10.2",
+    "recharts": "^3.10.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

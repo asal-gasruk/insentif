@@ -7,6 +7,7 @@ import {
   DELIVERY_DEMO_EMPLOYEES,
   DELIVERY_DEMO_TEAMS,
 } from "@/lib/sfa-import";
+import { buildParameterTargets } from "@/lib/parameter-target-import";
 import { SALES_TEAM_SPLITS } from "@/lib/team-utils";
 import type {
   AppData,
@@ -18,7 +19,7 @@ import type {
   VolumeTier,
 } from "@/types";
 
-export const STORAGE_KEY = "lahans-insentif-v11";
+export const STORAGE_KEY = "lahans-insentif-v13";
 
 function param(
   id: string,
@@ -544,6 +545,7 @@ export const seedData: AppData = {
   teams: [],
   // Data transaksi sengaja kosong — isi via halaman Pencapaian/Pengiriman
   // atau Import Bulk agar hasil perhitungan mudah ditelusuri.
+  parameterTargets: [],
   achievementRecords: [],
   deliveryRecords: [],
 };
@@ -554,5 +556,6 @@ const sfaTeams = buildSfaTeams();
 seedData.branches = buildSfaBranches(seedData.branches);
 seedData.employees = [...sfaEmployees, ...DELIVERY_DEMO_EMPLOYEES];
 seedData.teams = [...sfaTeams, ...DELIVERY_DEMO_TEAMS];
+seedData.parameterTargets = buildParameterTargets(seedData.teams);
 
 export const SEED_DATA: AppData = seedData;

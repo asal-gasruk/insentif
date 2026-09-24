@@ -1,0 +1,2766 @@
+{
+  "source": "docs/Pencapaian Agustus 2026 - Rev-2.xlsx",
+  "period": "2026-08",
+  "targets": [
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 578500000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 114.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 540.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 115.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 2729.3029166666674,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.85,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-001",
+      "salesman": "Wawan Kurniawan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 515500000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 144.4,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 727.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 142.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1943.3589583333332,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.45,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-002",
+      "salesman": "Cucu Yudi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 440000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.19999999999999,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 410.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1464.23375,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.15,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-003",
+      "salesman": "Iwa Setiawan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 4.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 403000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 114.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 494.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 114.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1226.0587500000001,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.85,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-004",
+      "salesman": "Dodhie Setiawan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 4.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 218000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 124.44999999999999,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 390.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 98.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 638.5283333333334,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 2.45,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-005",
+      "salesman": "Sopian Kusmayana",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 230000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 123.5,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 390.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 804.75,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 2.65,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-006",
+      "salesman": "Tri Aris Rusdiaman",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 510000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 118.33333333333333,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 520.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 98.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1585.1305555555555,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.5,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-007",
+      "salesman": "Candra Irawan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 493503407.358228,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 122.66666666666667,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 520.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 121.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1623.752777777778,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-008",
+      "salesman": "Diki Andriana",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 720425646.506419,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 129.66666666666666,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 650.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 125.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 2056.541666666667,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-009",
+      "salesman": "Kusada",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 430106619.432324,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 108.33333333333333,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 520.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 101.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1254.2138888888892,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.5,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-010",
+      "salesman": "Peri Perdiansyah",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 445600000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 106.33333333333333,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 520.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 70.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 988.9000000000001,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.5,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-011",
+      "salesman": "Ricat Batubara",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 192962705.051011,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 90.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 250.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 26.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-012",
+      "salesman": "Jajang Faryana",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-014",
+      "salesman": "Agus Saeful",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 32500000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-014",
+      "salesman": "Agus Saeful",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 45.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-014",
+      "salesman": "Agus Saeful",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-017",
+      "salesman": "Deni Romansyah",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 32500000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-017",
+      "salesman": "Deni Romansyah",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 60.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-GT-017",
+      "salesman": "Deni Romansyah",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-001",
+      "salesman": "Gita Rosita",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 100750000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-001",
+      "salesman": "Gita Rosita",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 40.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-001",
+      "salesman": "Gita Rosita",
+      "paramId": "coBranding",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian Co-Branding"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-001",
+      "salesman": "Gita Rosita",
+      "paramId": "contract",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Sales Contract"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-001",
+      "salesman": "Gita Rosita",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-002",
+      "salesman": "Dina Apriani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 84250000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-002",
+      "salesman": "Dina Apriani",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-002",
+      "salesman": "Dina Apriani",
+      "paramId": "coBranding",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian Co-Branding"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-002",
+      "salesman": "Dina Apriani",
+      "paramId": "contract",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Sales Contract"
+    },
+    {
+      "teamCode": "BDG-SLS-HRC-002",
+      "salesman": "Dina Apriani",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 30696591.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 75.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 15.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 15.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-001",
+      "salesman": "Dian Fitriani",
+      "paramId": "pd",
+      "period": "2026-08",
+      "target": 30.0,
+      "sheet": "Pencapaian Product Display"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 25303409.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "BDG-SLS-MT-002",
+      "salesman": "Dinda Dewi Maharani",
+      "paramId": "pd",
+      "period": "2026-08",
+      "target": 25.0,
+      "sheet": "Pencapaian Product Display"
+    },
+    {
+      "teamCode": "BYW-SLS-GT-001",
+      "salesman": "Agus Hermansyah",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 60000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "BYW-SLS-GT-001",
+      "salesman": "Agus Hermansyah",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 215.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-001",
+      "salesman": "Arianto",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 43546315.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-001",
+      "salesman": "Arianto",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.19999999999999,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-001",
+      "salesman": "Arianto",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 300.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-001",
+      "salesman": "Arianto",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 16.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-002",
+      "salesman": "Tia Ambarwati",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 41543835.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-002",
+      "salesman": "Tia Ambarwati",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.19999999999999,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-002",
+      "salesman": "Tia Ambarwati",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 300.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-002",
+      "salesman": "Tia Ambarwati",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 16.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-003",
+      "salesman": "Deny Koesmawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 44722545.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-003",
+      "salesman": "Deny Koesmawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 158.65,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-003",
+      "salesman": "Deny Koesmawan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 300.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "CRB-SLS-GT-003",
+      "salesman": "Deny Koesmawan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 16.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 439409467.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 156.75,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 425.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 120.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-001",
+      "salesman": "Sona Sukmayasa",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 22.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 322568815.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 154.85,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 550.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 35.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 120.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-002",
+      "salesman": "Sukmadin",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 18.5,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 242928710.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 115.89999999999999,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 450.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 35.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 75.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-003",
+      "salesman": "Nandang",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 16.599999999999994,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 370085397.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 171.95,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 625.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-004",
+      "salesman": "Hendrik",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 25.25,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 187700784.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 209.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 35.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-005",
+      "salesman": "Adie Wirahadi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 27.5,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 336048916.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 159.6,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 575.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 35.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-007",
+      "salesman": "Saryanto",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 21.75,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 305106349.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 139.65,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 625.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 75.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 250.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-008",
+      "salesman": "Moch. Ganjar Ilmani",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 18.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 336472573.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 76.95,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 625.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-009",
+      "salesman": "Solahudin",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.666666666666671,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-010",
+      "salesman": "Ade Nurjaman",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 110000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-010",
+      "salesman": "Ade Nurjaman",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 25.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-010",
+      "salesman": "Ade Nurjaman",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 30.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "GRT-SLS-GT-010",
+      "salesman": "Ade Nurjaman",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-HRC-001",
+      "salesman": "Yopi Dana Wirya",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 124706936.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "GRT-SLS-HRC-001",
+      "salesman": "Yopi Dana Wirya",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 42.75,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "GRT-SLS-HRC-001",
+      "salesman": "Yopi Dana Wirya",
+      "paramId": "coBranding",
+      "period": "2026-08",
+      "target": 5.0,
+      "sheet": "Pencapaian Co-Branding"
+    },
+    {
+      "teamCode": "GRT-SLS-HRC-001",
+      "salesman": "Yopi Dana Wirya",
+      "paramId": "contract",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian Sales Contract"
+    },
+    {
+      "teamCode": "GRT-SLS-HRC-001",
+      "salesman": "Yopi Dana Wirya",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 20.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "JBG-SLS-GT-001",
+      "salesman": "Rini Yuliani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 0.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "JBG-SLS-GT-001",
+      "salesman": "Rini Yuliani",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 0.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "JBR-SLS-GT-001",
+      "salesman": "Anang Indra Gunawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 22000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "JBR-SLS-GT-001",
+      "salesman": "Anang Indra Gunawan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 75.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "MLG-SLS-GT-001",
+      "salesman": "Moch Reza Zulfikar",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 9000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "MLG-SLS-GT-001",
+      "salesman": "Moch Reza Zulfikar",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "PBL-SLS-GT-002",
+      "salesman": "Maman Sumantri",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 14000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "PBL-SLS-GT-002",
+      "salesman": "Maman Sumantri",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-001",
+      "salesman": "Dede Supriadi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 186431219.99519998,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-001",
+      "salesman": "Dede Supriadi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 105.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-001",
+      "salesman": "Dede Supriadi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 300.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-001",
+      "salesman": "Dede Supriadi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-002",
+      "salesman": "Yayan Nurjaman",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 138807579.9952,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-002",
+      "salesman": "Yayan Nurjaman",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-002",
+      "salesman": "Yayan Nurjaman",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 350.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-002",
+      "salesman": "Yayan Nurjaman",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-003",
+      "salesman": "Acep Hendra",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 49761200.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-003",
+      "salesman": "Acep Hendra",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 90.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-003",
+      "salesman": "Acep Hendra",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 260.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "PWK-SLS-GT-003",
+      "salesman": "Acep Hendra",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 15.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 288271296.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 154.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 400.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 140.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 1250.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-001",
+      "salesman": "Mansyur",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 3.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 128285568.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 212.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 90.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 220.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-002",
+      "salesman": "Sujiarto",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 2.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 33443136.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 300.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "SBG-SLS-GT-003",
+      "salesman": "Agus Geri Gustiana",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 15.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SDO-SLS-GT-001",
+      "salesman": "Godod Bayu Ardi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 0.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SDO-SLS-GT-001",
+      "salesman": "Godod Bayu Ardi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 0.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-001",
+      "salesman": "Mira Kusumawati",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 71216030.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-001",
+      "salesman": "Mira Kusumawati",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 150.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-001",
+      "salesman": "Mira Kusumawati",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-001",
+      "salesman": "Mira Kusumawati",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-002",
+      "salesman": "Dede Suhendar",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 123608970.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-002",
+      "salesman": "Dede Suhendar",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 175.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-002",
+      "salesman": "Dede Suhendar",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SKB-SLS-GT-002",
+      "salesman": "Dede Suhendar",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SLO-SLS-GT-001",
+      "salesman": "Dwi Setyaningsih",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 72000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SLO-SLS-GT-001",
+      "salesman": "Dwi Setyaningsih",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 120.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-001",
+      "salesman": "Sigih Wahyani",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 72000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-001",
+      "salesman": "Sigih Wahyani",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-001",
+      "salesman": "Sigih Wahyani",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 170.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-001",
+      "salesman": "Sigih Wahyani",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 13.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-002",
+      "salesman": "Putro Prihadi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 72000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-002",
+      "salesman": "Putro Prihadi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-002",
+      "salesman": "Putro Prihadi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 190.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "SMG-SLS-GT-002",
+      "salesman": "Putro Prihadi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 13.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 135000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 190.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 120.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 450.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-001",
+      "salesman": "Yonatan",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 13.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 147571200.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 130.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 230.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 130.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 450.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TGL-SLS-GT-002",
+      "salesman": "Danu Mujiarto",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 13.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-001",
+      "salesman": "Candy Miranda",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 228774000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-001",
+      "salesman": "Candy Miranda",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 166.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-001",
+      "salesman": "Candy Miranda",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 312.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-001",
+      "salesman": "Candy Miranda",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-002",
+      "salesman": "Diki Wahyudin",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 123185999.99999999,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-002",
+      "salesman": "Diki Wahyudin",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 85.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-002",
+      "salesman": "Diki Wahyudin",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 260.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TGR-SLS-GT-002",
+      "salesman": "Diki Wahyudin",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 320000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 131.1,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 425.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 60.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 850.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-001",
+      "salesman": "Dede Hudaya",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 20.94999999999999,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 130000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 180.5,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 350.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 125.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 225.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-002",
+      "salesman": "Sansan Wirasandi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 24.5,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 101831200.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 247.95,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 400.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 15.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 25.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-003",
+      "salesman": "Eris Rismana",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 11.800000000000011,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-GT-004",
+      "salesman": "Wawan Darmawan",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 12500000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 15000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 19.95,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 375.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 50.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "iptIpo",
+      "period": "2026-08",
+      "target": 2.5,
+      "sheet": "Pencapaian Item per Outlet"
+    },
+    {
+      "teamCode": "TSK-SLS-HRC-001",
+      "salesman": "Hari Prayoga",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 21.92857142857143,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 154000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 155.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 260.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 70.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 70.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-001",
+      "salesman": "Novri Alvarizi",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 8.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 87000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 105.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 230.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 70.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-002",
+      "salesman": "Faria Ummi Kulsum",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 8.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 179000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 165.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 280.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-003",
+      "salesman": "Ilham Bachtiar",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 8.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 190000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 165.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 340.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 80.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WGN-SLS-GT-004",
+      "salesman": "Soimin",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 8.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 117000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 160.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 280.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 55.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-001",
+      "salesman": "Nur Sahid",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 102000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 280.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 105.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 190.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-002",
+      "salesman": "Suryatin",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 127000000.0,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 100.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 280.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 105.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 170.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-003",
+      "salesman": "Watini",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "allProduct",
+      "period": "2026-08",
+      "target": 433626735.9856,
+      "sheet": "Pencapaian Sales Value"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "ao",
+      "period": "2026-08",
+      "target": 200.0,
+      "sheet": "Pencapaian Active Outlet"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "ec",
+      "period": "2026-08",
+      "target": 380.0,
+      "sheet": "Pencapaian Effective Call"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "focusRO",
+      "period": "2026-08",
+      "target": 35.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "focusVol",
+      "period": "2026-08",
+      "target": 110.0,
+      "sheet": "Pencapaian Product Focus"
+    },
+    {
+      "teamCode": "WNS-SLS-GT-004",
+      "salesman": "Titin Chuzaemah",
+      "paramId": "noo",
+      "period": "2026-08",
+      "target": 10.0,
+      "sheet": "Pencapaian New Open Outlet"
+    }
+  ]
+}
