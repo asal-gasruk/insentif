@@ -12,7 +12,7 @@ import {
   subjectPolicyOf,
 } from "@/lib/team-utils";
 import { useAppData } from "@/hooks/useAppData";
-import type { Employee, EmployeePosition, WorkforceMode } from "@/types";
+import type { Employee, EmployeePosition, OrgNode, WorkforceMode } from "@/types";
 
 const positions: { value: EmployeePosition; label: string }[] = [
   { value: "salesman", label: "Salesman" },
@@ -35,6 +35,7 @@ const empty: Omit<Employee, "id"> = {
   teamSize: 3,
   vehicleType: undefined,
   workforceMode: "individu",
+  supervisorNodeId: undefined,
   active: true,
 };
 
@@ -46,6 +47,22 @@ export default function KaryawanPage() {
   const [error, setError] = useState<string | null>(null);
 
   if (!ready || !data) return <LoadingState />;
+
+  const nodeName = (n: OrgNode) =>
+    data.employees.find((e) => e.id === n.employeeId)?.name || n.name || "Vacant";
+  const supervisorLabel = (id?: string) => {
+    const n = data.orgNodes.find((x) => x.id === id);
+    return n ? `${n.title} · ${nodeName(n)}` : "—";
+  };
+  const supervisorOptions = [
+    { value: "", label: "— belum diatur —" },
+    ...data.orgNodes
+      .filter((n) => n.level !== "RSM")
+      .map((n) => ({
+        value: n.id,
+        label: `${n.title} · ${nodeName(n)} (${n.cabang ?? n.area})`,
+      })),
+  ];
 
   const policy = subjectPolicyOf(data, form.roleId);
   const modeLocked = policy === "individu" || policy === "team";
@@ -81,6 +98,7 @@ export default function KaryawanPage() {
       teamSize: emp.teamSize,
       vehicleType: emp.vehicleType,
       workforceMode: emp.workforceMode ?? defaultWorkforceMode(data, emp.roleId),
+      supervisorNodeId: emp.supervisorNodeId,
       active: emp.active,
     });
     setOpen(true);
@@ -144,6 +162,7 @@ export default function KaryawanPage() {
               <th className="px-4 py-3 text-left">Nama</th>
               <th className="px-4 py-3 text-left">Role</th>
               <th className="px-4 py-3 text-left">Cabang</th>
+              <th className="px-4 py-3 text-left">Atasan</th>
               <th className="px-4 py-3 text-left">Posisi</th>
               <th className="px-4 py-3 text-left">Mode</th>
               <th className="px-4 py-3 text-left">Ukuran</th>
@@ -163,6 +182,9 @@ export default function KaryawanPage() {
                   <td className="px-4 py-3 font-medium">{emp.name}</td>
                   <td className="px-4 py-3">{role?.name}</td>
                   <td className="px-4 py-3">{branch?.name}</td>
+                  <td className="px-4 py-3 text-xs">
+                    {supervisorLabel(emp.supervisorNodeId)}
+                  </td>
                   <td className="px-4 py-3 capitalize">{emp.position}</td>
                   <td className="px-4 py-3">
                     <span
@@ -271,6 +293,16 @@ export default function KaryawanPage() {
                 value: b.id,
                 label: `${b.name} (${b.branchType})`,
               }))}
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <label className="label">Atasan langsung (Struktur Organisasi)</label>
+            <Select2
+              value={form.supervisorNodeId ?? ""}
+              onChange={(v) =>
+                setForm({ ...form, supervisorNodeId: v || undefined })
+              }
+              options={supervisorOptions}
             />
           </div>
           <div>

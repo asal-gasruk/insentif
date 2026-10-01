@@ -1,5 +1,6 @@
 import { PARAMETER_NOTES } from "@/data/parameter-notes";
 import { SCHEME_NOTES } from "@/data/scheme-notes";
+import { buildSfaOrg } from "@/lib/org-import";
 import {
   buildSfaBranches,
   buildSfaEmployees,
@@ -542,6 +543,7 @@ export const seedData: AppData = {
   volumeTiers,
   // Placeholder — diganti di bawah dengan SFA + delivery demo
   employees: [],
+  orgNodes: [],
   teams: [],
   // Data transaksi sengaja kosong — isi via halaman Pencapaian/Pengiriman
   // atau Import Bulk agar hasil perhitungan mudah ditelusuri.
@@ -550,11 +552,12 @@ export const seedData: AppData = {
   deliveryRecords: [],
 };
 
-const sfaEmployees = buildSfaEmployees();
+const sfaOrg = buildSfaOrg(buildSfaEmployees());
 const sfaTeams = buildSfaTeams();
 
 seedData.branches = buildSfaBranches(seedData.branches);
-seedData.employees = [...sfaEmployees, ...DELIVERY_DEMO_EMPLOYEES];
+seedData.employees = [...sfaOrg.employees, ...DELIVERY_DEMO_EMPLOYEES];
+seedData.orgNodes = sfaOrg.orgNodes;
 seedData.teams = [...sfaTeams, ...DELIVERY_DEMO_TEAMS];
 seedData.parameterTargets = buildParameterTargets(seedData.teams);
 

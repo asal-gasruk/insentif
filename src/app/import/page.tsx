@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Fragment, useState } from "react";
+import {
+  ImportRowDetail,
+  type ImportRowDetailInput,
+} from "@/components/ImportRowDetail";
 import { LoadingState } from "@/components/LoadingState";
 import { PageHeader } from "@/components/PageHeader";
 import { Select2 } from "@/components/Select2";
@@ -57,7 +61,7 @@ function parseNum(raw: string | undefined): number | undefined {
 // Validasi baris
 // ---------------------------------------------------------------------------
 
-type ParsedRow =
+type ParsedRowBase =
   | {
       line: number;
       kind: "achievement";
@@ -91,13 +95,14 @@ type ParsedRow =
       info: string;
     };
 
+/** Baris hasil validasi + data mentah dari file Excel (untuk detail preview). */
+type ParsedRow = ParsedRowBase & { raw: Record<string, string> };
+
 function aggregateTeamResult(results: IncentiveResult[]): IncentiveResult {
   const first = results[0];
   return {
     ...first,
-    employeeName: first.teamName
-      ? `Tim ${first.teamName}`
-      : first.employeeName,
+    employeeName: first.teamName ? `Tim ${first.teamName}` : first.employeeName,
     finalAmount: results.reduce((s, r) => s + r.finalAmount, 0),
     splitRatio: 1,
   };
@@ -107,7 +112,7 @@ function validateTeamAchievementRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
-): ParsedRow {
+): ParsedRowBase {
   const teamId = row.teamId?.trim();
   const period = normalizeImportPeriod(row.periode ?? "");
   if (!teamId || !period) {
@@ -203,25 +208,28 @@ function validateTeamAchievementRow(
   };
 
   const results = calculateTeamParameterIncentive(data, payload, team);
-  const result = results.length > 0 ? aggregateTeamResult(results) : {
-    recordId: payload.id,
-    employeeId: "",
-    employeeName: team.name,
-    position: "salesman",
-    period,
-    schemeName: scheme.name,
-    segmentName: segment,
-    tierLabel: "-",
-    parameterBreakdown: {},
-    grossAmount: 0,
-    splitRatio: 1,
-    penaltyPct: 0,
-    suspended: false,
-    voided: false,
-    finalAmount: 0,
-    teamId: team.id,
-    teamName: team.name,
-  };
+  const result =
+    results.length > 0
+      ? aggregateTeamResult(results)
+      : {
+          recordId: payload.id,
+          employeeId: "",
+          employeeName: team.name,
+          position: "salesman",
+          period,
+          schemeName: scheme.name,
+          segmentName: segment,
+          tierLabel: "-",
+          parameterBreakdown: {},
+          grossAmount: 0,
+          splitRatio: 1,
+          penaltyPct: 0,
+          suspended: false,
+          voided: false,
+          finalAmount: 0,
+          teamId: team.id,
+          teamName: team.name,
+        };
 
   return {
     line,
@@ -241,7 +249,7 @@ function validateAchievementRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
-): ParsedRow {
+): ParsedRowBase {
   if (row.teamId?.trim()) {
     return validateTeamAchievementRow(data, row, line);
   }
@@ -341,10 +349,7 @@ function validateAchievementRow(
 const VEHICLE_TYPES = ["PICKUP", "ENGKEL", "DOUBLE"];
 
 /** Armada delivery tim dari Karyawan anggota (driver dulu), bukan kolom upload */
-function resolveTeamVehicleType(
-  data: AppData,
-  team: Team,
-): string | undefined {
+function resolveTeamVehicleType(data: AppData, team: Team): string | undefined {
   const ordered = [
     ...team.members.filter((m) => m.position === "driver"),
     ...team.members,
@@ -357,7 +362,9 @@ function resolveTeamVehicleType(
   return undefined;
 }
 
-function aggregateTeamDeliveryResult(results: DeliveryResult[]): DeliveryResult {
+function aggregateTeamDeliveryResult(
+  results: DeliveryResult[],
+): DeliveryResult {
   const first = results[0];
   return {
     ...first,
@@ -371,7 +378,7 @@ function validateTeamDeliveryRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
-): ParsedRow {
+): ParsedRowBase {
   const teamId = row.teamId?.trim();
   const period = normalizeImportPeriod(row.periode ?? "");
   if (!teamId || !period) {
@@ -482,7 +489,7 @@ function validateDeliveryRow(
   data: AppData,
   row: Record<string, string>,
   line: number,
-): ParsedRow {
+): ParsedRowBase {
   if (row.teamId?.trim()) {
     return validateTeamDeliveryRow(data, row, line);
   }
@@ -590,17 +597,52 @@ function ResultStatusBadge({ row }: { row: OkRow }) {
           Penalty {r.penaltyPct}%
         </span>
       );
-    return <span className="badge bg-[var(--success)]/10 text-[var(--success)]">Penuh</span>;
+    return (
+      <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+        Penuh
+      </span>
+    );
   }
   return row.result.qualityPassed ? (
-    <span className="badge bg-[var(--success)]/10 text-[var(--success)]">Quality OK</span>
+    <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+      Quality OK
+    </span>
   ) : (
     <span className="badge bg-red-100 text-red-700">Quality Gagal</span>
   );
 }
 
 /** Tabel hasil perhitungan — dipakai untuk preview & ringkasan after-import */
-function ResultTable({ rows }: { rows: ParsedRow[] }) {
+function detailInput(row: ParsedRow): ImportRowDetailInput {
+  if (row.status === "ok" && row.kind === "achievement") {
+    return {
+      kind: "achievement",
+      raw: row.raw,
+      payload: row.payload,
+      result: row.result,
+    };
+  }
+  if (row.status === "ok") {
+    return {
+      kind: "delivery",
+      raw: row.raw,
+      payload: row.payload,
+      result: row.result,
+    };
+  }
+  return { kind: row.kind, raw: row.raw } as ImportRowDetailInput;
+}
+
+function ResultTable({ rows, data }: { rows: ParsedRow[]; data: AppData }) {
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const toggle = (key: string) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  const allKeys = rows.map((r) => `d-${r.line}`);
   const hasTeamRows = rows.some((r) => r.status === "ok" && Boolean(r.team));
 
   type PreviewLine = {
@@ -614,6 +656,8 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
     schemeOrArmada: string;
     tierOrVolume: string;
     badgeRow: OkRow | null;
+    /** Baris sumber (untuk detail data Excel); hanya di baris utama */
+    sourceRow: ParsedRow | null;
     errorInfo?: string;
     finalAmount: number;
     emphasize: boolean;
@@ -634,6 +678,7 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
         schemeOrArmada: "—",
         tierOrVolume: "—",
         badgeRow: null,
+        sourceRow: row,
         errorInfo: row.info,
         finalAmount: 0,
         emphasize: false,
@@ -663,6 +708,7 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
       schemeOrArmada,
       tierOrVolume,
       badgeRow: row,
+      sourceRow: row,
       finalAmount: row.result.finalAmount,
       emphasize: true,
     });
@@ -680,6 +726,7 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
           schemeOrArmada,
           tierOrVolume: `bagian ${(m.splitRatio * 100).toFixed(1)}%`,
           badgeRow: null,
+          sourceRow: null,
           finalAmount: m.finalAmount,
           emphasize: false,
         });
@@ -688,9 +735,32 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
   }
 
   const errorColSpan = hasTeamRows ? 7 : 6;
+  const totalCols = hasTeamRows ? 9 : 8;
 
   return (
     <div className="card overflow-x-auto">
+      <div className="flex items-center justify-between gap-2 border-b border-[var(--border)] px-3 py-2">
+        <p className="text-xs text-[var(--text-muted)]">
+          Klik <b>Detail</b> pada baris untuk melihat data mentah dari Excel,
+          konversi ke % pencapaian, dan insentif per parameter.
+        </p>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            className="btn-secondary px-3 py-1 text-xs"
+            onClick={() => setExpanded(new Set(allKeys))}
+          >
+            Buka semua detail
+          </button>
+          <button
+            type="button"
+            className="btn-secondary px-3 py-1 text-xs"
+            onClick={() => setExpanded(new Set())}
+          >
+            Tutup semua
+          </button>
+        </div>
+      </div>
       <table className="w-full text-sm">
         <thead className="bg-[var(--surface-muted)]">
           <tr>
@@ -709,87 +779,111 @@ function ResultTable({ rows }: { rows: ParsedRow[] }) {
         </thead>
         <tbody>
           {lines.map((line) => (
-            <tr
-              key={line.key}
-              className={`border-t border-[var(--border)] ${
-                line.statusLabel === "member"
-                  ? "bg-[var(--surface-muted)]/35"
-                  : ""
-              }`}
-            >
-              <td className="px-3 py-2 font-[family-name:var(--font-mono)] text-xs">
-                {line.lineLabel}
-              </td>
-              <td className="px-3 py-2 text-center">
-                {line.statusLabel === "error" && (
-                  <span className="badge bg-red-100 text-red-700">Error</span>
-                )}
-                {line.statusLabel === "valid" && (
-                  <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
-                    Valid
-                  </span>
-                )}
-                {line.statusLabel === "update" && (
-                  <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
-                    Valid · update
-                  </span>
-                )}
-                {line.statusLabel === "member" && (
-                  <span className="text-xs text-[var(--text-muted)]">anggota</span>
-                )}
-              </td>
-              {line.statusLabel === "error" ? (
-                <td
-                  colSpan={errorColSpan}
-                  className="px-3 py-2 text-xs text-red-700"
-                >
-                  {line.errorInfo}
+            <Fragment key={line.key}>
+              <tr
+                className={`border-t border-[var(--border)] ${
+                  line.statusLabel === "member"
+                    ? "bg-[var(--surface-muted)]/35"
+                    : ""
+                }`}
+              >
+                <td className="px-3 py-2 font-[family-name:var(--font-mono)] text-xs">
+                  <div>{line.lineLabel}</div>
+                  {line.sourceRow && (
+                    <button
+                      type="button"
+                      className="mt-1 text-[10px] font-sans text-[var(--text-muted)] underline-offset-2 hover:underline"
+                      onClick={() => toggle(`d-${line.sourceRow!.line}`)}
+                    >
+                      {expanded.has(`d-${line.sourceRow.line}`)
+                        ? "▾ Detail"
+                        : "▸ Detail"}
+                    </button>
+                  )}
                 </td>
-              ) : (
-                <>
-                  {hasTeamRows && (
-                    <td className="px-3 py-2">
-                      <div className={line.emphasize ? "font-medium" : ""}>
-                        {line.teamName}
-                      </div>
-                      {line.teamId && line.emphasize && (
-                        <div className="mt-0.5 font-[family-name:var(--font-mono)] text-[10px] text-[var(--text-muted)]">
-                          {line.teamId}
+                <td className="px-3 py-2 text-center">
+                  {line.statusLabel === "error" && (
+                    <span className="badge bg-red-100 text-red-700">Error</span>
+                  )}
+                  {line.statusLabel === "valid" && (
+                    <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+                      Valid
+                    </span>
+                  )}
+                  {line.statusLabel === "update" && (
+                    <span className="badge bg-[var(--success)]/10 text-[var(--success)]">
+                      Valid · update
+                    </span>
+                  )}
+                  {line.statusLabel === "member" && (
+                    <span className="text-xs text-[var(--text-muted)]">
+                      anggota
+                    </span>
+                  )}
+                </td>
+                {line.statusLabel === "error" ? (
+                  <td
+                    colSpan={errorColSpan}
+                    className="px-3 py-2 text-xs text-red-700"
+                  >
+                    {line.errorInfo}
+                  </td>
+                ) : (
+                  <>
+                    {hasTeamRows && (
+                      <td className="px-3 py-2">
+                        <div className={line.emphasize ? "font-medium" : ""}>
+                          {line.teamName}
                         </div>
+                        {line.teamId && line.emphasize && (
+                          <div className="mt-0.5 font-[family-name:var(--font-mono)] text-[10px] text-[var(--text-muted)]">
+                            {line.teamId}
+                          </div>
+                        )}
+                      </td>
+                    )}
+                    <td
+                      className={`px-3 py-2 ${
+                        line.statusLabel === "member"
+                          ? "pl-5 text-[var(--text-muted)]"
+                          : "font-medium"
+                      }`}
+                    >
+                      {line.subject}
+                    </td>
+                    <td className="px-3 py-2">{line.period}</td>
+                    <td className="px-3 py-2 text-xs">{line.schemeOrArmada}</td>
+                    <td className="px-3 py-2 text-xs">{line.tierOrVolume}</td>
+                    <td className="px-3 py-2 text-center">
+                      {line.badgeRow ? (
+                        <ResultStatusBadge row={line.badgeRow} />
+                      ) : (
+                        <span className="text-[var(--text-muted)]">—</span>
                       )}
                     </td>
-                  )}
-                  <td
-                    className={`px-3 py-2 ${
-                      line.statusLabel === "member"
-                        ? "pl-5 text-[var(--text-muted)]"
-                        : "font-medium"
-                    }`}
-                  >
-                    {line.subject}
+                    <td
+                      className={`px-3 py-2 text-right font-semibold ${
+                        line.emphasize
+                          ? "text-[var(--success)]"
+                          : "text-[var(--text)]"
+                      }`}
+                    >
+                      {formatRupiah(line.finalAmount)}
+                    </td>
+                  </>
+                )}
+              </tr>
+              {line.sourceRow && expanded.has(`d-${line.sourceRow.line}`) && (
+                <tr className="border-t border-[var(--border)]">
+                  <td colSpan={totalCols} className="p-0">
+                    <ImportRowDetail
+                      data={data}
+                      input={detailInput(line.sourceRow)}
+                    />
                   </td>
-                  <td className="px-3 py-2">{line.period}</td>
-                  <td className="px-3 py-2 text-xs">{line.schemeOrArmada}</td>
-                  <td className="px-3 py-2 text-xs">{line.tierOrVolume}</td>
-                  <td className="px-3 py-2 text-center">
-                    {line.badgeRow ? (
-                      <ResultStatusBadge row={line.badgeRow} />
-                    ) : (
-                      <span className="text-[var(--text-muted)]">—</span>
-                    )}
-                  </td>
-                  <td
-                    className={`px-3 py-2 text-right font-semibold ${
-                      line.emphasize
-                        ? "text-[var(--success)]"
-                        : "text-[var(--text)]"
-                    }`}
-                  >
-                    {formatRupiah(line.finalAmount)}
-                  </td>
-                </>
+                </tr>
               )}
-            </tr>
+            </Fragment>
           ))}
         </tbody>
       </table>
@@ -861,9 +955,7 @@ export default function ImportPage() {
     }
 
     const isDelivery =
-      "karton" in parsed[0] ||
-      "faktur" in parsed[0] ||
-      "armada" in parsed[0];
+      "karton" in parsed[0] || "faktur" in parsed[0] || "armada" in parsed[0];
     const hasTeamId = "teamId" in parsed[0];
 
     if (subjectMode === "team" && !hasTeamId) {
@@ -881,11 +973,12 @@ export default function ImportPage() {
       return;
     }
 
-    const validated = parsed.map((row, i) =>
-      isDelivery
+    const validated: ParsedRow[] = parsed.map((row, i) => ({
+      ...(isDelivery
         ? validateDeliveryRow(data, row, i + 2)
-        : validateAchievementRow(data, row, i + 2),
-    );
+        : validateAchievementRow(data, row, i + 2)),
+      raw: row,
+    }));
     setRows(validated);
   };
 
@@ -933,8 +1026,8 @@ export default function ImportPage() {
         <section className="card p-5">
           <h3 className="mb-1 font-bold">1 · Unduh Template</h3>
           <p className="mb-4 text-sm text-[var(--text-muted)]">
-            Pilih subjek dulu, lalu skema. Template Tim memakai{" "}
-            <b>teamId</b>; Individu memakai <b>NIK</b> (termasuk Delivery).
+            Pilih subjek dulu, lalu skema. Template Tim memakai <b>teamId</b>;
+            Individu memakai <b>NIK</b> (termasuk Delivery).
           </p>
 
           <div className="mb-4">
@@ -1062,7 +1155,8 @@ export default function ImportPage() {
                   • Kolom identitas: <b>teamId</b> (lihat Master Tim)
                 </li>
                 <li>
-                  • Satu baris pencapaian dibagi ke semua anggota saat perhitungan
+                  • Satu baris pencapaian dibagi ke semua anggota saat
+                  perhitungan
                 </li>
                 <li>
                   • Delivery Tim: tanpa kolom armada — diambil dari Karyawan
@@ -1075,8 +1169,8 @@ export default function ImportPage() {
                   • Kolom identitas: <b>NIK</b> (lihat Karyawan)
                 </li>
                 <li>
-                  • Delivery Tim: tanpa kolom armada — jenis armada dari Karyawan
-                  anggota Master Tim
+                  • Delivery Tim: tanpa kolom armada — jenis armada dari
+                  Karyawan anggota Master Tim
                 </li>
                 <li>
                   • Delivery Individu: kolom armada / karton / faktur / OTD /
@@ -1088,14 +1182,16 @@ export default function ImportPage() {
               • Periode sesuai skema:{" "}
               <b>{templateMeta?.periodLabel ?? "YYYY-MM"}</b>
             </li>
-            <li>• Jika subjek + periode sudah ada, data akan <b>diperbarui</b></li>
+            <li>
+              • Jika subjek + periode sudah ada, data akan <b>diperbarui</b>
+            </li>
             <li>
               • Template unduhan: <b>.xlsx</b> · upload juga menerima .csv lama
             </li>
             <li>
-              • Pencapaian: isi <b>ACTUAL</b> per parameter (bukan %). % = ACTUAL ÷
-              Target (menu Target Parameter). Overdue isi seperti Excel (0.059)
-              atau persen (5.9).
+              • Pencapaian: isi <b>ACTUAL</b> per parameter (bukan %). % =
+              ACTUAL ÷ Target (menu Target Parameter). Overdue isi seperti Excel
+              (0.059) atau persen (5.9).
             </li>
           </ul>
         </section>
@@ -1104,8 +1200,8 @@ export default function ImportPage() {
           <h3 className="mb-1 font-bold">2 · Upload File Excel</h3>
           <p className="mb-4 text-sm text-[var(--text-muted)]">
             Pastikan file sesuai mode{" "}
-            <b>{subjectMode === "team" ? "Tim" : "Individu"}</b> di sebelah kiri.
-            Data divalidasi dulu — tidak langsung tersimpan.
+            <b>{subjectMode === "team" ? "Tim" : "Individu"}</b> di sebelah
+            kiri. Data divalidasi dulu — tidak langsung tersimpan.
           </p>
           <label className="flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-[var(--border)] px-4 py-8 text-center hover:border-[var(--primary)] hover:bg-[var(--surface-muted)]">
             <span className="text-2xl">⇪</span>
@@ -1133,8 +1229,8 @@ export default function ImportPage() {
             <div>
               <h3 className="font-bold">
                 3 · Preview, Validasi &amp; Estimasi Hasil —{" "}
-                {rows[0].kind === "delivery" ? "Pengiriman" : "Pencapaian"}{" "}
-                ({subjectMode === "team" ? "Tim" : "Individu"})
+                {rows[0].kind === "delivery" ? "Pengiriman" : "Pencapaian"} (
+                {subjectMode === "team" ? "Tim" : "Individu"})
               </h3>
               <p className="text-xs text-[var(--text-muted)]">
                 {validRows.length} baris valid · {errorRows.length} baris error
@@ -1153,7 +1249,7 @@ export default function ImportPage() {
               Import {validRows.length} Baris Valid
             </button>
           </div>
-          <ResultTable rows={rows} />
+          <ResultTable rows={rows} data={data} />
         </>
       )}
 
@@ -1161,7 +1257,9 @@ export default function ImportPage() {
         <>
           <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h3 className="font-bold">✓ Hasil Import &amp; Perhitungan Insentif</h3>
+              <h3 className="font-bold">
+                ✓ Hasil Import &amp; Perhitungan Insentif
+              </h3>
               <p className="text-xs text-[var(--text-muted)]">
                 {result} Total insentif:{" "}
                 <b className="text-[var(--success)]">
@@ -1170,6 +1268,22 @@ export default function ImportPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
+              {imported.some((r) => r.kind === "achievement") && (
+                <Link
+                  href="/perhitungan#output-insentif"
+                  className="btn-primary"
+                >
+                  Output Insentif (PDF)
+                </Link>
+              )}
+              {imported.some((r) => r.kind === "achievement") && (
+                <Link
+                  href="/perhitungan#pencairan-insentif"
+                  className="btn-primary"
+                >
+                  Pencairan Insentif (PDF)
+                </Link>
+              )}
               {imported.some((r) => r.kind === "achievement") && (
                 <Link href="/pencapaian" className="btn-secondary">
                   Data Pencapaian
@@ -1185,7 +1299,7 @@ export default function ImportPage() {
               </Link>
             </div>
           </div>
-          <ResultTable rows={imported} />
+          <ResultTable rows={imported} data={data} />
         </>
       )}
 

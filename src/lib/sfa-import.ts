@@ -34,11 +34,11 @@ const CABANG_ALIAS: Record<
   KEBUMEN: { id: "br-nb-19", name: "Kebumen", branchType: "NB" },
 };
 
-function slugNik(nik: string): string {
+export function slugNik(nik: string): string {
   return nik.replace(/[^a-zA-Z0-9_-]/g, "");
 }
 
-function mapIndividuRole(jabatan: string): {
+export function mapIndividuRole(jabatan: string): {
   roleId: string;
   position: EmployeePosition;
 } {
@@ -138,6 +138,7 @@ export function buildSfaTeams(): Team[] {
       id: `sfa-team-${t.code}`,
       name: t.name,
       teamType: t.teamType,
+      typeSales: t.typeSales ?? undefined,
       roleId: t.roleId,
       branchId: branch.id,
       members: t.members.map((m) => ({

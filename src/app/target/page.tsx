@@ -5,6 +5,8 @@ import { LoadingState } from "@/components/LoadingState";
 import { Modal } from "@/components/Modal";
 import { PageHeader } from "@/components/PageHeader";
 import { Select2 } from "@/components/Select2";
+import { TargetStructureTable } from "@/components/TargetStructureTable";
+import { formatTarget } from "@/lib/format-target";
 import { generateId } from "@/lib/storage";
 import { useAppData } from "@/hooks/useAppData";
 import type { ParameterTarget } from "@/types";
@@ -21,25 +23,13 @@ type FormState = {
   notes: string;
 };
 
-function formatTarget(n: number, unit: string): string {
-  if (unit === "Rp") {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0,
-    }).format(n);
-  }
-  return new Intl.NumberFormat("id-ID", {
-    maximumFractionDigits: 4,
-  }).format(n);
-}
-
 export default function TargetPage() {
   const { data, ready, create, update, remove } = useAppData();
   const [filterPeriod, setFilterPeriod] = useState("2026-08");
   const [filterParam, setFilterParam] = useState("");
   const [filterBranch, setFilterBranch] = useState("");
   const [filterMode, setFilterMode] = useState<"all" | SubjectMode>("team");
+  const [view, setView] = useState<"tabel" | "struktur">("tabel");
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<ParameterTarget | null>(null);
   const [form, setForm] = useState<FormState | null>(null);
@@ -70,6 +60,16 @@ export default function TargetPage() {
   const periods = [
     ...new Set(data.parameterTargets.map((t) => t.period).concat(["2026-08"])),
   ].sort();
+
+  // Kolom tabel struktur: parameter yang punya target di periode terpilih
+  const structureParamIds = data.parameters
+    .filter((p) => (filterParam ? p.id === filterParam : true))
+    .filter((p) =>
+      data.parameterTargets.some(
+        (t) => t.period === filterPeriod && t.paramId === p.id,
+      ),
+    )
+    .map((p) => p.id);
 
   const openCreate = () => {
     setEditing(null);
@@ -189,6 +189,24 @@ export default function TargetPage() {
         }
       />
 
+      <div className="mb-4 flex gap-2">
+        {(
+          [
+            ["tabel", "Tabel"],
+            ["struktur", "Per Struktur (RSM → ASM → SPV → Tim)"],
+          ] as const
+        ).map(([id, text]) => (
+          <button
+            key={id}
+            type="button"
+            className={view === id ? "btn-primary" : "btn-secondary"}
+            onClick={() => setView(id)}
+          >
+            {text}
+          </button>
+        ))}
+      </div>
+
       <div className="mb-4 flex flex-wrap gap-3">
         <div className="min-w-[140px]">
           <label className="label">Periode</label>
@@ -226,7 +244,7 @@ export default function TargetPage() {
             ]}
           />
         </div>
-        <div className="min-w-[140px]">
+        <div className={`min-w-[140px] ${view === "struktur" ? "hidden" : ""}`}>
           <label className="label">Mode</label>
           <Select2
             value={filterMode}
@@ -240,11 +258,25 @@ export default function TargetPage() {
         </div>
       </div>
 
-      <p className="mb-2 text-sm text-[var(--text-muted)]">
+      {view === "struktur" && (
+        <TargetStructureTable
+          data={data}
+          period={filterPeriod}
+          branchId={filterBranch}
+          paramIds={structureParamIds}
+          onEditTarget={openEdit}
+        />
+      )}
+
+      <p
+        className={`mb-2 text-sm text-[var(--text-muted)] ${view === "struktur" ? "hidden" : ""}`}
+      >
         Menampilkan {filtered.length} dari {data.parameterTargets.length} target
       </p>
 
-      <div className="card overflow-hidden">
+      <div
+        className={`card overflow-hidden ${view === "struktur" ? "hidden" : ""}`}
+      >
         <div className="max-h-[70vh] overflow-auto">
           <table className="w-full text-sm">
             <thead className="sticky top-0 bg-[var(--surface-muted)]">
@@ -382,9 +414,7 @@ export default function TargetPage() {
                 <input
                   className="input"
                   value={form.period}
-                  onChange={(e) =>
-                    setForm({ ...form, period: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, period: e.target.value })}
                   placeholder="2026-08"
                   required
                 />

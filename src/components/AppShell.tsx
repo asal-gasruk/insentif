@@ -10,25 +10,31 @@ const navGroups = [
     items: [{ href: "/", label: "Dashboard", icon: "◉" }],
   },
   {
-    label: "1 · Master Data",
+    label: "1 · Master Organisasi",
     items: [
-      { href: "/parameter", label: "Master Parameter", icon: "◈" },
-      { href: "/target", label: "Target Parameter", icon: "◎" },
-      { href: "/tier", label: "Master Tier", icon: "▤" },
       { href: "/cabang", label: "Master Cabang", icon: "⌂" },
       { href: "/karyawan", label: "Karyawan", icon: "☺" },
+      { href: "/organisasi", label: "Struktur Organisasi", icon: "⌗" },
       { href: "/tim", label: "Master Tim", icon: "☷" },
     ],
   },
   {
-    label: "2 · Konfigurasi Skema",
+    label: "2 · Master Parameter",
+    items: [
+      { href: "/parameter", label: "Master Parameter", icon: "◈" },
+      { href: "/tier", label: "Master Tier", icon: "▤" },
+      { href: "/target", label: "Target Parameter", icon: "◎" },
+    ],
+  },
+  {
+    label: "3 · Konfigurasi Skema",
     items: [
       { href: "/skema", label: "Skema Insentif", icon: "❖" },
       { href: "/bobot", label: "Bobot & Nominal", icon: "⚖" },
     ],
   },
   {
-    label: "3 · Hasil",
+    label: "4 · Hasil",
     items: [
       { href: "/import", label: "Import", icon: "⇪" },
       { href: "/pencapaian", label: "Pencapaian", icon: "▲" },

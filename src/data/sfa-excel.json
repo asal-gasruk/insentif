@@ -1,5 +1,5 @@
 {
-  "source": "docs/Insentif Team - Data Karyawan SFA.xlsx",
+  "source": "docs/DATA KARYAWAN SFA.xlsx",
   "sheets": {
     "splits": "Pembagian Insentif",
     "teams": "Sales Team SFA"
@@ -1319,14 +1319,6 @@
       "kode": null
     },
     {
-      "nik": "20250117",
-      "name": "JENI LESMANA",
-      "cabang": "GARUT",
-      "area": "JAWA BARAT-2",
-      "jabatan": "SPV",
-      "kode": null
-    },
-    {
       "nik": "20240721",
       "name": "Budi Dermawan",
       "cabang": "GARUT",
@@ -1396,6 +1388,14 @@
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "jabatan": "SP-MT",
+      "kode": null
+    },
+    {
+      "nik": "20260111",
+      "name": "ENDANG NURHIDAYAT RAMDAN",
+      "cabang": "TASIK",
+      "area": "JAWA BARAT-2",
+      "jabatan": "SPV",
       "kode": null
     },
     {
@@ -1589,6 +1589,7 @@
       "name": "BDG-SLS-GT-001 · Wawan Kurniawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1614,6 +1615,7 @@
       "name": "BDG-SLS-GT-002 · Cucu Yudi",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1639,6 +1641,7 @@
       "name": "BDG-SLS-GT-003 · Iwa Setiawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1664,6 +1667,7 @@
       "name": "BDG-SLS-GT-004 · Dodhie Setiawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1689,6 +1693,7 @@
       "name": "BDG-SLS-GT-005 · Sopian Kusmayana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1709,6 +1714,7 @@
       "name": "BDG-SLS-GT-006 · Tri Aris Rusdiaman",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1729,6 +1735,7 @@
       "name": "BDG-SLS-GT-017 · Deni Romansyah",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "MTC",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1744,6 +1751,7 @@
       "name": "BDG-SLS-GT-014 · Agus Saeful",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "MTC",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1759,6 +1767,7 @@
       "name": "BDG-SLS-GT-007 · Candra Irawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1784,6 +1793,7 @@
       "name": "BDG-SLS-GT-008 · Diki Andriana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1809,6 +1819,7 @@
       "name": "BDG-SLS-GT-009 · Kusada",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1834,6 +1845,7 @@
       "name": "BDG-SLS-GT-010 · Peri Perdiansyah",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1859,6 +1871,7 @@
       "name": "BDG-SLS-GT-011 · Ricat Batubara",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1884,6 +1897,7 @@
       "name": "BDG-SLS-GT-012 · Jajang Faryana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1904,6 +1918,7 @@
       "name": "BDG-SLS-GT-019 · Ende Taryana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": null,
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1929,6 +1944,7 @@
       "name": "BDG-SLS-HRC-002 · Dina Apriani",
       "teamType": "Horeca",
       "roleId": "sales-horeca",
+      "typeSales": "AE",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1944,6 +1960,7 @@
       "name": "BDG-SLS-MT-001 · Dian Fitriani",
       "teamType": "MT",
       "roleId": "sales-mt",
+      "typeSales": "KAE",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1959,6 +1976,7 @@
       "name": "BDG-SLS-MT-002 · Dinda Dewi Maharani",
       "teamType": "MT",
       "roleId": "sales-mt",
+      "typeSales": "KAE",
       "cabang": "BANDUNG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1974,6 +1992,7 @@
       "name": "SBG-SLS-GT-001 · Mansyur",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "SUBANG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -1999,6 +2018,7 @@
       "name": "SBG-SLS-GT-002 · Sujiarto",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SUBANG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -2019,6 +2039,7 @@
       "name": "SBG-SLS-GT-003 · Agus Geri Gustiana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SUBANG",
       "area": "JAWA BARAT-1",
       "members": [
@@ -2039,6 +2060,7 @@
       "name": "PWK-SLS-GT-001 · Dede Supriadi",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "3 Orang",
       "cabang": "PURWAKARTA",
       "area": "JAWA BARAT-1",
       "members": [
@@ -2064,6 +2086,7 @@
       "name": "PWK-SLS-GT-002 · Yayan Nurjaman",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "PURWAKARTA",
       "area": "JAWA BARAT-1",
       "members": [
@@ -2084,6 +2107,7 @@
       "name": "PWK-SLS-GT-003 · Acep Hendra",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "PURWAKARTA",
       "area": "JAWA BARAT-1",
       "members": [
@@ -2104,6 +2128,7 @@
       "name": "GRT-SLS-GT-002 · Sukmadin",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2124,6 +2149,7 @@
       "name": "GRT-SLS-GT-004 · Hendrik",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2144,6 +2170,7 @@
       "name": "GRT-SLS-GT-001 · Sona Sukmayasa",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2164,6 +2191,7 @@
       "name": "GRT-SLS-GT-005 · Adie Wirahadie",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2184,6 +2212,7 @@
       "name": "GRT-SLS-GT-007 · Saryanto",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2204,6 +2233,7 @@
       "name": "GRT-SLS-GT-003 · Nandang",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2224,6 +2254,7 @@
       "name": "GRT-SLS-GT-008 · Moch. Ganjar Ilmani",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "Stockpoint",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2239,6 +2270,7 @@
       "name": "TEAM-20230586 · Irman Hidayat",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": null,
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2264,6 +2296,7 @@
       "name": "GRT-SLS-GT-009 · Solahudin",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "Stockpoint",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2279,6 +2312,7 @@
       "name": "TEAM-20200167 · Rian Ernawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": null,
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2304,6 +2338,7 @@
       "name": "GRT-SLS-HRC-001 · Yopi Dana Wirya",
       "teamType": "Horeca",
       "roleId": "sales-horeca",
+      "typeSales": "AE",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2319,6 +2354,7 @@
       "name": "GRT-SLS-GT-010 · Ade Nurjaman",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "Stockpoint",
       "cabang": "GARUT",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2334,6 +2370,7 @@
       "name": "TSK-SLS-GT-001 · Dede Hudaya",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "TASIK",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2349,6 +2386,7 @@
       "name": "TSK-SLS-GT-002 · Sansan Wirasandi",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "TASIK",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2369,6 +2407,7 @@
       "name": "TSK-SLS-GT-003 · Eris Rismana",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "TASIK",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2389,6 +2428,7 @@
       "name": "TSK-SLS-GT-004 · Wawan Darmawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "MTC",
       "cabang": "TASIK",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2404,6 +2444,7 @@
       "name": "TSK-SLS-HRC-001 · Hari Prayoga",
       "teamType": "Horeca",
       "roleId": "sales-horeca",
+      "typeSales": "KAE",
       "cabang": "TASIK",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2419,6 +2460,7 @@
       "name": "TEAM-20240736 · Dede Kurniasih",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": null,
       "cabang": "CIREBON",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2439,6 +2481,7 @@
       "name": "CRB-SLS-GT-002 · Tia Ambarwati",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "CIREBON",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2459,6 +2502,7 @@
       "name": "CRB-SLS-GT-003 · Deny Koesmawan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "CIREBON",
       "area": "JAWA BARAT-2",
       "members": [
@@ -2479,6 +2523,7 @@
       "name": "SKB-SLS-GT-001 · Mira Kusumawati",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SUKABUMI",
       "area": "JAWA BARAT-3",
       "members": [
@@ -2499,6 +2544,7 @@
       "name": "SKB-SLS-GT-002 · Dede Suhendar",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SUKABUMI",
       "area": "JAWA BARAT-3",
       "members": [
@@ -2519,6 +2565,7 @@
       "name": "TGR-SLS-GT-001 · Candy Miranda",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "BOGOR",
       "area": "JAWA BARAT-3",
       "members": [
@@ -2539,6 +2586,7 @@
       "name": "TGR-SLS-GT-002 · Diki Wahyudin",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "BOGOR",
       "area": "JAWA BARAT-3",
       "members": [
@@ -2559,6 +2607,7 @@
       "name": "SMG-SLS-GT-001 · Sigih Wahyani",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SEMARANG",
       "area": "JAWA TENGAH",
       "members": [
@@ -2579,6 +2628,7 @@
       "name": "SMG-SLS-GT-002 · Putro Prihadi",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "SEMARANG",
       "area": "JAWA TENGAH",
       "members": [
@@ -2599,6 +2649,7 @@
       "name": "SLO-SLS-GT-001 · Dwi Setyaningsih",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "SE",
       "cabang": "SOLO",
       "area": "JAWA TENGAH",
       "members": [
@@ -2614,6 +2665,7 @@
       "name": "TGL-SLS-GT-001 · Yonatan",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "TEGAL",
       "area": "JAWA TENGAH",
       "members": [
@@ -2634,6 +2686,7 @@
       "name": "TGL-SLS-GT-002 · Danu Mujiarto",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "TEGAL",
       "area": "JAWA TENGAH",
       "members": [
@@ -2654,6 +2707,7 @@
       "name": "WGN-SLS-GT-001 · Novri Alvarizi",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WANGON",
       "area": "JAWA TENGAH",
       "members": [
@@ -2669,6 +2723,7 @@
       "name": "WGN-SLS-GT-002 · Faria Ummi Kulsum",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WANGON",
       "area": "JAWA TENGAH",
       "members": [
@@ -2684,6 +2739,7 @@
       "name": "WGN-SLS-GT-004 · Soimin",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WANGON",
       "area": "JAWA TENGAH",
       "members": [
@@ -2699,6 +2755,7 @@
       "name": "WGN-SLS-GT-003 · Ilham Bachtiar",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WANGON",
       "area": "JAWA TENGAH",
       "members": [
@@ -2714,6 +2771,7 @@
       "name": "WNS-SLS-GT-001 · Nur Sahid",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WONOSOBO",
       "area": "JAWA TENGAH",
       "members": [
@@ -2729,6 +2787,7 @@
       "name": "WNS-SLS-GT-004 · Titin Chuzaemah",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "TO",
       "cabang": "WONOSOBO",
       "area": "JAWA TENGAH",
       "members": [
@@ -2744,6 +2803,7 @@
       "name": "WNS-SLS-GT-002 · Suryatin",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "WONOSOBO",
       "area": "JAWA TENGAH",
       "members": [
@@ -2764,6 +2824,7 @@
       "name": "WNS-SLS-GT-003 · Watini",
       "teamType": "GT",
       "roleId": "canvasser",
+      "typeSales": "2 Orang",
       "cabang": "WONOSOBO",
       "area": "JAWA TENGAH",
       "members": [

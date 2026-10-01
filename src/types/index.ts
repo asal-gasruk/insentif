@@ -209,7 +209,31 @@ export interface Employee {
   vehicleType?: string;
   /** Mode aktual: individu (NIK) atau tim (Master Tim) */
   workforceMode: WorkforceMode;
+  /** Atasan langsung — id OrgNode (SPV/leader/ASM) */
+  supervisorNodeId?: string;
   active: boolean;
+}
+
+export type OrgLevel = "RSM" | "ASM" | "LEADER";
+
+/**
+ * Node struktur organisasi: RSM (per region) → ASM (per AREA) → leader
+ * (SPV/ASPR/dst, font kuning di Excel) → bawahan (Employee.supervisorNodeId).
+ */
+export interface OrgNode {
+  id: string;
+  level: OrgLevel;
+  /** Jabatan tampil (SPV, ASPR, ASM, RSM, ...) */
+  title: string;
+  /** Nama manual; kosong = vacant (diabaikan jika employeeId terisi) */
+  name: string;
+  employeeId?: string;
+  parentId: string | null;
+  area: string;
+  cabang?: string;
+  /** Hasil tebakan import — perlu dicek manual */
+  needsReview?: boolean;
+  note?: string;
 }
 
 /** Label tipe tim (GT/MT/Horeca/Delivery/dll) — bebas string */
@@ -228,6 +252,8 @@ export interface Team {
   roleId: string;
   branchId: string;
   members: TeamMember[];
+  /** Label TYPE SALES di Output Insentif (3 Orang, TO, SE, MTC, KAE, Stockpoint, ...) */
+  typeSales?: string;
   active: boolean;
 }
 
@@ -337,6 +363,7 @@ export interface AppData {
   schemeNominals: SchemeNominal[];
   volumeTiers: VolumeTier[];
   employees: Employee[];
+  orgNodes: OrgNode[];
   teams: Team[];
   parameterTargets: ParameterTarget[];
   achievementRecords: AchievementRecord[];
@@ -353,6 +380,7 @@ export type CollectionKey = keyof Pick<
   | "schemeNominals"
   | "volumeTiers"
   | "employees"
+  | "orgNodes"
   | "teams"
   | "parameterTargets"
   | "achievementRecords"

@@ -10,6 +10,7 @@ import type {
   CollectionKey,
   Employee,
   IncentiveScheme,
+  OrgNode,
   PenaltyRule,
   Role,
   SubjectPolicy,
@@ -129,6 +130,23 @@ function migrateScheme(scheme: IncentiveScheme & { penalty?: LegacyPenalty }): I
   return migrated;
 }
 
+/**
+ * RSM/ASM mengikuti master seed (hapus yang sudah tidak ada); nama seed dipakai
+ * bila node belum diisi. Induk node seed selalu mengikuti seed.
+ */
+function migrateOrgNodes(current: OrgNode[], fromSeed: OrgNode[]): OrgNode[] {
+  const seedById = new Map(fromSeed.map((n) => [n.id, n]));
+  const kept = current
+    .filter((n) => n.level === "LEADER" || seedById.has(n.id))
+    .map((n) => {
+      const s = seedById.get(n.id);
+      if (!s) return n;
+      const hasName = n.name || n.employeeId;
+      return { ...n, parentId: s.parentId, name: hasName ? n.name : s.name };
+    });
+  return mergeMissingById(kept, fromSeed);
+}
+
 function migrateRole(role: Role & { subjectPolicy?: SubjectPolicy }): Role {
   return {
     ...role,
@@ -188,19 +206,34 @@ function enrichNotes(data: AppData): AppData {
     seed.schemes,
   );
 
-  const teams = mergeMissingById(data.teams ?? [], seed.teams);
+  const seedTypeSales = new Map(seed.teams.map((t) => [t.id, t.typeSales]));
+  const teams = mergeMissingById(data.teams ?? [], seed.teams).map((t) =>
+    t.typeSales || !seedTypeSales.get(t.id)
+      ? t
+      : { ...t, typeSales: seedTypeSales.get(t.id) },
+  );
 
   const roles = mergeMissingById(
     (data.roles ?? []).map(migrateRole),
     seed.roles,
   ).map(migrateRole);
 
+  const seedSupervisor = new Map(
+    seed.employees.map((e) => [e.id, e.supervisorNodeId]),
+  );
   const employees = mergeMissingById(
     (data.employees ?? []).map((e) =>
       migrateEmployee(e, { teams, roles }),
     ),
     seed.employees,
-  ).map((e) => migrateEmployee(e, { teams, roles }));
+  )
+    .map((e) => migrateEmployee(e, { teams, roles }))
+    // Atasan dari Excel diisi hanya jika belum pernah diatur manual
+    .map((e) =>
+      e.supervisorNodeId || !seedSupervisor.get(e.id)
+        ? e
+        : { ...e, supervisorNodeId: seedSupervisor.get(e.id) },
+    );
 
   return {
     ...data,
@@ -218,6 +251,7 @@ function enrichNotes(data: AppData): AppData {
     ),
     volumeTiers: mergeMissingById(data.volumeTiers ?? [], seed.volumeTiers),
     employees,
+    orgNodes: migrateOrgNodes(data.orgNodes ?? [], seed.orgNodes ?? []),
     teams,
     parameterTargets: mergeMissingById(
       data.parameterTargets ?? [],

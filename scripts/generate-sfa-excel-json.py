@@ -18,7 +18,11 @@ except ImportError as e:
     raise SystemExit("Install openpyxl: pip install openpyxl") from e
 
 ROOT = Path(__file__).resolve().parents[1]
-XLSX = ROOT / "docs" / "Insentif Team - Data Karyawan SFA.xlsx"
+XLSX = ROOT / "docs" / "DATA KARYAWAN SFA.xlsx"
+# Sheet "Pembagian Insentif" di file terbaru berubah layout; contoh split tetap dari file ini
+# Label TYPE SALES (3 Orang / TO / SE / MTC / ...) per kode tim — kolom Q→S sheet rekap
+XLSX_REKAP = ROOT / "docs" / "Pencapaian Agustus 2026 - Rev-2.xlsx"
+XLSX_SPLITS = ROOT / "docs" / "Insentif Team - Data Karyawan SFA.xlsx"
 OUT = ROOT / "src" / "data" / "sfa-excel.json"
 
 SKIP_JABATAN_TEAM = {
@@ -56,7 +60,7 @@ LEAD_JABATAN = {
 }
 MEMBER_JABATAN = {"Driver", "Helper"}
 
-DEFAULT_COLMAP = {"nama": 3, "nik": 4, "kode": 5, "jabatan": 6, "mobil": 7}
+DEFAULT_COLMAP = {"area": 1, "cabang": 2, "nama": 3, "nik": 4, "kode": 5, "jabatan": 6, "mobil": 7}
 
 
 def is_vacant(p: dict) -> bool:
@@ -76,6 +80,12 @@ def norm_nik(nik) -> str | None:
     return s
 
 
+def is_yellow(cell) -> bool:
+    """Font kuning (FFFF00) pada kolom NAMA menandai leader / supervisor."""
+    color = cell.font.color
+    return color is not None and color.type == "rgb" and color.rgb == "FFFFFF00"
+
+
 def is_header_row(vals: list) -> bool:
     labels = {str(v).strip() for v in vals if v is not None and str(v).strip()}
     return "AREA" in labels and "CABANG" in labels and "NAMA" in labels
@@ -84,10 +94,12 @@ def is_header_row(vals: list) -> bool:
 def colmap_from_header(ws, row: int) -> dict[str, int]:
     headers = {
         str(ws.cell(row, c).value).strip(): c
-        for c in range(1, 8)
+        for c in range(1, 10)
         if ws.cell(row, c).value is not None
     }
     return {
+        "area": headers.get("AREA", DEFAULT_COLMAP["area"]),
+        "cabang": headers.get("CABANG", DEFAULT_COLMAP["cabang"]),
         "nama": headers.get("NAMA", DEFAULT_COLMAP["nama"]),
         "nik": headers.get("NIK Karyawan", DEFAULT_COLMAP["nik"]),
         "kode": headers.get("Kode", DEFAULT_COLMAP["kode"]),
@@ -113,21 +125,26 @@ def parse_sfa(ws) -> list[dict]:
     people: list[dict] = []
     area = cabang = None
     colmap = dict(DEFAULT_COLMAP)
+    after_note = False
 
     for r in range(1, ws.max_row + 1):
-        vals = [ws.cell(r, c).value for c in range(1, 8)]
+        vals = [ws.cell(r, c).value for c in range(1, 10)]
         if is_header_row(vals):
             colmap = colmap_from_header(ws, r)
             continue
 
-        a, cab = vals[0], vals[1]
+        a, cab = vals[colmap["area"] - 1], vals[colmap["cabang"] - 1]
         if a is not None and str(a).strip() and str(a).strip().upper() != "AREA":
             area = str(a).strip()
         if cab is not None and str(cab).strip():
             cab_s = str(cab).strip()
             if cab_s.startswith("*"):
+                # "*CATATAN:" — baris setelahnya adalah tambahan tanpa leader
+                after_note = True
                 continue
             if cab_s.upper() != "CABANG":
+                if cab_s != cabang:
+                    after_note = False
                 cabang = cab_s
 
         nama = ws.cell(r, colmap["nama"]).value
@@ -147,11 +164,15 @@ def parse_sfa(ws) -> list[dict]:
                 "cabang": cabang,
                 "nama": str(nama).strip() if nama else None,
                 "nik": norm_nik(nik),
+                "nikRaw": nik,
                 "kode": None
                 if kode is None or str(kode).strip() in ("", "0")
                 else str(kode).strip(),
                 "jabatan": str(jabatan).strip() if jabatan else None,
                 "mobil": str(mobil).strip() if mobil else None,
+                "row": r,
+                "leader": is_yellow(ws.cell(r, colmap["nama"])),
+                "afterNote": after_note,
             }
         )
     return people
@@ -211,6 +232,21 @@ def is_individu_jabatan(j: str) -> bool:
     return False
 
 
+def load_type_sales() -> dict[str, str]:
+    """ID tim → TYPE SALES dari 'Rekap Insentif Sales Copy' (kolom Q dan S)."""
+    if not XLSX_REKAP.exists():
+        return {}
+    ws = openpyxl.load_workbook(XLSX_REKAP, data_only=True, read_only=True)[
+        "Rekap Insentif Sales Copy"
+    ]
+    out: dict[str, str] = {}
+    for row in ws.iter_rows(min_row=5, min_col=17, max_col=19, values_only=True):
+        code, _name, type_sales = row
+        if code and str(code).count("-") >= 2 and type_sales:
+            out[str(code).strip()] = str(type_sales).strip()
+    return out
+
+
 def main() -> None:
     wb = openpyxl.load_workbook(XLSX, data_only=True)
     people = parse_sfa(wb["Sales Team SFA"])
@@ -230,7 +266,7 @@ def main() -> None:
                 continue
             raw_teams.append(t)
 
-    ws2 = wb["Pembagian Insentif"]
+    ws2 = openpyxl.load_workbook(XLSX_SPLITS, data_only=True)["Pembagian Insentif"]
     examples = []
     for r in range(9, 15):
         examples.append(
@@ -244,6 +280,7 @@ def main() -> None:
             }
         )
 
+    type_sales = load_type_sales()
     emp_map: dict[str, dict] = {}
     out_teams = []
     for t in raw_teams:
@@ -282,6 +319,7 @@ def main() -> None:
                 "name": f"{kode} · {t['lead']['nama']}",
                 "teamType": team_type,
                 "roleId": role,
+                "typeSales": type_sales.get(kode),
                 "cabang": t["cabang"],
                 "area": t["area"],
                 "members": members_out,
@@ -318,7 +356,7 @@ def main() -> None:
     )
 
     out = {
-        "source": "docs/Insentif Team - Data Karyawan SFA.xlsx",
+        "source": "docs/DATA KARYAWAN SFA.xlsx",
         "sheets": {"splits": "Pembagian Insentif", "teams": "Sales Team SFA"},
         "poolRule": "non-salesman share remaining pool equally",
         "splits": {

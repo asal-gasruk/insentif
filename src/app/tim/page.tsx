@@ -13,8 +13,13 @@ import {
   teamTypeForRoleId,
   validateTeamMembers,
 } from "@/lib/team-utils";
+import {
+  orgNodeName,
+  supervisorChain,
+  teamSupervisorNodeId,
+} from "@/lib/org-rollup";
 import { useAppData } from "@/hooks/useAppData";
-import type { EmployeePosition, Team, TeamMember } from "@/types";
+import type { EmployeePosition, OrgNode, Team, TeamMember } from "@/types";
 
 type TeamForm = Omit<Team, "id">;
 
@@ -33,6 +38,10 @@ export default function TimPage() {
   const [editing, setEditing] = useState<Team | null>(null);
   const [form, setForm] = useState<TeamForm | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [view, setView] = useState<"daftar" | "struktur">("daftar");
+  const [fRsm, setFRsm] = useState("");
+  const [fAsm, setFAsm] = useState("");
+  const [fSpv, setFSpv] = useState("");
 
   if (!ready || !data) return <LoadingState />;
 
@@ -54,6 +63,7 @@ export default function TimPage() {
       teamType: team.teamType,
       roleId: team.roleId,
       branchId: team.branchId,
+      typeSales: team.typeSales,
       members: team.members.map((m) => ({ ...m })),
       active: team.active,
     });
@@ -112,9 +122,7 @@ export default function TimPage() {
       if (e.roleId !== form.roleId) return false;
       if (e.id === currentId) return true;
       if (
-        form.members.some(
-          (m, i) => i !== memberIndex && m.employeeId === e.id,
-        )
+        form.members.some((m, i) => i !== memberIndex && m.employeeId === e.id)
       ) {
         return false;
       }
@@ -173,6 +181,101 @@ export default function TimPage() {
   const roleName = (roleId: string) =>
     data.roles.find((r) => r.id === roleId)?.name ?? roleId;
 
+  // --- Struktur organisasi: atasan tim diturunkan dari atasan salesman ---
+  const supNodeOf = (team: Team) => teamSupervisorNodeId(team, data.employees);
+  const chainOf = (team: Team) =>
+    supervisorChain(supNodeOf(team), data.orgNodes);
+  const nodeName = (n?: OrgNode) => (n ? orgNodeName(n, data.employees) : "—");
+
+  const shownTeams = data.teams.filter((t) => {
+    const c = chainOf(t);
+    if (fRsm && c.rsm?.id !== fRsm) return false;
+    if (fAsm && c.asm?.id !== fAsm) return false;
+    if (fSpv && c.spv?.id !== fSpv) return false;
+    return true;
+  });
+
+  const nodeOptions = (level: OrgNode["level"], emptyLabel: string) => [
+    { value: "", label: emptyLabel },
+    ...data.orgNodes
+      .filter((n) => n.level === level)
+      .map((n) => ({
+        value: n.id,
+        label: `${nodeName(n)}${n.cabang ? ` (${n.cabang})` : ""}`,
+      })),
+  ];
+
+  const teamsByNode = new Map<string, Team[]>();
+  const noSupervisor: Team[] = [];
+  for (const t of shownTeams) {
+    const id = supNodeOf(t);
+    if (id && data.orgNodes.some((n) => n.id === id)) {
+      teamsByNode.set(id, [...(teamsByNode.get(id) ?? []), t]);
+    } else {
+      noSupervisor.push(t);
+    }
+  }
+  const childNodes = (id: string) =>
+    data.orgNodes.filter((n) => n.parentId === id);
+  const teamCountUnder = (id: string): number =>
+    (teamsByNode.get(id)?.length ?? 0) +
+    childNodes(id).reduce((n, c) => n + teamCountUnder(c.id), 0);
+
+  const renderTeamChips = (team: Team) => (
+    <li
+      key={team.id}
+      className="flex flex-wrap items-center gap-2 rounded-lg border border-[var(--border)] bg-white px-3 py-1.5 text-xs"
+    >
+      <span className="font-semibold">{team.name}</span>
+      <span className="badge bg-[var(--surface-muted)]">{team.teamType}</span>
+      {team.members.map((m) => (
+        <span
+          key={`${m.employeeId}-${m.position}`}
+          className="text-[var(--text-muted)]"
+        >
+          {positionLabel(m.position)}:{" "}
+          {data.employees.find((e) => e.id === m.employeeId)?.name ?? "?"}
+        </span>
+      ))}
+      <button
+        type="button"
+        className="btn-secondary ml-auto px-2 py-0.5 text-xs"
+        onClick={() => openEdit(team)}
+      >
+        Edit
+      </button>
+    </li>
+  );
+
+  const renderStructureNode = (node: OrgNode) => {
+    const count = teamCountUnder(node.id);
+    if (count === 0) return null;
+    const own = teamsByNode.get(node.id) ?? [];
+    const levelStyle =
+      node.level === "RSM"
+        ? "bg-[var(--text)] text-white"
+        : node.level === "ASM"
+          ? "bg-[var(--action)] text-[var(--on-action)]"
+          : "bg-amber-100 text-amber-900";
+    return (
+      <details key={node.id} open={node.level !== "LEADER"} className="mt-2">
+        <summary className="flex cursor-pointer flex-wrap items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-2">
+          <span className={`badge ${levelStyle}`}>{node.title}</span>
+          <span className="font-semibold">{nodeName(node)}</span>
+          <span className="text-xs text-[var(--text-muted)]">
+            {node.cabang ?? node.area} · {count} tim
+          </span>
+        </summary>
+        <div className="ml-4 border-l border-[var(--border)] pl-4">
+          {own.length > 0 && (
+            <ul className="mt-2 space-y-1">{own.map(renderTeamChips)}</ul>
+          )}
+          {childNodes(node.id).map(renderStructureNode)}
+        </div>
+      </details>
+    );
+  };
+
   return (
     <>
       <PageHeader
@@ -190,7 +293,66 @@ export default function TimPage() {
         }
       />
 
-      <div className="card overflow-x-auto">
+      <div className="mb-4 flex flex-wrap items-end gap-3">
+        <div className="flex gap-2">
+          {(
+            [
+              ["daftar", "Daftar"],
+              ["struktur", "Per Struktur"],
+            ] as const
+          ).map(([id, text]) => (
+            <button
+              key={id}
+              type="button"
+              className={view === id ? "btn-primary" : "btn-secondary"}
+              onClick={() => setView(id)}
+            >
+              {text}
+            </button>
+          ))}
+        </div>
+        {(
+          [
+            ["RSM", fRsm, setFRsm, "RSM", "Semua RSM"],
+            ["ASM", fAsm, setFAsm, "ASM", "Semua ASM"],
+            ["LEADER", fSpv, setFSpv, "SPV / Leader", "Semua SPV"],
+          ] as const
+        ).map(([level, value, setter, label, empty]) => (
+          <div key={level} className="min-w-[180px]">
+            <label className="label">{label}</label>
+            <Select2
+              value={value}
+              onChange={setter}
+              options={nodeOptions(level, empty)}
+            />
+          </div>
+        ))}
+        <p className="pb-2 text-sm text-[var(--text-muted)]">
+          {shownTeams.length} dari {data.teams.length} tim
+        </p>
+      </div>
+
+      {view === "struktur" && (
+        <div className="card p-4">
+          {data.orgNodes
+            .filter((n) => n.level === "RSM")
+            .map(renderStructureNode)}
+          {noSupervisor.length > 0 && (
+            <details open className="mt-4">
+              <summary className="cursor-pointer rounded-lg border border-dashed border-[var(--border)] px-3 py-2 font-semibold text-[var(--text-muted)]">
+                Tanpa atasan · {noSupervisor.length} tim
+              </summary>
+              <ul className="ml-4 mt-2 space-y-1">
+                {noSupervisor.map(renderTeamChips)}
+              </ul>
+            </details>
+          )}
+        </div>
+      )}
+
+      <div
+        className={`card overflow-x-auto ${view === "struktur" ? "hidden" : ""}`}
+      >
         <table className="w-full text-sm">
           <thead className="bg-[var(--surface-muted)]">
             <tr>
@@ -198,6 +360,9 @@ export default function TimPage() {
               <th className="px-4 py-3 text-left">Role</th>
               <th className="px-4 py-3 text-left">Tipe</th>
               <th className="px-4 py-3 text-left">Cabang</th>
+              <th className="px-4 py-3 text-left">SPV</th>
+              <th className="px-4 py-3 text-left">ASM</th>
+              <th className="px-4 py-3 text-left">RSM</th>
               <th className="px-4 py-3 text-left">Anggota</th>
               <th className="px-4 py-3 text-center">Ukuran</th>
               <th className="px-4 py-3 text-center">Status</th>
@@ -205,7 +370,8 @@ export default function TimPage() {
             </tr>
           </thead>
           <tbody>
-            {data.teams.map((team) => {
+            {shownTeams.map((team) => {
+              const chain = chainOf(team);
               const branch = data.branches.find((b) => b.id === team.branchId);
               return (
                 <tr key={team.id} className="border-t border-[var(--border)]">
@@ -213,6 +379,9 @@ export default function TimPage() {
                   <td className="px-4 py-3">{roleName(team.roleId)}</td>
                   <td className="px-4 py-3">{team.teamType}</td>
                   <td className="px-4 py-3">{branch?.name ?? team.branchId}</td>
+                  <td className="px-4 py-3 text-xs">{nodeName(chain.spv)}</td>
+                  <td className="px-4 py-3 text-xs">{nodeName(chain.asm)}</td>
+                  <td className="px-4 py-3 text-xs">{nodeName(chain.rsm)}</td>
                   <td className="px-4 py-3">
                     <div className="flex flex-wrap gap-1">
                       {team.members.map((m) => {
@@ -266,13 +435,13 @@ export default function TimPage() {
                 </tr>
               );
             })}
-            {data.teams.length === 0 && (
+            {shownTeams.length === 0 && (
               <tr>
                 <td
-                  colSpan={8}
+                  colSpan={11}
                   className="px-4 py-8 text-center text-[var(--text-muted)]"
                 >
-                  Belum ada master tim.
+                  Tidak ada tim untuk filter ini.
                 </td>
               </tr>
             )}
@@ -290,6 +459,18 @@ export default function TimPage() {
             {error && (
               <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
                 {error}
+              </p>
+            )}
+
+            {editing && (
+              <p className="rounded-lg bg-[var(--surface-muted)] px-3 py-2 text-xs text-[var(--text-muted)]">
+                Atasan (dari Struktur Organisasi):{" "}
+                <strong>
+                  SPV {nodeName(chainOf(editing).spv)} · ASM{" "}
+                  {nodeName(chainOf(editing).asm)} · RSM{" "}
+                  {nodeName(chainOf(editing).rsm)}
+                </strong>
+                . Ubah lewat /karyawan atau /organisasi.
               </p>
             )}
 
@@ -323,6 +504,19 @@ export default function TimPage() {
                     value: b.id,
                     label: `${b.name} (${b.branchType})`,
                   }))}
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label className="label">
+                  TYPE SALES (label di Output Insentif)
+                </label>
+                <input
+                  className="input"
+                  value={form.typeSales ?? ""}
+                  onChange={(e) =>
+                    setForm({ ...form, typeSales: e.target.value || undefined })
+                  }
+                  placeholder="mis. 3 Orang, TO, SE, MTC, KAE — kosong = otomatis"
                 />
               </div>
               <div className="sm:col-span-2">
@@ -375,9 +569,7 @@ export default function TimPage() {
                       <label className="label">Karyawan</label>
                       <Select2
                         value={member.employeeId}
-                        onChange={(v) =>
-                          updateMember(index, { employeeId: v })
-                        }
+                        onChange={(v) => updateMember(index, { employeeId: v })}
                         options={eligibleEmployees(index).map((e) => ({
                           value: e.id,
                           label: `${e.name} (${e.nik})`,

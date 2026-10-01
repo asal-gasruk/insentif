@@ -1,7 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
+import { DeliveryDetail, ParameterDetail } from "@/components/CalculationDetail";
 import { LoadingState } from "@/components/LoadingState";
+import { OutputInsentifPanel } from "@/components/OutputInsentifPanel";
+import { PencairanInsentifPanel } from "@/components/PencairanInsentifPanel";
 import { PageHeader } from "@/components/PageHeader";
 import {
   calculateAllDelivery,
@@ -109,6 +112,9 @@ export default function PerhitunganPage() {
         title="Perhitungan Insentif"
         description="Hasil kalkulasi semua skema. Mode Tim ditampilkan per Master Tim (total + pecahan anggota); Individu tetap per NIK."
       />
+
+      <OutputInsentifPanel data={data} />
+      <PencairanInsentifPanel data={data} />
 
       <div className="card mb-6 flex flex-wrap items-center justify-between gap-4 p-5">
         <div>
@@ -238,6 +244,11 @@ export default function PerhitunganPage() {
                     </tbody>
                   </table>
                 </div>
+                <ParameterDetail
+                  data={data}
+                  head={head}
+                  members={group.members}
+                />
               </article>
             );
           })}
@@ -297,6 +308,9 @@ export default function PerhitunganPage() {
                     </span>
                   );
                 })}
+              </div>
+              <div className="-mx-5 -mb-5 mt-4">
+                <ParameterDetail data={data} head={r} members={[r]} />
               </div>
             </article>
           ))}
@@ -396,6 +410,11 @@ export default function PerhitunganPage() {
                     </tbody>
                   </table>
                 </div>
+                <DeliveryDetail
+                  data={data}
+                  head={head}
+                  members={group.members}
+                />
               </article>
             );
           })}

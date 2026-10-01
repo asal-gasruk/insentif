@@ -14,11 +14,17 @@
     "start": "next start",
     "lint": "next lint",
     "generate:sfa": "python3 scripts/generate-sfa-excel-json.py",
+    "generate:hierarchy": "python3 scripts/generate-sfa-hierarchy.py",
     "generate:targets": "python3 scripts/generate-parameter-targets.py",
     "verify:sfa": "node scripts/verify-sfa-mapping.mjs",
+    "verify:hierarchy": "node scripts/verify-sfa-hierarchy.mjs",
+    "verify:rollup": "npx --yes tsx --tsconfig tsconfig.json scripts/verify-org-rollup.ts",
+    "verify:output": "npx --yes tsx --tsconfig tsconfig.json scripts/verify-output-insentif.ts",
     "verify:targets": "node scripts/verify-parameter-targets.mjs"
   },
   "dependencies": {
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "next": "^15.5.21",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
