@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { PdfPreviewModal } from "@/components/PdfPreviewModal";
 import { Select2 } from "@/components/Select2";
 import { formatRupiah } from "@/lib/calculator";
 import { outputPeriods } from "@/lib/output-insentif";
@@ -46,19 +47,24 @@ export function PencairanInsentifPanel({ data }: { data: AppData }) {
     [data, activePeriod, area],
   );
 
-  const download = async () => {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const suffix = area ? `-${area.replace(/\s+/g, "-")}` : "";
+  const filename = `Pencairan-Insentif-${activePeriod}${suffix}.pdf`;
+
+  const closePreview = () => {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    setPreviewUrl(null);
+  };
+
+  const preview = async () => {
     if (!output) return;
     setBusy(true);
     setError(null);
     try {
-      const { downloadPencairanInsentifPdf } =
+      const { renderPencairanInsentifPdf } =
         await import("@/lib/pencairan-insentif-pdf");
-      const suffix = area ? `-${area.replace(/\s+/g, "-")}` : "";
-      await downloadPencairanInsentifPdf(
-        output,
-        `Pencairan-Insentif-${output.period}${suffix}.pdf`,
-        asm ?? undefined,
-      );
+      const doc = await renderPencairanInsentifPdf(output, asm ?? undefined);
+      setPreviewUrl(URL.createObjectURL(doc.output("blob")));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Gagal membuat PDF.");
     } finally {
@@ -120,13 +126,19 @@ export function PencairanInsentifPanel({ data }: { data: AppData }) {
             type="button"
             className="btn-primary ml-auto"
             disabled={busy || !output || output.lineCount === 0}
-            onClick={download}
+            onClick={preview}
           >
-            {busy ? "Membuat PDF…" : "Unduh PDF"}
+            {busy ? "Membuat preview…" : "Preview PDF"}
           </button>
         </div>
       )}
       {error && <p className="mt-2 text-sm text-red-700">{error}</p>}
+      <PdfPreviewModal
+        url={previewUrl}
+        filename={filename}
+        title="Preview Pencairan Insentif"
+        onClose={closePreview}
+      />
     </section>
   );
 }

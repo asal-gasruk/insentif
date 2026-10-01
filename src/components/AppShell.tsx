@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAppData } from "@/hooks/useAppData";
 
 const navGroups = [
@@ -47,18 +48,34 @@ const navGroups = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { reset } = useAppData();
+  const router = useRouter();
+
+  // Halaman login tampil tanpa sidebar
+  if (pathname === "/login") return <>{children}</>;
+
+  const logout = async () => {
+    await fetch("/api/logout", { method: "POST" });
+    router.replace("/login");
+    router.refresh();
+  };
 
   return (
     <div className="flex min-h-screen">
       <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-[var(--border)] bg-white">
-        <div className="border-b border-[var(--border)] px-5 py-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
-            Lahans
-          </p>
-          <h1 className="mt-1 text-lg font-bold leading-tight text-[var(--text)]">
-            Insentif Reguler
-          </h1>
-          <p className="mt-1 text-xs text-[var(--text-muted)]">Plan 2026 · Prototype</p>
+        <div className="flex items-center gap-3 border-b border-[var(--border)] px-5 py-5">
+          <Image
+            src="/logo-mark.png"
+            alt="Lahans Impact"
+            width={40}
+            height={40}
+            className="h-10 w-10 shrink-0"
+            priority
+          />
+          <div className="min-w-0">
+            <h1 className="text-[15px] font-bold leading-tight text-[var(--text)]">
+              Lahans Impact - Insentif
+            </h1>
+          </div>
         </div>
 
         <nav className="flex-1 overflow-y-auto px-3 py-4">
@@ -109,6 +126,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             className="btn-secondary w-full px-3 py-2 text-xs"
           >
             Reset Data Lokal
+          </button>
+          <button
+            type="button"
+            onClick={logout}
+            className="btn-secondary mt-2 w-full px-3 py-2 text-xs"
+          >
+            Keluar
           </button>
         </div>
       </aside>

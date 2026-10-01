@@ -278,15 +278,6 @@ export async function renderOutputInsentifPdf(
   return doc;
 }
 
-export async function downloadOutputInsentifPdf(
-  output: OutputInsentif,
-  filename?: string,
-  asm?: AsmInsentif,
-) {
-  const doc = await renderOutputInsentifPdf(output, asm);
-  doc.save(filename ?? `Output-Insentif-${output.period}.pdf`);
-}
-
 const pctOrBlank = (v: number | null) => (v === null ? "" : `${v.toFixed(1)}%`);
 
 /** Halaman "LAMPIRAN INSENTIF ASM": ringkasan per ASM + akumulasi per SPV di bawahnya. */

@@ -203,12 +203,3 @@ export async function renderPencairanInsentifPdf(
 
   return doc;
 }
-
-export async function downloadPencairanInsentifPdf(
-  output: PencairanInsentif,
-  filename?: string,
-  asm?: AsmInsentif,
-) {
-  const doc = await renderPencairanInsentifPdf(output, asm);
-  doc.save(filename ?? `Pencairan-Insentif-${output.period}.pdf`);
-}

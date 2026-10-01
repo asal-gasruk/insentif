@@ -16,8 +16,13 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lahans Insentif Reguler 2026",
+  title: "Lahans Impact - Insentif",
   description: "Prototype Skema Insentif Reguler - Plan 2026",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
